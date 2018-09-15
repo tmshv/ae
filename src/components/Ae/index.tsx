@@ -1,7 +1,6 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import { dropRight, last, slice, range, isNumber, cloneDeep, isNull, isUndefined, isFunction } from 'lodash'
-import AeBlock from './AeBlock'
+import Frame from './Frame'
 import {
     createDefaultDivision,
     div,
@@ -29,22 +28,22 @@ function Block(props) {
     )
 }
 
-export default class Ae extends React.Component {
-    static propTypes = {
-        value: PropTypes.object,
-        onChange: PropTypes.func,
-    }
+interface AeProps {
+    value: any,
+    onChange(any)
+}
 
-    get rows() {
-        return this.props.value.rows
+export default class Ae extends Component<AeProps, any> {
+    get frames() {
+        return this.props.value.frames
         // return [
         //     ...this.props.value.rows,
         //     createDefaultDivision(),
         // ]
     }
 
-    get hasRows() {
-        return this.rows.length > 0
+    get hasFrames() {
+        return this.frames.length > 0
     }
 
     update(partial) {
@@ -55,34 +54,34 @@ export default class Ae extends React.Component {
     }
 
     onAddRowClick = event => {
-        const x = this.hasRows
-            ? cloneDeep(last(this.rows))
+        const x = this.hasFrames
+            ? cloneDeep(last(this.frames))
             : createDefaultDivision()
 
         this.update({
-            rows: listPush(this.rows, x),
+            rows: listPush(this.frames, x),
         })
     }
 
     onDeleteRowClick = event => {
         this.update({
-            rows: dropRight(this.rows),
+            rows: dropRight(this.frames),
         })
     }
 
     onAddContent = (rowIndex, elementIndex, element) => {
-        const row = this.rows[rowIndex]
+        const row = this.frames[rowIndex]
         const content = listReplaceIndex(row.content, elementIndex, element)
 
         this.update({
-            rows: listReplaceIndex(this.rows, rowIndex, merge(row, {
+            rows: listReplaceIndex(this.frames, rowIndex, merge(row, {
                 content,
             })),
         })
     }
 
     onMergeRight = (rowIndex, elementIndex) => {
-        const row = this.rows[rowIndex]
+        const row = this.frames[rowIndex]
         const divisionRange = div(row.divide)
         divisionRange[elementIndex - 1] = divisionRange[elementIndex]
         const divide = listRemoveIndex(divisionRange, elementIndex)
@@ -92,7 +91,7 @@ export default class Ae extends React.Component {
         content = listRemoveIndex(content, elementIndex)
 
         this.update({
-            rows: listReplaceIndex(this.rows, rowIndex, merge(row, {
+            rows: listReplaceIndex(this.frames, rowIndex, merge(row, {
                 content,
                 divide,
             })),
@@ -103,23 +102,23 @@ export default class Ae extends React.Component {
      * @param {Number} divide 
      */
     divideLast(divide) {
-        const row = last(this.rows)
+        const row = last(this.frames)
         const content = listTrim(
             listFill(row.content, divide, i => `hi-${i}`),
             divide,
         )
         this.update({
-            rows: listReplaceLast(this.rows, merge(row, {
+            rows: listReplaceLast(this.frames, merge(row, {
                 content,
                 divide,
             })),
         })
     }
 
-    renderRow = (row, index) => {
+    renderFrame = (frame, index) => {
         return (
-            <AeBlock
-                row={row}
+            <Frame
+                frame={frame}
                 onMergeRight={i => this.onMergeRight(index, i)}
                 onAddContent={(i, element) => this.onAddContent(index, i, element)}
                 key={index}
@@ -146,10 +145,25 @@ export default class Ae extends React.Component {
         this.divideLast(n)
     }
 
+    renderControls() {
+        return (
+            <div
+                className={'controls'}
+            >
+                <button
+                    onClick={this.onAddRowClick}
+                >+</button>
+
+                <button
+                    onClick={this.onDeleteRowClick}
+                // disabled={!this.hasFrames}
+                >–</button>
+            </div>
+        )
+    }
+
     render() {
         console.log(this.props.value)
-
-        const rows = this.rows;
 
         return (
             <div
@@ -160,21 +174,10 @@ export default class Ae extends React.Component {
                     className={'ae-layout-container'}
                     onKeyDown={this.onKeyDown}
                 >
-                    {rows.map(this.renderRow)}
+                    {this.frames.map(this.renderFrame)}
                 </div>
 
-                <div
-                    className={'controls'}
-                >
-                    <button
-                        onClick={this.onAddRowClick}
-                    >add row</button>
-
-                    <button
-                        onClick={this.onDeleteRowClick}
-                    // disabled={!this.hasRows}
-                    >delete row</button>
-                </div>
+                {this.renderControls()}
             </div>
         )
     }

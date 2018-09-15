@@ -54,7 +54,11 @@ const Attention = ({ color = '#0384e3', ...props }) => (
     </div>
 )
 
-class MyAe extends React.Component {
+interface Props {
+    initialValue: any
+}
+
+class MyAe extends React.Component<Props, any> {
     state = {
         value: this.props.initialValue,
     }
@@ -93,11 +97,94 @@ function getInitial() {
     // }
 
     return {
-        rows: [
+        version: "1",
+        frames: [
             {
-                type: 'Division',
-                divide: 1,
-                content: ['>']
+                direction: "horizontal",
+                divide: 2,
+                nodes: [
+                    {
+                        type: "Frame",
+                        options: {
+                            direction: "vertical",
+                            divide: 2,
+                            nodes: [
+                                {
+                                    type: "Block",
+                                    options: {
+                                        content: "HI"
+                                    }
+                                },
+                                {
+                                    type: "Frame",
+                                    options: {
+                                        direction: "horizontal",
+                                        divide: 3,
+                                        nodes: [
+                                            {
+                                                type: "Block",
+                                                options: {
+                                                    content: "POP"
+                                                }
+                                            },
+                                            {
+                                                type: "Block",
+                                                options: {
+                                                    content: "LOL"
+                                                }
+                                            },
+                                            {
+                                                type: "Block",
+                                                options: {
+                                                    content: "KEK"
+                                                }
+                                            },
+                                        ]
+                                    }
+                                },
+                            ]
+                        }
+                    },
+                    {
+                        type: "Block",
+                        options: {
+                            content: "XX"
+                        }
+                    },
+                ]
+            },
+            {
+                direction: "horizontal",
+                divide: [.7, 1],
+                nodes: [
+                    {
+                        type: "Block",
+                        options: {
+                            content: "MD"
+                        }
+                    },
+                    {
+                        type: "Frame",
+                        options: {
+                            direction: "vertical",
+                            divide: 2,
+                            nodes: [
+                                {
+                                    type: "Block",
+                                    options: {
+                                        content: "DD"
+                                    }
+                                },
+                                {
+                                    type: "Block",
+                                    options: {
+                                        content: "AE"
+                                    }
+                                },
+                            ]
+                        }
+                    },
+                ]
             }
         ],
     }
