@@ -128,9 +128,9 @@ function getInitial() {
                                                 }
                                             },
                                             {
-                                                type: "Block",
+                                                type: "Picture",
                                                 options: {
-                                                    content: "LOL"
+                                                    source: "/static/1.jpg"
                                                 }
                                             },
                                             {
@@ -193,10 +193,11 @@ function getInitial() {
 export default function () {
     return (
         <Page>
-            {/* {test()} */}
             <MyAe
                 initialValue={getInitial()}
             />
+
+            {test()}
         </Page>
     )
 }

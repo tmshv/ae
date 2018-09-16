@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Ae from './Ae'
 import { dropRight, last, slice, range, isNumber, cloneDeep, isNull, isUndefined, isFunction } from 'lodash'
 import Frame from './Frame'
 import {
@@ -29,17 +30,13 @@ function Block(props) {
 }
 
 interface AeProps {
-    value: any,
+    value: Ae,
     onChange(any)
 }
 
-export default class Ae extends Component<AeProps, any> {
+export default class AeEditor extends Component<AeProps, any> {
     get frames() {
         return this.props.value.frames
-        // return [
-        //     ...this.props.value.rows,
-        //     createDefaultDivision(),
-        // ]
     }
 
     get hasFrames() {
@@ -59,39 +56,39 @@ export default class Ae extends Component<AeProps, any> {
             : createDefaultDivision()
 
         this.update({
-            rows: listPush(this.frames, x),
+            frames: listPush(this.frames, x),
         })
     }
 
     onDeleteRowClick = event => {
         this.update({
-            rows: dropRight(this.frames),
+            frames: dropRight(this.frames),
         })
     }
 
-    onAddContent = (rowIndex, elementIndex, element) => {
-        const row = this.frames[rowIndex]
-        const content = listReplaceIndex(row.content, elementIndex, element)
+    onAddContent = (frameIndex, elementIndex, element) => {
+        const frame = this.frames[frameIndex]
+        const content = listReplaceIndex(frame.content, elementIndex, element)
 
         this.update({
-            rows: listReplaceIndex(this.frames, rowIndex, merge(row, {
+            frames: listReplaceIndex(this.frames, frameIndex, merge(frame, {
                 content,
             })),
         })
     }
 
-    onMergeRight = (rowIndex, elementIndex) => {
-        const row = this.frames[rowIndex]
-        const divisionRange = div(row.divide)
+    onMergeRight = (frameIndex, elementIndex) => {
+        const frame = this.frames[frameIndex]
+        const divisionRange = div(frame.divide)
         divisionRange[elementIndex - 1] = divisionRange[elementIndex]
         const divide = listRemoveIndex(divisionRange, elementIndex)
 
-        let content = cloneDeep(row.content)
+        let content = cloneDeep(frame.content)
         content[elementIndex - 1] = content[elementIndex]
         content = listRemoveIndex(content, elementIndex)
 
         this.update({
-            rows: listReplaceIndex(this.frames, rowIndex, merge(row, {
+            frames: listReplaceIndex(this.frames, frameIndex, merge(frame, {
                 content,
                 divide,
             })),
@@ -102,13 +99,13 @@ export default class Ae extends Component<AeProps, any> {
      * @param {Number} divide 
      */
     divideLast(divide) {
-        const row = last(this.frames)
+        const frame = last(this.frames)
         const content = listTrim(
-            listFill(row.content, divide, i => `hi-${i}`),
+            listFill(frame.content, divide, i => `hi-${i}`),
             divide,
         )
         this.update({
-            rows: listReplaceLast(this.frames, merge(row, {
+            frames: listReplaceLast(this.frames, merge(frame, {
                 content,
                 divide,
             })),
@@ -124,14 +121,6 @@ export default class Ae extends Component<AeProps, any> {
                 key={index}
             />
         )
-        // return (
-        //     <Division>
-        //         <Img
-        //             src={image1}
-        //             ratio={8 / 16}
-        //         />
-        //     </Division>
-        // )
     }
 
     onKeyDown = (event) => {

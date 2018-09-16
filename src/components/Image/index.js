@@ -8,6 +8,7 @@ export default function Image(props) {
     const style = {
         paddingTop: `${v}%`
     }
+
     return (
         <div
             className={'image'}
