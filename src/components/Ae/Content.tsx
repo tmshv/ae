@@ -7,9 +7,9 @@ interface BlockProps {
 
 function Block(props: BlockProps) {
     return (
-        <div>
-            {props.content}
-        </div>
+        <div
+            dangerouslySetInnerHTML={{__html: props.content}}
+        />
     )
 }
 
