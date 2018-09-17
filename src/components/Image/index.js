@@ -5,9 +5,10 @@ import './styles.less'
 
 export default function Image(props) {
     const v = props.ratio * 100
-    const style = {
-        paddingTop: `${v}%`
-    }
+    // const style = {
+    //     paddingTop: `${v}%`
+    // }
+    const style = null
 
     return (
         <div
