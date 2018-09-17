@@ -32,12 +32,19 @@ function percents(value) {
 }
 
 function getStyle(value, vertical) {
-    const field = vertical
-        ? 'height'
-        : 'width'
-    return {
-        [field]: percents(value),
+    if(vertical){
+        return null
     }
+
+    return {
+        width: percents(value)
+    }
+    // const field = vertical
+    //     ? 'height'
+    //     : 'width'
+    // return {
+    //     [field]: percents(value),
+    // }
 }
 
 export default function Division(props) {
