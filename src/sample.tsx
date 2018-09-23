@@ -23,3 +23,86 @@ export function Article() {
         </article>
     )
 }
+
+export function slateSample() {
+    return {
+        "object": "value",
+        "document": {
+            "object": "document",
+            "data": {
+
+            },
+            "nodes": [
+                {
+                    "object": "block",
+                    "type": "paragraph",
+                    "isVoid": false,
+                    "data": {
+
+                    },
+                    "nodes": [
+                        {
+                            "object": "text",
+                            "leaves": [
+                                {
+                                    "object": "leaf",
+                                    "text": "This is a line of text",
+                                    "marks": [
+
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "object": "block",
+                    "type": "image",
+                    "isVoid": true,
+                    "data": {
+                        url: 'https://static.shlisselburg.org/art/images/448e3e7190a45570ad4e0fe72c02e426-big.jpg',
+                        "file": {
+
+                        }
+                    },
+                    "nodes": [
+                        {
+                            "object": "text",
+                            "leaves": [
+                                {
+                                    "object": "leaf",
+                                    "text": "",
+                                    "marks": [
+
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "object": "block",
+                    "type": "paragraph",
+                    "isVoid": false,
+                    "data": {
+
+                    },
+                    "nodes": [
+                        {
+                            "object": "text",
+                            "leaves": [
+                                {
+                                    "object": "leaf",
+                                    "text": "end",
+                                    "marks": [
+
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+            ]
+        }
+    }
+}
