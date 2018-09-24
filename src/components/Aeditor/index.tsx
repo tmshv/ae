@@ -1,11 +1,14 @@
 import React from 'react'
 import { Editor as SlateEditor } from 'slate-react'
-import { Value } from 'slate';
+import { Value } from 'slate'
 import { ImageIcon } from 'mdi-react'
 import EditList from 'slate-edit-list'
 import isUrl from 'is-url'
 
+import {BlockType} from './const'
+
 import imagePasteDrop from './plugins/imagePasteDrop'
+import { Paragraph } from './blocks/Paragraph'
 
 import './styles.less'
 
@@ -18,7 +21,7 @@ function CodeNode(props) {
     )
 }
 
-const Image = ({ src, isSelected = true }) => (
+const Image = ({ src, isSelected = false }) => (
     <div style={{
         border: !isSelected ? null : '3px solid gold'
     }}>
@@ -70,19 +73,18 @@ function WordCount() {
 }
 
 function renderEditor(props) {
-    const { children, editor } = props
+    const { editor } = props
 
     console.log(props.value)
 
     // const wordCount = countWords(editor.value.text)
     // const wordCount = editor.value.text.length
 
-    const wordCount = Math.random()
+    // const wordCount = Math.random()
 
     return (
         <div>
-            {children}
-            <span className="word-count">{wordCount}</span>
+            {props.children}
         </div>
     )
 }
@@ -118,7 +120,7 @@ const plugins = [
 ]
 
 // Define our app...
-export default class Editor extends React.Component {
+export default class Aeditor extends React.Component {
     // Set the initial value when the app is first constructed.
     state = {
         value: this.props.value,
@@ -126,6 +128,11 @@ export default class Editor extends React.Component {
 
     // On change, update the app's React state with the new editor value.
     onChange = ({ value }) => {
+        console.log('CHANGE')
+        // console.log(value.selection.anchor)
+
+        // console.log(JSON.stringify(value.toJSON()))
+
         this.setState({ value })
     }
 
@@ -167,25 +174,36 @@ export default class Editor extends React.Component {
         // return true
     }
 
-    // Add a `renderNode` method to render a `CodeNode` for code blocks.
     renderNode = props => {
         const { attributes, node } = props
 
         // console.log('props.isSelected', props.isSelected)
         // console.log(attributes)
         console.log(node.type)
-        
-        switch (node.type) {
-            case 'code': {
-                return <CodeNode {...props} />
-            }
 
-            case 'image': {
+        switch (node.type) {
+            case BlockType.paragraph: {
                 return (
-                    <ImageNode
-                        {...props}
-                    />
+                    <Paragraph {...props}/>
                 )
+            }
+            // case 'code': {
+            //     return <CodeNode {...props} />
+            // }
+
+            // case 'image': {
+            //     console.log('>>>')
+            //     console.log(node)
+
+            //     return (
+            //         <ImageNode
+            //             {...props}
+            //         />
+            //     )
+            // }
+
+            default: {
+                break
             }
         }
     }
@@ -204,13 +222,13 @@ export default class Editor extends React.Component {
         return (
             <div className={'editor-canvas'}>
                 <SlateEditor
-                    schema={schema}
+                    // schema={schema}
                     value={this.state.value}
                     onChange={this.onChange}
-                    onKeyDown={this.onKeyDown}
+                    // onKeyDown={this.onKeyDown}
                     renderNode={this.renderNode}
-                    renderEditor={renderEditor}
-                    plugins={plugins}
+                // renderEditor={renderEditor}
+                // plugins={plugins}
                 />
             </div>
         )
@@ -219,7 +237,7 @@ export default class Editor extends React.Component {
     render() {
         return (
             <div className={'editor'}>
-                {this.renderToolbar()}
+                {/* {this.renderToolbar()} */}
                 {this.renderEditor()}
             </div>
         )

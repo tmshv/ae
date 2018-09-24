@@ -1,6 +1,6 @@
 import React from 'react'
-import { Value } from 'slate'
-import Editor from '../src/components/Editor'
+import { Value, ValueJSON } from 'slate'
+import Aeditor from '../src/components/Aeditor'
 import { slateSample } from '../src/sample'
 // import Plain from 'slate-plain-serializer'
 
@@ -27,11 +27,12 @@ export default function () {
     //     },
     // })
 
-    const initialValue = Value.fromJSON(slateSample())
+    const json = slateSample() as ValueJSON
+    const initialValue = Value.fromJSON(json)
 
     return (
         <div>
-            <Editor value={initialValue} />
+            <Aeditor value={initialValue} />
         </div>
     )
 }

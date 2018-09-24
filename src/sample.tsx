@@ -25,6 +25,40 @@ export function Article() {
 }
 
 export function slateSample() {
+    // return {
+    //     "object": "value",
+    //     "document": {
+    //         "object": "document",
+    //         "data": {}, "nodes": [
+    //             {
+    //                 "object": "block",
+    //                 "type": "paragraph", "data": {},
+    //                  "nodes": [{ "object": "text", "leaves": [{ "object": "leaf", "text": "A line of text in a paragraph.", "marks": [] }] }]
+    //             }]
+    //     }
+    // }
+
+    return {
+        document: {
+            nodes: [
+                {
+                    object: 'block',
+                    type: 'paragraph',
+                    nodes: [
+                        {
+                            object: 'text',
+                            leaves: [
+                                {
+                                    text: 'A line of text in a paragraph.',
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+    }
+
     return {
         "object": "value",
         "document": {
@@ -55,15 +89,37 @@ export function slateSample() {
                         }
                     ]
                 },
+                // {
+                //     "object": "block",
+                //     "type": "image",
+                //     "isVoid": true,
+                //     "data": {
+                //         url: 'https://static.shlisselburg.org/art/images/448e3e7190a45570ad4e0fe72c02e426-big.jpg',
+                //         "file": {
+
+                //         }
+                //     },
+                //     "nodes": [
+                //         {
+                //             "object": "text",
+                //             "leaves": [
+                //                 {
+                //                     "object": "leaf",
+                //                     "text": "",
+                //                     "marks": [
+
+                //                     ]
+                //                 }
+                //             ]
+                //         }
+                //     ]
+                // },
                 {
                     "object": "block",
-                    "type": "image",
-                    "isVoid": true,
+                    "type": "paragraph",
+                    "isVoid": false,
                     "data": {
-                        url: 'https://static.shlisselburg.org/art/images/448e3e7190a45570ad4e0fe72c02e426-big.jpg',
-                        "file": {
 
-                        }
                     },
                     "nodes": [
                         {
@@ -71,7 +127,7 @@ export function slateSample() {
                             "leaves": [
                                 {
                                     "object": "leaf",
-                                    "text": "",
+                                    "text": "One line of text",
                                     "marks": [
 
                                     ]
@@ -93,7 +149,7 @@ export function slateSample() {
                             "leaves": [
                                 {
                                     "object": "leaf",
-                                    "text": "end",
+                                    "text": "EOL",
                                     "marks": [
 
                                     ]
