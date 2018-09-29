@@ -1,26 +1,50 @@
-.editor{
-    padding: 10px;
+.ae-editor {
+    --background: white;
+    --border-radius: 2px;
+    --font-size-text: 20px;
+    --font-size-title: 36px;
+    --highlight-color: gold;
+    --highlight-background-color: #f3f6fc;
+    --size-m: 5px;
+    --size-l: 10px;
+
+    --text-margin: 0;
+
+    // font-family: 'Roboto', sans-serif;
+    font-family: 'Lora', serif;
+    font-size: var(--font-size-text);
+    background-color: var(--background);
 }
 
-.editor-toolbar {
-    border: 1px solid black;
-    margin-bottom: 10px;
+.ae-editor {
+    .focused {
+        background-color: var(--highlight-background-color);
+        border-radius: var(--border-radius);
+    }
+
+    .text {
+        margin: var(--text-margin);
+        padding: var(--size-m) var(--size-l);
+    }
 }
 
-.editor-canvas {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
-    // line-height: 20px;
-
-    background-color: white;
-
-
+.ae-block-paragraph {
+    --text-margin: 0 0 var(--size-l);    
 }
 
-.ae-paragraph {
-    padding: 5px 10px;
+.ae-block-header {
+    font-size: var(--font-size-title);
+}
+
+.ae-block-image {
+    --border: var(--background);
+
+    .image {
+        border: 2px solid var(--border);
+    }
 
     &.focused {
-        background-color: gold;
+        --highlight-background-color: none;
+        --border: var(--highlight-color);
     }
 }

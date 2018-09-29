@@ -1,3 +1,5 @@
 export enum BlockType {
-    paragraph = 'paragraph'
+    paragraph = 'paragraph',
+    header1 = 'header_1',
+    image = 'image',
 }

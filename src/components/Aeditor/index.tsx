@@ -1,16 +1,19 @@
 import React from 'react'
 import { Editor as SlateEditor } from 'slate-react'
 import { Value } from 'slate'
-import { ImageIcon } from 'mdi-react'
 import EditList from 'slate-edit-list'
 import isUrl from 'is-url'
+import schema from './schema'
 
-import {BlockType} from './const'
+import { BlockType } from './const'
 
 import imagePasteDrop from './plugins/imagePasteDrop'
 import { Paragraph } from './blocks/Paragraph'
+import { Image } from './blocks/Image'
 
 import './styles.less'
+import Toolbar from '../Toolbar';
+import { Header } from './blocks/Header';
 
 // Define a React component renderer for our code blocks.
 function CodeNode(props) {
@@ -18,35 +21,6 @@ function CodeNode(props) {
         <pre {...props.attributes}>
             <code>{props.children}</code>
         </pre>
-    )
-}
-
-const Image = ({ src, isSelected = false }) => (
-    <div style={{
-        border: !isSelected ? null : '3px solid gold'
-    }}>
-        <img
-            style={{
-                width: '200px'
-            }}
-            src={src}
-        />
-    </div>
-)
-
-function ImageNode(props) {
-    const src = props.node.data.get('url')
-
-    return (
-        <div {...props.attributes}>
-            <div>
-                {props.children}
-                <Image
-                    isSelected={props.isSelected}
-                    src={src}
-                />
-            </div>
-        </div>
     )
 }
 
@@ -89,19 +63,19 @@ function renderEditor(props) {
     )
 }
 
-const schema = {
-    document: {
-        last: { types: ['paragraph'] },
-        normalize: (change, reason, { node, child }) => {
-            switch (reason) {
-                case LAST_CHILD_TYPE_INVALID: {
-                    const paragraph = Block.create('paragraph')
-                    return change.insertNodeByKey(node.key, node.nodes.size, paragraph)
-                }
-            }
-        },
-    },
-}
+// const schema = {
+//     document: {
+//         last: { types: ['paragraph'] },
+//         normalize: (change, reason, { node, child }) => {
+//             switch (reason) {
+//                 case LAST_CHILD_TYPE_INVALID: {
+//                     const paragraph = Block.create('paragraph')
+//                     return change.insertNodeByKey(node.key, node.nodes.size, paragraph)
+//                 }
+//             }
+//         },
+//     },
+// }
 
 const plugins = [
     imagePasteDrop({
@@ -126,10 +100,20 @@ export default class Aeditor extends React.Component {
         value: this.props.value,
     }
 
+    onClickImage = () => {
+        console.log('Image')
+    }
+
     // On change, update the app's React state with the new editor value.
     onChange = ({ value }) => {
-        console.log('CHANGE')
+        // console.log('CHANGE')
         // console.log(value.selection.anchor)
+
+        // text of block where curcor is
+        // console.log(value.anchorText.text)
+        // console.log(value.anchorBlock.type)
+
+        window.x = value
 
         // console.log(JSON.stringify(value.toJSON()))
 
@@ -179,65 +163,70 @@ export default class Aeditor extends React.Component {
 
         // console.log('props.isSelected', props.isSelected)
         // console.log(attributes)
-        console.log(node.type)
+        console.log('renderNode', node.type)
+        console.log('isSelected', props.isSelected, node.text)
+        // debugger
 
         switch (node.type) {
-            case BlockType.paragraph: {
+            case BlockType.header1: {
                 return (
-                    <Paragraph {...props}/>
+                    <Header {...props} />
                 )
             }
-            // case 'code': {
-            //     return <CodeNode {...props} />
-            // }
 
-            // case 'image': {
-            //     console.log('>>>')
-            //     console.log(node)
+            case BlockType.paragraph: {
+                return (
+                    <Paragraph {...props} />
+                )
+            }
 
-            //     return (
-            //         <ImageNode
-            //             {...props}
-            //         />
-            //     )
-            // }
+            case BlockType.image: {
+                return (
+                    <Image {...props} />
+                )
+            }
 
             default: {
                 break
             }
         }
+
+        return (
+            <Paragraph {...props} />
+        )
     }
 
     renderToolbar() {
         return (
-            <div className={'editor-toolbar'}>
-                <button onClick={this.onClickImage}>
-                    <ImageIcon />
-                </button>
-            </div>
+            <Toolbar
+                value={this.state.value}
+                onChange={this.onChange}
+            />
         )
     }
 
     renderEditor() {
         return (
-            <div className={'editor-canvas'}>
-                <SlateEditor
-                    // schema={schema}
-                    value={this.state.value}
-                    onChange={this.onChange}
-                    // onKeyDown={this.onKeyDown}
-                    renderNode={this.renderNode}
-                // renderEditor={renderEditor}
-                // plugins={plugins}
-                />
-            </div>
+            <SlateEditor
+                autoFocus={true}
+                // schema={schema}
+                value={this.state.value}
+                onChange={this.onChange}
+                // onKeyDown={this.onKeyDown}
+                renderNode={this.renderNode}
+                schema={schema}
+            // renderEditor={renderEditor}
+            // plugins={plugins}
+            />
         )
     }
 
     render() {
+        console.log('')
+
         return (
-            <div className={'editor'}>
-                {/* {this.renderToolbar()} */}
+            <div className={'ae-editor'}>
+                {this.renderToolbar()}
                 {this.renderEditor()}
             </div>
         )
