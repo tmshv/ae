@@ -1,9 +1,10 @@
 import React from 'react'
-import { Editor as SlateEditor } from 'slate-react'
+import { Editor as SlateEditor, getEventTransfer } from 'slate-react'
 import { Value } from 'slate'
 import EditList from 'slate-edit-list'
 import isUrl from 'is-url'
 import schema from './schema'
+import { handleTextPaste } from './lib'
 
 import { BlockType } from './const'
 
@@ -63,20 +64,6 @@ function renderEditor(props) {
     )
 }
 
-// const schema = {
-//     document: {
-//         last: { types: ['paragraph'] },
-//         normalize: (change, reason, { node, child }) => {
-//             switch (reason) {
-//                 case LAST_CHILD_TYPE_INVALID: {
-//                     const paragraph = Block.create('paragraph')
-//                     return change.insertNodeByKey(node.key, node.nodes.size, paragraph)
-//                 }
-//             }
-//         },
-//     },
-// }
-
 const plugins = [
     imagePasteDrop({
         insertImage: (change, file, editor) => {
@@ -93,28 +80,27 @@ const plugins = [
     // EditList(),
 ]
 
+
+export interface AeditorProps {
+    value: Value,
+}
+
+interface State {
+    value: Value,
+}
+
 // Define our app...
-export default class Aeditor extends React.Component {
+export default class Aeditor extends React.Component<AeditorProps, State> {
     // Set the initial value when the app is first constructed.
     state = {
         value: this.props.value,
     }
 
-    onClickImage = () => {
-        console.log('Image')
-    }
-
     // On change, update the app's React state with the new editor value.
     onChange = ({ value }) => {
-        // console.log('CHANGE')
-        // console.log(value.selection.anchor)
-
         // text of block where curcor is
         // console.log(value.anchorText.text)
         // console.log(value.anchorBlock.type)
-
-        window.x = value
-
         // console.log(JSON.stringify(value.toJSON()))
 
         this.setState({ value })
@@ -158,14 +144,21 @@ export default class Aeditor extends React.Component {
         // return true
     }
 
-    renderNode = props => {
-        const { attributes, node } = props
+    onPaste = (e, change) => {
+        const transfer = getEventTransfer(e)
 
-        // console.log('props.isSelected', props.isSelected)
-        // console.log(attributes)
-        console.log('renderNode', node.type)
-        console.log('isSelected', props.isSelected, node.text)
-        // debugger
+        switch (transfer.type) {
+            // case 'files': return this.handleOnDrop(files);
+            case 'text': {
+                return handleTextPaste(e, change)
+            }
+            // case 'html': return onPasteHtml(e, change);
+            default: break;
+        }
+    }
+
+    renderNode = props => {
+        const { node } = props
 
         switch (node.type) {
             case BlockType.header1: {
@@ -190,10 +183,6 @@ export default class Aeditor extends React.Component {
                 break
             }
         }
-
-        return (
-            <Paragraph {...props} />
-        )
     }
 
     renderToolbar() {
@@ -208,15 +197,14 @@ export default class Aeditor extends React.Component {
     renderEditor() {
         return (
             <SlateEditor
-                autoFocus={true}
-                // schema={schema}
+                onPaste={this.onPaste}
                 value={this.state.value}
                 onChange={this.onChange}
-                // onKeyDown={this.onKeyDown}
                 renderNode={this.renderNode}
-                schema={schema}
-            // renderEditor={renderEditor}
-            // plugins={plugins}
+                // onKeyDown={this.onKeyDown}
+                // schema={schema}
+                // renderEditor={renderEditor}
+                // plugins={plugins}
             />
         )
     }

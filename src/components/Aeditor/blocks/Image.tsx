@@ -1,6 +1,6 @@
 import React from 'react'
 import className from 'classnames'
-import { BlockProps } from '.';
+import { BlockProps } from '.'
 
 const Img = ({ src, mix }) => (
     <img
@@ -14,14 +14,33 @@ const Img = ({ src, mix }) => (
 )
 
 export class Image extends React.PureComponent<BlockProps, object> {
+    onCaptionChange = (event) => {
+        const caption = event.target.value
+        const { node, editor } = this.props
+        const src = node.data.get('src')
+
+        console.log(caption)
+
+        editor.change(c => c.setNodeByKey(node.key, {
+            data: {
+                caption,
+                src,
+            }
+        }))
+    }
+
+    onCaptionClick = (event) => {
+        event.stopPropagation()
+    }
+
     render() {
         // const { node, editor, attributes, connectDragSource, isDragging, isSelected } = this.props;
-        const { node, attributes, isSelected } = this.props;
+        const { node, attributes, isSelected } = this.props
 
-        const src = node.data.get('src');
-        // const caption = node.data.get('caption');
-        const caption = JSON.stringify(isSelected);
-        // const { readOnly } = editor.props;
+        const src = node.data.get('src')
+        const caption = node.data.get('caption')
+        // const caption = src
+        const { readOnly } = this.props.editor.props
 
         // const imgStyle = {
         //     cursor: readOnly ? 'auto' : 'move',
@@ -42,7 +61,14 @@ export class Image extends React.PureComponent<BlockProps, object> {
                 />
 
                 <figcaption>
-                    {caption}
+                    {readOnly ? caption : (
+                        <input
+                            onChange={this.onCaptionChange}
+                            onClick={this.onCaptionClick}
+                            value={caption}
+                            placeholder={'caption'}
+                        />
+                    )}
                 </figcaption>
             </figure>
         )

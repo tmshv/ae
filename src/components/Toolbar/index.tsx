@@ -2,21 +2,10 @@ import React from 'react'
 import slate from 'slate'
 import { ImageIcon, FormatHeader1Icon, BugIcon } from 'mdi-react'
 import IconButton from '../IconButton'
+import { BlockType } from '../Aeditor/const'
+import { insertImage } from '../Aeditor/lib'
 
 import './styles.less'
-import { BlockType } from '../Aeditor/const';
-
-const insertImage = (change, src, target) => {
-    if (target) {
-        change.select(target);
-    }
-
-    return change.insertBlock({
-        type: BlockType.image,
-        isVoid: true,
-        data: { src },
-    });
-};
 
 interface ToolbarProps {
     value: slate.Value,
