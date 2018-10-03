@@ -1,9 +1,20 @@
 import React from 'react'
 import slate from 'slate'
-import { ImageIcon, FormatHeader1Icon, BugIcon, FileIcon } from 'mdi-react'
+import {
+    ImageIcon,
+    FormatHeader1Icon,
+    BugIcon,
+    FileIcon,
+    FormatQuoteCloseIcon,
+    FormatListBulletedIcon,
+    TableIcon,
+} from 'mdi-react'
 import IconButton from '../IconButton'
 import { BlockType } from '../Aeditor/const'
 import { insertImage, insertFile } from '../Aeditor/lib'
+import listPlugin from '../Aeditor/plugins/list'
+import tablePlugin from '../Aeditor/plugins/table'
+import blockquotePlugin from '../Aeditor/plugins/blockquote'
 
 import './styles.less'
 
@@ -59,17 +70,59 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
         return this.props.onChange(change.setBlocks(type))
     }
 
+    onClickQuote = (event: Event) => {
+        event.preventDefault()
+
+        const value = this.props.value
+        const change = value.change()
+
+        return blockquotePlugin.utils.isSelectionInBlockquote(value)
+            ? this.props.onChange(blockquotePlugin.changes.unwrapBlockquote(change))
+            : this.props.onChange(blockquotePlugin.changes.wrapInBlockquote(change))
+    }
+
+    onClickUnorderedList = (event: Event) => {
+        event.preventDefault()
+
+        const type = BlockType.unorderedList
+        const value = this.props.value
+        const change = value.change()
+
+        const inList = listPlugin.utils.isSelectionInList(value)
+
+        // const isTargetType = listPlugin.utils.getCurrentList(value).type === type
+        // const isActive = listPlugin.utils.isSelectionInList(value) && isTargetType
+        // return isActive
+        return inList
+            ? this.props.onChange(listPlugin.changes.unwrapList(change))
+            : this.props.onChange(listPlugin.changes.wrapInList(change, type))
+    }
+
+    onClickTable = (event: Event) => {
+        event.preventDefault()
+
+        const value = this.props.value
+        const change = value.change()
+        const isActive = tablePlugin.utils.isSelectionInTable(value)
+
+        return isActive
+            ? this.props.onChange(tablePlugin.changes.removeTable(change))
+            : this.props.onChange(tablePlugin.changes.insertTable(change))
+    }
+
     renderButton(onClick, children) {
         return (
             <IconButton
                 mix={'ae-toolbar-button'}
                 onClick={onClick}
                 size={20}
-                color={'#999'}
-                hoverColor={'#999'}
-                focusColor={'#999'}
-                disabledColor={'#999'}
+                color={'#666'}
+                hoverColor={'#333'}
+                focusColor={'#000'}
+                activeColor={'gold'}
+                disabledColor={'#ddd'}
                 disabled={false}
+                active={false}
             >
                 {children}
             </IconButton>
@@ -88,6 +141,15 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
                     ))}
                     {this.renderButton(this.onClickHeader, (
                         <FormatHeader1Icon />
+                    ))}
+                    {this.renderButton(this.onClickQuote, (
+                        <FormatQuoteCloseIcon />
+                    ))}
+                    {this.renderButton(this.onClickUnorderedList, (
+                        <FormatListBulletedIcon />
+                    ))}
+                    {this.renderButton(this.onClickTable, (
+                        <TableIcon />
                     ))}
                 </div>
 

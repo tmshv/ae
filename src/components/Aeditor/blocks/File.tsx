@@ -33,9 +33,7 @@ export class File extends React.PureComponent<BlockProps, object> {
                     src={src}
                 />
 
-                <span>
-                    {name}
-                </span>
+                {/* {this.props.children} */}
             </figure>
         )
     }

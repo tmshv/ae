@@ -1,6 +1,6 @@
 import { LAST_CHILD_TYPE_INVALID } from 'slate-schema-violations'
 import { Block } from 'slate'
-import { BlockType } from '../const';
+import { BlockType } from '../const'
 
 const schema = {
     document: {

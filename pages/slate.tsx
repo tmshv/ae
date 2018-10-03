@@ -4,24 +4,56 @@ import Aeditor from '../src/components/Aeditor'
 import { slateSample } from '../src/sample'
 // import Plain from 'slate-plain-serializer'
 
-export default function () {
-    const json = slateSample() as ValueJSON
-    const initialValue = Value.fromJSON(json)
+export default class Index extends React.Component<object, object> {
+    constructor(props) {
+        super(props)
 
-    return (
-        <div
-            style={{
-                display: 'flex',
-                justifyContent: 'center',
-            }}
-        >
+        this.state = {
+            initialValue: undefined,
+        }
+    }
+
+    componentDidMount() {
+        const json = slateSample() as ValueJSON
+        const initialValue = Value.fromJSON(json)
+
+        this.setState({
+            initialValue,
+        })
+
+        document.execCommand('enableObjectResizing', false, 'false')
+        document.execCommand('enableInlineTableEditing', false, 'false')
+    }
+
+    render() {
+        if (!this.state.initialValue) {
+            return null
+        }
+
+        return (
             <div
                 style={{
-                    width: '50%',
+                    display: 'flex',
+                    justifyContent: 'center',
                 }}
             >
-                <Aeditor value={initialValue} />
+                <div
+                    style={{
+                        width: '80%',
+                        marginTop: '40px',
+                    }}
+                >
+                    <Aeditor value={this.state.initialValue} />
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
+
+// Index.getInitialProps = async () => {
+//     const json = slateSample()
+
+//     return {
+//         json,
+//     }
+// }

@@ -3,10 +3,13 @@
     --border-radius: 2px;
     --font-size-text: 20px;
     --font-size-title: 36px;
-    --highlight-color: gold;
-    --highlight-background-color: #f3f6fc;
+    --highlight-color: #efdb6d;
+    --highlight-background-color: #efdb6d;
+    --highlight-border-size: 5px;
     --size-m: 5px;
     --size-l: 10px;
+
+    --blockquote-color: #666;
 
     --text-margin: 0;
 
@@ -40,7 +43,7 @@
     --border: var(--background);
 
     .image {
-        border: 2px solid var(--border);
+        border: var(--highlight-border-size) solid var(--border);
     }
 
     &.focused {
@@ -54,11 +57,21 @@
 
     .file-preview {
         width: 50px;
-        border: 2px solid var(--border);
+        border: var(--highlight-border-size) solid var(--border);
     }
 
     &.focused {
         --highlight-background-color: none;
         --border: var(--highlight-color);
     }
+}
+
+.ae-block-blockquote {
+    font-style: italic;
+
+    color: var(--blockquote-color);
+
+    border-left: 3px solid var(--blockquote-color);
+    margin: 0;
+    padding: 0 var(--size-l);
 }
