@@ -48,3 +48,17 @@
         --border: var(--highlight-color);
     }
 }
+
+.ae-block-file {
+    --border: var(--background);
+
+    .file-preview {
+        width: 50px;
+        border: 2px solid var(--border);
+    }
+
+    &.focused {
+        --highlight-background-color: none;
+        --border: var(--highlight-color);
+    }
+}

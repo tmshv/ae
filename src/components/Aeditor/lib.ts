@@ -36,3 +36,15 @@ export function insertImage(change: Change, src: string, target) {
         isVoid: true,
     })
 }
+
+export function insertFile(change: Change, file: object, target) {
+    if (target) {
+        change.select(target, undefined)
+    }
+
+    return change.insertBlock({
+        type: BlockType.file,
+        data: file,
+        isVoid: true,
+    })
+}

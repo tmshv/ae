@@ -11,6 +11,7 @@ import { BlockType } from './const'
 import imagePasteDrop from './plugins/imagePasteDrop'
 import { Paragraph } from './blocks/Paragraph'
 import { Image } from './blocks/Image'
+import { File } from './blocks/File'
 
 import './styles.less'
 import Toolbar from '../Toolbar';
@@ -176,6 +177,12 @@ export default class Aeditor extends React.Component<AeditorProps, State> {
             case BlockType.image: {
                 return (
                     <Image {...props} />
+                )
+            }
+
+            case BlockType.file: {
+                return (
+                    <File {...props} />
                 )
             }
 
