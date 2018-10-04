@@ -14,8 +14,8 @@
     --highlight-color: var(--color-4);
     --highlight-background-color: var(--color-3);
     --highlight-border-size: 5px;
-    --size-m: 5px;
-    --size-l: 10px;
+    --size-m: 10px;
+    --size-l: 20px;
 
     --blockquote-color: #666;
 
@@ -29,8 +29,21 @@
 
 .ae-editor {
     .focused {
-        background-color: var(--highlight-background-color);
+        position: relative;
+        // background-color: var(--highlight-background-color);
         // border-radius: var(--border-radius);
+
+        &:after{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+
+            border: var(--highlight-border-size) solid var(--highlight-color);
+
+            content: '';
+        }
     }
 
     .text {
