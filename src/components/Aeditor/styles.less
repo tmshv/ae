@@ -1,4 +1,11 @@
 .ae-editor {
+    figure {
+        margin: 0 0 var(--size-l);
+        // padding: 0;
+    }
+}
+
+.ae-editor {
     --color-1: #ffffff;
     --color-2: #eff6f6;
     --color-3: #d2e1e4;
@@ -8,17 +15,17 @@
     --color-7: #000000;
 
     --background: white;
-    --border-radius: 2px;
     --font-size-text: 20px;
     --font-size-title: 36px;
-    --highlight-color: var(--color-4);
+    --highlight-color: var(--color-5);
     --highlight-background-color: var(--color-3);
     --highlight-border-size: 5px;
+    --highlight-border-radius: 0;
     --size-m: 10px;
     --size-l: 20px;
 
+    --embed-video-ratio: 55.25%;
     --blockquote-color: #666;
-
     --text-margin: 0;
 
     // font-family: 'Roboto', sans-serif;
@@ -30,17 +37,17 @@
 .ae-editor {
     .focused {
         position: relative;
-        // background-color: var(--highlight-background-color);
-        // border-radius: var(--border-radius);
 
         &:after{
+            --pos: ~"calc(-1 * var(--highlight-border-size))";
             position: absolute;
             width: 100%;
             height: 100%;
-            top: 0;
-            left: 0;
+            top: var(--pos);
+            left: var(--pos);
 
             border: var(--highlight-border-size) solid var(--highlight-color);
+            border-radius: var(--highlight-border-radius);
 
             content: '';
         }
@@ -63,30 +70,26 @@
 }
 
 .ae-block-image {
-    --border: var(--background);
-
-    .image {
-        border: var(--highlight-border-size) solid var(--border);
-    }
-
-    &.focused {
-        --highlight-background-color: none;
-        --border: var(--highlight-color);
-    }
+    // &.focused {
+    //     --highlight-background-color: none;
+    //     --border: var(--highlight-color);
+    // }
 }
 
 .ae-block-file {
     --border: var(--background);
+
+    margin: 0;
 
     .file-preview {
         width: 50px;
         border: var(--highlight-border-size) solid var(--border);
     }
 
-    &.focused {
-        --highlight-background-color: none;
-        --border: var(--highlight-color);
-    }
+    // &.focused {
+    //     --highlight-background-color: none;
+    //     --border: var(--highlight-color);
+    // }
 }
 
 .ae-block-blockquote {
@@ -134,5 +137,22 @@
 .ae-block-table {
     .ae-block-paragraph {
         margin-bottom: 0;
+    }
+}
+
+.ae-block-video {
+    margin-bottom: var(--size-l);
+
+    width: 100%;
+    height: 0;
+    position: relative;
+    padding-bottom: var(--embed-video-ratio);
+
+    iframe {
+        width: 100%;
+        height: 100%;
+        top:0;
+        left: 0;
+        position: absolute;
     }
 }

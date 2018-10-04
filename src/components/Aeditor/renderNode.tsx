@@ -5,6 +5,7 @@ import { Image } from './blocks/Image'
 import { File } from './blocks/File'
 import { Blockquote } from './blocks/Blockquote'
 import { Header } from './blocks/Header'
+import Video from './blocks/Video';
 
 export default function renderNode(props) {
     const { node, attributes } = props
@@ -81,6 +82,12 @@ export default function renderNode(props) {
                 <td {...attributes}>
                     {props.children}
                 </td>
+            )
+        }
+
+        case BlockType.video: {
+            return (
+                <Video {...props} />
             )
         }
 

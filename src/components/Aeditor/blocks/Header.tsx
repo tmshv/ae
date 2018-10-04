@@ -7,7 +7,7 @@ export function Header(props: BlockProps) {
     return (
         <h1 {...props.attributes}
             className={className('ae-block-header', 'text', {
-                focused: props.isSelected,
+                focused: false, // props.isSelected,
             })}
         >
             {props.children}

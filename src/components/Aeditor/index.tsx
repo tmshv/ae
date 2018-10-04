@@ -1,20 +1,21 @@
 import React from 'react'
-import { Editor, getEventTransfer } from 'slate-react'
+import { Editor } from 'slate-react'
 import { Value, Change } from 'slate'
 import blockquotePlugin from './plugins/blockquote'
 import listPlugin from './plugins/list'
 import tablePlugin from './plugins/table'
 import schema from './schema'
-import { handleTextPaste } from './lib'
-
+import handlePaste from './utils/handlePaste'
+import pasteEmbedLink from './plugins/pasteEmbedLink'
 import Toolbar from '../Toolbar'
 import exitHeader from './plugins/exitHeader'
 import renderNode from './renderNode'
 
 import './styles.less'
-import shortcutMark from './plugins/shortcutMark';
-import { MarkType } from './const';
-import renderMark from './renderMark';
+import shortcutMark from './plugins/shortcutMark'
+import { MarkType } from './const'
+import renderMark from './renderMark'
+import insertVideo from './utils/insertVideo';
 
 // Define a React component renderer for our code blocks.
 function CodeNode(props) {
@@ -92,6 +93,12 @@ const plugins = [
     shortcutMark({
         key: 'h',
         type: MarkType.highlight,
+    }),
+    pasteEmbedLink({
+        match: /youtube\.com/,
+        change: (change: Change, link: string) => {
+            return change.call(insertVideo, link)
+        },
     }),
     // imagePasteDrop({
     //     insertImage: (change, file, editor) => {
@@ -171,19 +178,6 @@ export default class Aeditor extends React.Component<AeditorProps, State> {
         // return true
     }
 
-    onPaste = (e, change) => {
-        const transfer = getEventTransfer(e)
-
-        switch (transfer.type) {
-            // case 'files': return this.handleOnDrop(files);
-            case 'text': {
-                return handleTextPaste(e, change)
-            }
-            // case 'html': return onPasteHtml(e, change);
-            default: break
-        }
-    }
-
     renderToolbar() {
         return (
             <Toolbar
@@ -196,7 +190,7 @@ export default class Aeditor extends React.Component<AeditorProps, State> {
     renderEditor() {
         return (
             <Editor
-                onPaste={this.onPaste}
+                onPaste={handlePaste}
                 value={this.state.value}
                 onChange={this.onChange}
                 renderNode={renderNode}

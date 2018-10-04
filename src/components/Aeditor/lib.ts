@@ -8,21 +8,11 @@ import { BlockType } from './const'
 // import insertVideo from './insertVideo';
 // import insertLink from './insertLink';
 
-export function handleTextPaste(e, change) {
-    const target = getEventRange(e, change.value)
-
-    const transfer = getEventTransfer(e)
+export function getEventTransferText(event: Event): string {
+    const transfer = getEventTransfer(event)
     const { text } = transfer
-    // if (!isUrl(text)) return null;
 
-    if (isImage(text)) {
-        return change.call(insertImage, text, target)
-    }
-    //  else if (text.match(/youtube\.com|vimeo\.com/)) {
-    //     return change.call(insertVideo, text);
-    // }
-
-    // return change.call(insertLink, text);
+    return text
 }
 
 export function insertImage(change: Change, src: string, target) {
@@ -46,5 +36,24 @@ export function insertFile(change: Change, file: object, target) {
         type: BlockType.file,
         data: file,
         isVoid: true,
+        nodes: [
+            {
+                object: 'block',
+                type: 'paragraph',
+                nodes: [
+                    {
+                        "object": "text",
+                        "leaves": [
+                            {
+                                "object": "leaf",
+                                "text": file.name,
+                                "marks": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        // isVoid: true,
     })
 }

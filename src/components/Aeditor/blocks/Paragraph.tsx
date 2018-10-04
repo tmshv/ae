@@ -7,7 +7,7 @@ export function Paragraph(props: BlockProps) {
     return (
         <p {...props.attributes}
             className={className('ae-block-paragraph', 'text', {
-                focused: props.isSelected,
+                focused: false, // props.isSelected,
             })}
         >
             {props.children}

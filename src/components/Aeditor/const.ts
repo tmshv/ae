@@ -10,6 +10,7 @@ export enum BlockType {
     table = 'table',
     tableRow = 'tableRow',
     tableCell = 'tableCell',
+    video = 'video',
 }
 
 export enum MarkType {

@@ -60,7 +60,7 @@ export class Image extends React.PureComponent<BlockProps, object> {
                     src={src}
                 />
 
-                <figcaption>
+                {/* <figcaption>
                     {readOnly ? caption : (
                         <input
                             onChange={this.onCaptionChange}
@@ -69,7 +69,7 @@ export class Image extends React.PureComponent<BlockProps, object> {
                             placeholder={'caption'}
                         />
                     )}
-                </figcaption>
+                </figcaption> */}
             </figure>
         )
     }
