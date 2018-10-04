@@ -75,3 +75,41 @@
     margin: 0;
     padding: 0 var(--size-l);
 }
+
+.ae-block-table {
+    --border-color: #c0d4d9;
+    --border-size: 2px;
+    --border: var(--border-size) solid var(--border-color);
+
+    width: 100%;
+    margin-bottom: var(--size-l);
+
+    border-spacing: 0;
+    border: var(--border);
+
+    tr {
+        padding: 0;
+ 
+        &:first-child {
+            // font-style: bold;
+            background-color: var(--border-color);
+        }
+    }
+
+    td {
+        padding: 0;
+
+        min-width: 100px;
+
+        border-right: var(--border);
+        &:last-child {
+            border-right: none;
+        }
+    }
+}
+
+.ae-block-table {
+    .ae-block-paragraph {
+        margin-bottom: 0;
+    }
+}
