@@ -12,6 +12,9 @@ import exitHeader from './plugins/exitHeader'
 import renderNode from './renderNode'
 
 import './styles.less'
+import shortcutMark from './plugins/shortcutMark';
+import { MarkType } from './const';
+import renderMark from './renderMark';
 
 // Define a React component renderer for our code blocks.
 function CodeNode(props) {
@@ -66,6 +69,30 @@ const plugins = [
     listPlugin,
     tablePlugin,
     exitHeader(),
+    shortcutMark({
+        key: 'b',
+        type: MarkType.bold,
+    }),
+    shortcutMark({
+        key: 'i',
+        type: MarkType.italic,
+    }),
+    shortcutMark({
+        key: 'u',
+        type: MarkType.underline,
+    }),
+    shortcutMark({
+        key: 'd',
+        type: MarkType.strikethrough,
+    }),
+    shortcutMark({
+        key: '9',
+        type: MarkType.code,
+    }),
+    shortcutMark({
+        key: 'h',
+        type: MarkType.highlight,
+    }),
     // imagePasteDrop({
     //     insertImage: (change, file, editor) => {
     //         // console.log(change, file, editor)

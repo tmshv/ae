@@ -11,3 +11,12 @@ export enum BlockType {
     tableRow = 'tableRow',
     tableCell = 'tableCell',
 }
+
+export enum MarkType {
+    bold = 'bold',
+    italic = 'italic',
+    strikethrough = 'strikethrough',
+    underline = 'underline',
+    code = 'code',
+    highlight = 'highlight',
+}
