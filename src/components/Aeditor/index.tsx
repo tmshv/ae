@@ -200,6 +200,7 @@ export default class Aeditor extends React.Component<AeditorProps, State> {
                 value={this.state.value}
                 onChange={this.onChange}
                 renderNode={renderNode}
+                renderMark={renderMark}
                 schema={schema}
                 // onKeyDown={this.onKeyDown}
                 // renderEditor={renderEditor}
