@@ -9,16 +9,16 @@ import renderMark from './renderMark'
 import defaultPlugins from './defaultPlugins'
 import './styles.less'
 
-export interface AeditorProps {
+export interface IAeditorProps {
     value: Value,
     onChange: (change: Change) => void,
 }
 
-interface State {
+interface IState {
     plugins: any[],
 }
 
-export default class Aeditor extends React.Component<AeditorProps, State> {
+export default class Aeditor extends React.Component<IAeditorProps, IState> {
     state = {
         plugins: defaultPlugins(),
     }
