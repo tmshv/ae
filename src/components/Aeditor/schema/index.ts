@@ -17,9 +17,12 @@ const schema = {
         },
     },
     blocks: {
-        image: {
+        [BlockType.image]: {
             isVoid: true,
         },
+        [BlockType.video]: {
+            isVoid: true,
+        }
     },
 }
 
