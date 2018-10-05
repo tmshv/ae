@@ -4,14 +4,12 @@ import { BlockProps } from '.'
 
 export class Figure extends React.PureComponent<BlockProps, object> {
     render() {
-        const { attributes, isSelected } = this.props
+        const { attributes } = this.props
 
         return (
             <figure
                 {...attributes}
-                className={className('ae-block-figure', {
-                    focused: isSelected,
-                })}
+                className={className('ae-block-figure')}
             >
                 {this.props.children}
             </figure>

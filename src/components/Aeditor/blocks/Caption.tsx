@@ -4,7 +4,7 @@ import { BlockProps } from '.'
 
 export class Caption extends React.PureComponent<BlockProps, object> {
     render() {
-        const { attributes, isSelected } = this.props
+        const { attributes } = this.props
 
         return (
             <figcaption
