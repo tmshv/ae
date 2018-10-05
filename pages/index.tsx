@@ -4,21 +4,31 @@ import Aeditor from '../src/components/Aeditor'
 import { slateSample } from '../src/sample'
 // import Plain from 'slate-plain-serializer'
 
-export default class Index extends React.Component<object, object> {
+interface IState {
+    value: Value,
+}
+
+export default class Index extends React.Component<object, IState> {
     constructor(props) {
         super(props)
 
         this.state = {
-            initialValue: undefined,
+            value: undefined,
         }
+    }
+
+    onChange = ({ value }) => {
+        this.setState({
+            value
+        })
     }
 
     componentDidMount() {
         const json = slateSample() as ValueJSON
-        const initialValue = Value.fromJSON(json)
+        const value = Value.fromJSON(json)
 
         this.setState({
-            initialValue,
+            value,
         })
 
         document.execCommand('enableObjectResizing', false, 'false')
@@ -26,7 +36,7 @@ export default class Index extends React.Component<object, object> {
     }
 
     render() {
-        if (!this.state.initialValue) {
+        if (!this.state.value) {
             return null
         }
 
@@ -43,7 +53,10 @@ export default class Index extends React.Component<object, object> {
                         marginTop: '40px',
                     }}
                 >
-                    <Aeditor value={this.state.initialValue} />
+                    <Aeditor
+                        value={this.state.value}
+                        onChange={this.onChange}
+                    />
                 </div>
             </div>
         )

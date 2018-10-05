@@ -1,29 +1,33 @@
 import { LAST_CHILD_TYPE_INVALID } from 'slate-schema-violations'
-import { Block } from 'slate'
+import { Block, Schema } from 'slate'
 import { BlockType } from '../const'
 
-const schema = {
-    document: {
-        last: { types: [BlockType.paragraph] },
-        normalize: (change, reason, { node }) => {
-            switch (reason) {
-                case LAST_CHILD_TYPE_INVALID: {
-                    const paragraph = Block.create(BlockType.paragraph)
-                    return change.insertNodeByKey(node.key, node.nodes.size, paragraph)
+function getSchema() {
+    return {
+        document: {
+            last: { types: [BlockType.paragraph] },
+            normalize: (change, reason, { node }) => {
+                switch (reason) {
+                    case LAST_CHILD_TYPE_INVALID: {
+                        const paragraph = Block.create(BlockType.paragraph)
+                        return change.insertNodeByKey(node.key, node.nodes.size, paragraph)
+                    }
+                    default:
+                        break
                 }
-                default:
-                    break
+            },
+        },
+        blocks: {
+            [BlockType.image]: {
+                isVoid: true,
+            },
+            [BlockType.video]: {
+                isVoid: true,
             }
         },
-    },
-    blocks: {
-        [BlockType.image]: {
-            isVoid: true,
-        },
-        [BlockType.video]: {
-            isVoid: true,
-        }
-    },
+    }
 }
+
+const schema: Schema = getSchema()
 
 export default schema
