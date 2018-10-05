@@ -15,18 +15,6 @@ export function getEventTransferText(event: Event): string {
     return text
 }
 
-export function insertImage(change: Change, src: string, target) {
-    if (target) {
-        change.select(target, undefined)
-    }
-
-    return change.insertBlock({
-        type: BlockType.image,
-        data: { src },
-        isVoid: true,
-    })
-}
-
 export function insertFile(change: Change, file: object, target) {
     if (target) {
         change.select(target, undefined)

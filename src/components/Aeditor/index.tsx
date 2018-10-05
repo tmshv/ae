@@ -13,9 +13,12 @@ import renderNode from './renderNode'
 
 import './styles.less'
 import shortcutMark from './plugins/shortcutMark'
-import { MarkType } from './const'
+import { MarkType, BlockType } from './const'
 import renderMark from './renderMark'
-import insertVideo from './utils/insertVideo';
+import insertVideo from './changes/insertVideo'
+import captionExit from './plugins/captionExit';
+
+const youtubeLinkRegExp = /(youtube\.com)|(youtu\.be)/
 
 // Define a React component renderer for our code blocks.
 function CodeNode(props) {
@@ -95,11 +98,17 @@ const plugins = [
         type: MarkType.highlight,
     }),
     pasteEmbedLink({
-        match: /youtube\.com/,
+        match: youtubeLinkRegExp,
         change: (change: Change, link: string) => {
-            return change.call(insertVideo, link)
+            return insertVideo(change, link)
+            // console.log(link)
+            // return change.call(insertVideo, link)
         },
     }),
+    captionExit({
+        exitBlockType: BlockType.paragraph,
+        exitKey: 'Enter',
+    })
     // imagePasteDrop({
     //     insertImage: (change, file, editor) => {
     //         // console.log(change, file, editor)

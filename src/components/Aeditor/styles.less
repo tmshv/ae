@@ -3,6 +3,11 @@
         margin: 0 0 var(--size-l);
         // padding: 0;
     }
+
+    blockquote {
+        margin: 0;
+        // padding: 0;
+    }
 }
 
 .ae-editor {
@@ -15,17 +20,21 @@
     --color-7: #000000;
 
     --background: white;
+    --font-size-caption: 16px;
     --font-size-text: 20px;
     --font-size-title: 36px;
     --highlight-color: var(--color-5);
     --highlight-background-color: var(--color-3);
     --highlight-border-size: 5px;
     --highlight-border-radius: 0;
+    --size-s: 5px;
     --size-m: 10px;
     --size-l: 20px;
 
     --embed-video-ratio: 55.25%;
     --blockquote-color: #666;
+    --blockquote-marker-offset: 20px;
+    --blockquote-marker-thickness: 3px;
     --text-margin: 0;
 
     // font-family: 'Roboto', sans-serif;
@@ -55,7 +64,8 @@
 
     .text {
         margin: var(--text-margin);
-        padding: var(--size-m) var(--size-l);
+        // padding: var(--size-m) var(--size-l);
+        padding: var(--size-m) 0;
     }
 }
 
@@ -70,10 +80,12 @@
 }
 
 .ae-block-image {
-    // &.focused {
-    //     --highlight-background-color: none;
-    //     --border: var(--highlight-color);
-    // }
+    position: relative;
+    
+    img {
+        display: block;
+        width: 100%;
+    }
 }
 
 .ae-block-file {
@@ -93,13 +105,23 @@
 }
 
 .ae-block-blockquote {
-    font-style: italic;
+    position: relative;
 
+    font-style: italic;
     color: var(--blockquote-color);
 
-    border-left: 3px solid var(--blockquote-color);
-    margin: 0;
-    padding: 0 var(--size-l);
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: ~"calc(-1 * var(--blockquote-marker-offset))";
+        width: 0;
+        height: 100%;
+
+        border-left: var(--blockquote-marker-thickness) solid var(--blockquote-color);
+        margin: 0;
+        padding: 0 var(--size-l);
+    }
 }
 
 .ae-block-table {
@@ -137,6 +159,7 @@
 .ae-block-table {
     .ae-block-paragraph {
         margin-bottom: 0;
+        padding: var(--size-m) var(--size-m);
     }
 }
 
@@ -155,4 +178,17 @@
         left: 0;
         position: absolute;
     }
+}
+
+.ae-block-caption {
+    padding-top: var(--size-s);
+    padding-left: var(--size-l);
+
+    .ae-block-paragraph {
+        padding: 0;
+    }
+
+    color: var(--color-5);
+    font-size: var(--font-size-caption);
+    font-style: italic;
 }

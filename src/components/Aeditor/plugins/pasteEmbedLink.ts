@@ -2,17 +2,6 @@ import { Change } from 'slate'
 import { getEventTransfer } from 'slate-react';
 import { getEventTransferText } from '../lib';
 
-
-// switch (transfer.type) {
-//     case 'text': {
-//         return handleTextPaste(event, change)
-//     }
-//     // case 'files': return this.handleOnDrop(files);
-//     // case 'html': return onPasteHtml(e, change);
-//     default: {
-//         return null
-//     }
-// }
 export interface IPasteEmbedLinkOptions {
     match: RegExp,
     change: (Change, string) => Change,

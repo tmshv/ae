@@ -11,7 +11,7 @@ import {
 } from 'mdi-react'
 import IconButton from '../IconButton'
 import { BlockType } from '../Aeditor/const'
-import { insertImage, insertFile } from '../Aeditor/lib'
+import insertImage from '../Aeditor/changes/insertImage'
 import listPlugin from '../Aeditor/plugins/list'
 import tablePlugin from '../Aeditor/plugins/table'
 import blockquotePlugin from '../Aeditor/plugins/blockquote'
@@ -45,18 +45,18 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
     }
 
     onClickFile = () => {
-        const change = this.props.value.change()
-        const file = {
-            srcPreview: 'https://art.shlisselburg.org/data/images/ae64123551407d5c325f75d83f58a338-medium.jpg',
-            srcFile: '',
-            name: 'Some PDF file',
-            size: 5000000,
-            mimeType: 'application/pdf',
-        }
+        // const change = this.props.value.change()
+        // const file = {
+        //     srcPreview: 'https://art.shlisselburg.org/data/images/ae64123551407d5c325f75d83f58a338-medium.jpg',
+        //     srcFile: '',
+        //     name: 'Some PDF file',
+        //     size: 5000000,
+        //     mimeType: 'application/pdf',
+        // }
 
-        return this.props.onChange(
-            insertFile(change, file, undefined)
-        )
+        // return this.props.onChange(
+        //     insertFile(change, file, undefined)
+        // )
     }
 
     onClickHeader = (event) => {
@@ -107,7 +107,7 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
 
         return isActive
             ? this.props.onChange(tablePlugin.changes.removeTable(change))
-            : this.props.onChange(tablePlugin.changes.insertTable(change))
+            : this.props.onChange(tablePlugin.changes.insertTable(change, 3))
     }
 
     renderButton(onClick, children) {
@@ -136,9 +136,9 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
                     {this.renderButton(this.onClickImage, (
                         <ImageIcon />
                     ))}
-                    {this.renderButton(this.onClickFile, (
+                    {/* {this.renderButton(this.onClickFile, (
                         <FileIcon />
-                    ))}
+                    ))} */}
                     {this.renderButton(this.onClickHeader, (
                         <FormatHeader1Icon />
                     ))}

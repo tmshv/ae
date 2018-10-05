@@ -6,6 +6,7 @@ import { File } from './blocks/File'
 import { Blockquote } from './blocks/Blockquote'
 import { Header } from './blocks/Header'
 import Video from './blocks/Video';
+import { Caption } from './blocks/Caption';
 
 export default function renderNode(props) {
     const { node, attributes } = props
@@ -88,6 +89,12 @@ export default function renderNode(props) {
         case BlockType.video: {
             return (
                 <Video {...props} />
+            )
+        }
+
+        case BlockType.caption: {
+            return (
+                <Caption {...props}/>
             )
         }
 

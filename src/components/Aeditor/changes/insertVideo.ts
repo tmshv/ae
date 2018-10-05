@@ -1,13 +1,13 @@
 import getVideoId from 'get-video-id'
 import { Change } from 'slate'
-import { BlockType } from '../const'
+import createVideo from '../utils/createVideo'
 
 export enum VideoService {
     youtube = 'youtube',
     vimeo = 'vimeo',
 }
 
-export default function insertVideo(change: Change, url: string): object {
+export default function insertVideo(change: Change, url: string): Change {
     const video = getVideoId(url)
 
     if (!video) {
@@ -28,11 +28,15 @@ export default function insertVideo(change: Change, url: string): object {
 
             break
         }
+
+        default: {
+            return null
+        }
     }
 
-    return change.insertBlock({
-        type: BlockType.video,
-        data: { src, url },
-        isVoid: true,
-    })
+    return change.insertBlock(createVideo({
+        src,
+        url,
+        caption: '',
+    }))
 }

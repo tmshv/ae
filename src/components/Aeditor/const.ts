@@ -11,6 +11,8 @@ export enum BlockType {
     tableRow = 'tableRow',
     tableCell = 'tableCell',
     video = 'video',
+    figure = 'figure',
+    caption = 'caption',
 }
 
 export enum MarkType {
