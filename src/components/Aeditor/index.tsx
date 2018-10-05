@@ -17,6 +17,7 @@ import { MarkType, BlockType } from './const'
 import renderMark from './renderMark'
 import insertVideo from './changes/insertVideo'
 import captionExit from './plugins/captionExit';
+import defaultPlugins from './defaultPlugins';
 
 const youtubeLinkRegExp = /(youtube\.com)|(youtu\.be)/
 
@@ -68,62 +69,6 @@ function renderEditor(props) {
     )
 }
 
-const plugins = [
-    blockquotePlugin,
-    listPlugin,
-    tablePlugin,
-    exitHeader(),
-    shortcutMark({
-        key: 'b',
-        type: MarkType.bold,
-    }),
-    shortcutMark({
-        key: 'i',
-        type: MarkType.italic,
-    }),
-    shortcutMark({
-        key: 'u',
-        type: MarkType.underline,
-    }),
-    shortcutMark({
-        key: 'd',
-        type: MarkType.strikethrough,
-    }),
-    shortcutMark({
-        key: '9',
-        type: MarkType.code,
-    }),
-    shortcutMark({
-        key: 'h',
-        type: MarkType.highlight,
-    }),
-    pasteEmbedLink({
-        match: youtubeLinkRegExp,
-        change: (change: Change, link: string) => {
-            return insertVideo(change, link)
-            // console.log(link)
-            // return change.call(insertVideo, link)
-        },
-    }),
-    captionExit({
-        exitBlockType: BlockType.paragraph,
-        exitKey: 'Enter',
-    })
-    // imagePasteDrop({
-    //     insertImage: (change, file, editor) => {
-    //         // console.log(change, file, editor)
-
-    //         return change.insertBlock({
-    //             type: 'image',
-    //             isVoid: true,
-    //             data: { file }
-    //         })
-    //     }
-    // })
-    // WordCount(),
-    // EditList(),
-]
-
 export interface AeditorProps {
     value: Value,
 }
@@ -137,6 +82,7 @@ export default class Aeditor extends React.Component<AeditorProps, State> {
     // Set the initial value when the app is first constructed.
     state = {
         value: this.props.value,
+        plugins: defaultPlugins(),
     }
 
     // On change, update the app's React state with the new editor value.
@@ -207,7 +153,7 @@ export default class Aeditor extends React.Component<AeditorProps, State> {
                 schema={schema}
                 // onKeyDown={this.onKeyDown}
                 // renderEditor={renderEditor}
-                plugins={plugins}
+                plugins={this.state.plugins}
             />
         )
     }
