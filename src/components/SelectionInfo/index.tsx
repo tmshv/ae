@@ -3,6 +3,7 @@ import { Value, Block, Change } from 'slate'
 import { BlockType } from '../Aeditor/const'
 import { DivisionInfo } from './DivisionInfo'
 import { ImageInfo } from './ImageInfo'
+import { FigureInfo } from './FigureInfo';
 
 interface Props {
     value: Value,
@@ -49,17 +50,17 @@ export default class SelectionInfo extends React.Component<Props, {}> {
     }
 
     renderFigure(block: Block) {
-        const hasCaption = block.getBlocksByType(BlockType.caption).size > 0
-
         return (
             <div key={block.key}>
                 <p>
                     {block.type}
                 </p>
 
-                <p>
-                    hasCaption: {JSON.stringify(hasCaption)}
-                </p>
+                <FigureInfo
+                    value={this.props.value}
+                    onChange={this.props.onChange}
+                    block={block}
+                />
             </div>
         )
     }
