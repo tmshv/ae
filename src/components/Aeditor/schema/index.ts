@@ -2,6 +2,7 @@ import { LAST_CHILD_TYPE_INVALID } from 'slate-schema-violations'
 import { Block, Schema } from 'slate'
 import { BlockType } from '../const'
 import image from './image'
+import division from './division'
 
 function getSchema() {
     return {
@@ -19,6 +20,7 @@ function getSchema() {
             },
         },
         blocks: {
+            [BlockType.division]: division,
             [BlockType.image]: image,
             [BlockType.video]: {
                 isVoid: true,

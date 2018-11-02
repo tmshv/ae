@@ -6,7 +6,7 @@ import Division from '../../Division'
 export class DivisionBlock extends React.PureComponent<BlockProps, object> {
     render() {
         const { node, attributes } = this.props
-        const layout = node.data.get('layout') || 'default' // todo: define by creator or schema
+        const layout = node.data.get('layout')
 
         return (
             <Division

@@ -30,3 +30,9 @@ export enum ImageLayout {
     portrait = 'portrait',
     landscape = 'landscape',
 }
+
+export enum DivisionLayout {
+    default = 'default',
+    big = 'big',
+    full = 'full',
+}

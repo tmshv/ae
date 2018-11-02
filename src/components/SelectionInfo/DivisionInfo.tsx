@@ -4,12 +4,7 @@ import { Change } from 'slate'
 import { Dice1Icon, Dice4Icon, Dice5Icon } from 'mdi-react'
 import { BlockInfoProps } from '.'
 import InfoIconButton from './InfoIconButton'
-
-enum DivisionLayout {
-    default = 'default',
-    big = 'big',
-    full = 'full',
-}
+import { DivisionLayout } from '../Aeditor/const'
 
 function nextLayout(currentValue: DivisionLayout): DivisionLayout {
     const values = [
@@ -84,7 +79,7 @@ export class DivisionInfo extends React.Component<BlockInfoProps, object> {
 
     render() {
         const { block } = this.props
-        const layout: DivisionLayout = block.data.get('layout') || DivisionLayout.default
+        const layout: DivisionLayout = block.data.get('layout')
 
         return (
             <InfoIconButton
