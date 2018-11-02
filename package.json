@@ -22,7 +22,7 @@
     "slate-edit-blockquote": "^0.6.1",
     "slate-edit-list": "^0.12.1",
     "slate-edit-table": "^0.18.0",
-    "slate-react": "0.12.5",
+    "slate-react": "0.13.2",
     "slate-schema-violations": "^0.1.39",
     "typescript": "^3.1.1"
   },
