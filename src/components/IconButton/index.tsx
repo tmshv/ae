@@ -4,6 +4,8 @@ import './styles.less'
 
 interface IconButtonProps {
     onClick(event: Event): void,
+    onMouseDown?(event: Event): void,
+    onMouseUp?(event: Event): void,
     children: any,
     mix?: string,
     size?: number,
@@ -46,6 +48,8 @@ export default class IconButton extends React.Component<IconButtonProps, object>
             <button
                 className={className('ae-icon-button', this.props.mix)}
                 onClick={this.props.onClick as any}
+                onMouseDown={this.props.onMouseDown as any}
+                onMouseUp={this.props.onMouseUp as any}
                 onMouseOver={this.onMouseOver}
                 onMouseLeave={this.onMouseLeave}
             >

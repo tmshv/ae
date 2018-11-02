@@ -1,16 +1,17 @@
 import React from 'react'
-import { Value, Block } from 'slate'
+import { Value, Block, Change } from 'slate'
 import { BlockType } from '../Aeditor/const'
 import { DivisionInfo } from './DivisionInfo'
 
 interface Props {
     value: Value,
-    onClick(event: Event): void,
+    onChange: (change: Change) => void,
 }
 
 export interface BlockInfoProps {
     block: Block,
     value: Value,
+    onChange: (change: Change) => void,
 }
 
 export default class SelectionInfo extends React.Component<Props, {}> {
@@ -23,6 +24,7 @@ export default class SelectionInfo extends React.Component<Props, {}> {
 
                 <DivisionInfo
                     value={this.props.value}
+                    onChange={this.props.onChange}
                     block={block}
                 />
             </div>
@@ -45,6 +47,12 @@ export default class SelectionInfo extends React.Component<Props, {}> {
         )
     }
 
+    onClick = (event: Event) => {
+        event.preventDefault()
+
+        console.log('ae: click')
+    }
+
     renderBlock = (block: Block) => {
         switch (block.type) {
             case BlockType.division: {
@@ -58,7 +66,7 @@ export default class SelectionInfo extends React.Component<Props, {}> {
             default: {
                 return (
                     <div key={block.key}>
-                        <button onClick={this.props.onClick}>
+                        <button onClick={this.onClick}>
                             click
                         </button>
 

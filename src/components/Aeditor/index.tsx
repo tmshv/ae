@@ -12,15 +12,6 @@ import SelectionInfo from '../SelectionInfo'
 import './styles.less'
 import './ae.less'
 
-function renderEditor(props: any) {
-    return (
-        <React.Fragment>
-            <div>hi</div>
-            {props.children}
-        </React.Fragment>
-    )
-}
-
 export interface IAeditorProps {
     value: Value,
     onChange: (change: Change) => void,
@@ -35,44 +26,42 @@ export default class Aeditor extends React.Component<IAeditorProps, IState> {
         plugins: defaultPlugins(),
     }
 
-    onClick = (event: Event) => {
-        event.preventDefault()
+    renderEditor = (props: any) => (
+        <div className={'ae-editor'}>
+            <div className={'ae-editor-header'}>
+                <Toolbar
+                    value={this.props.value}
+                    onChange={this.props.onChange}
+                />
+            </div>
 
-        console.log('ae: click')
-    }
-
-    render() {
-        return (
-            <div className={'ae-editor'}>
-                <div className={'ae-editor-header'}>
-                    <Toolbar
+            <div className={'ae-editor-content'}>
+                <aside className={'ae-editor-content__side'}>
+                    <SelectionInfo
                         value={this.props.value}
                         onChange={this.props.onChange}
                     />
-                </div>
+                </aside>
 
-                <div className={'ae-editor-content'}>
-                    <aside className={'ae-editor-content__side'}>
-                        <SelectionInfo
-                            value={this.props.value}
-                            onClick={this.onClick}
-                        />
-                    </aside>
-
-                    <div className={'ae-editor-content__main'}>
-                        <Editor
-                            value={this.props.value}
-                            onPaste={handlePaste}
-                            onChange={this.props.onChange}
-                            renderNode={renderNode}
-                            renderMark={renderMark}
-                            renderEditor={renderEditor}
-                            schema={schema}
-                            plugins={this.state.plugins}
-                        />
-                    </div>
+                <div className={'ae-editor-content__main'}>
+                    {props.children}
                 </div>
             </div>
+        </div>
+    )
+
+    render() {
+        return (
+            <Editor
+                value={this.props.value}
+                onPaste={handlePaste}
+                onChange={this.props.onChange}
+                renderNode={renderNode}
+                renderMark={renderMark}
+                renderEditor={this.renderEditor}
+                schema={schema}
+                plugins={this.state.plugins}
+            />
         )
     }
 }

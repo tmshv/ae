@@ -29,30 +29,33 @@ function nextLayout(currentValue: DivisionLayout): DivisionLayout {
 }
 
 export class DivisionInfo extends React.Component<BlockInfoProps, object> {
+    onMouseDown = (event: Event) => {
+        event.preventDefault()
+    }
+
     onClick = (event: Event) => {
         console.log('division_info: click')
 
         event.preventDefault()
 
-        // const change: Change = this.props.value.change()
-        // change.setNodeByKey()
+        const { block, value } = this.props
+        const change: Change = value.change()
 
-        // // const { node, editor } = this.props
-        // const block = this.props.block
+        const src = block.data.get('src')
+        const caption = block.data.get('caption')
+        const ratio = block.data.get('ratio')
+        const layout = nextLayout(block.data.get('layout'))
 
-        // const src = block.data.get('src')
-        // const caption = block.data.get('caption')
-        // const ratio = block.data.get('ratio')
-        // const layout = nextLayout(block.data.get('layout'))
+        const newProps: any = {
+            data: {
+                caption,
+                ratio,
+                src,
+                layout,
+            }
+        }
 
-        // this.props.value.change(c => c.setNodeByKey(block.key, {
-        //     data: {
-        //         caption,
-        //         ratio,
-        //         src,
-        //         layout,
-        //     }
-        // }))
+        return this.props.onChange(change.setNodeByKey(block.key, newProps))
     }
 
     renderIcon(layout: DivisionLayout) {
@@ -92,6 +95,7 @@ export class DivisionInfo extends React.Component<BlockInfoProps, object> {
                 hoverColor={'blue'}
                 size={20}
                 onClick={this.onClick}
+                onMouseDown={this.onMouseDown}
             >
                 {this.renderIcon(layout)}
             </IconButton>
