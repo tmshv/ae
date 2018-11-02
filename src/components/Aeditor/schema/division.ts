@@ -3,7 +3,6 @@ import { Block } from 'slate'
 import { DivisionLayout } from '../const';
 
 export default {
-    isVoid: true,
     data: {
         layout: v => Boolean(v),
     },
