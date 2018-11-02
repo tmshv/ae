@@ -84,7 +84,7 @@ export class ImageInfo extends React.PureComponent<BlockInfoProps, object> {
 
     render() {
         const { block } = this.props
-        const layout: ImageLayout = block.data.get('layout') || ImageLayout.square
+        const layout: ImageLayout = block.data.get('layout')
 
         return (
             <div>

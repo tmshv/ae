@@ -1,6 +1,6 @@
-import { LAST_CHILD_TYPE_INVALID } from 'slate-schema-violations'
+import { LAST_CHILD_TYPE_INVALID, NODE_DATA_INVALID } from 'slate-schema-violations'
 import { Block, Schema } from 'slate'
-import { BlockType } from '../const'
+import { BlockType, ImageLayout } from '../const'
 
 function getSchema() {
     return {
@@ -20,6 +20,38 @@ function getSchema() {
         blocks: {
             [BlockType.image]: {
                 isVoid: true,
+                data: {
+                    layout: v => Boolean(v),
+                    // src: v => Boolean(v),
+                },
+                normalize: (change, reason, { node }) => {
+                    const block = node as Block
+                    const data = block.data
+
+                    switch (reason) {
+                        case NODE_DATA_INVALID: {
+                            if (!data.has('src')) {
+                                break
+                            }
+
+                            let newData = data
+
+                            if (!data.has('layout')) {
+                                newData = data.set('layout', ImageLayout.square)
+                            }
+
+                            const newProps: any = {
+                                data: newData,
+                            }
+
+                            return change.setNodeByKey(block.key, newProps)
+                        }
+
+                        default: {
+                            break
+                        }
+                    }
+                }
             },
             [BlockType.video]: {
                 isVoid: true,

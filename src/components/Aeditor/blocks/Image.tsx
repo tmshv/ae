@@ -2,12 +2,7 @@ import React from 'react'
 import className from 'classnames'
 import { BlockProps } from '.'
 import Aspect from '../../../components/Aspect'
-
-enum ImageLayout {
-    square = 'square',
-    portrait = 'portrait',
-    landscape = 'landscape',
-}
+import { ImageLayout } from '../const'
 
 function getRatio(layout: ImageLayout = ImageLayout.square, value: number = 1): number {
     value = 3 / 4
@@ -36,7 +31,7 @@ export class Image extends React.PureComponent<BlockProps, object> {
         const { node, attributes, isSelected } = this.props
         const src: string = node.data.get('src')
         const caption: string = node.data.get('caption')
-        const layout: ImageLayout = node.data.get('layout') || ImageLayout.square
+        const layout: string = node.data.get('layout')
         const ratio: number = node.data.get('ratio')
 
         return (

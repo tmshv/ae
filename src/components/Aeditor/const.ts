@@ -24,3 +24,9 @@ export enum MarkType {
     code = 'code',
     highlight = 'highlight',
 }
+
+export enum ImageLayout {
+    square = 'square',
+    portrait = 'portrait',
+    landscape = 'landscape',
+}
