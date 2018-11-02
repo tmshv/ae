@@ -8,18 +8,22 @@ export default class Video extends React.PureComponent<BlockProps, any, any> {
         const src = node.data.get('src')
 
         return (
-            <figure {...attributes}
-                className={className('ae-block-video', {
-                    focused: isSelected,
-                })}
+            <div {...attributes}
+                className={className('ae-block-video', )}
             >
-                <iframe
-                    title='video-embed'
-                    src={src}
-                    frameBorder='0'
-                    allowFullScreen
-                />
-            </figure>
+                <figure {...attributes}
+                    className={className('wrapper', {
+                        focused: isSelected,
+                    })}
+                >
+                    <iframe
+                        title='video-embed'
+                        src={src}
+                        frameBorder='0'
+                        allowFullScreen
+                    />
+                </figure>
+            </div>
         )
     }
 }

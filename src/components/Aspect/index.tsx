@@ -2,13 +2,13 @@ import React from 'react'
 
 import './styles.less'
 
-interface AspectProps {
+interface IAspectProps {
     mix?: string,
     ratio: number,
     children: any,
 }
 
-export default function Aspect(props: AspectProps) {
+export default function Aspect(props: IAspectProps) {
     const v = props.ratio * 100
     const style = {
         paddingTop: `${v}%`

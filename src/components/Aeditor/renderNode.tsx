@@ -8,6 +8,9 @@ import { Header } from './blocks/Header'
 import Video from './blocks/Video'
 import { Figure } from './blocks/Figure'
 import { Caption } from './blocks/Caption'
+import { List } from './blocks/List'
+import { ListItem } from './blocks/ListItem'
+import { DivisionBlock } from './blocks/Division'
 
 export default function renderNode(props) {
     const { node, attributes } = props
@@ -45,19 +48,29 @@ export default function renderNode(props) {
 
         case BlockType.listItem: {
             return (
-                <li {...attributes}>{props.children}</li>
+                <ListItem {...attributes}>{props.children}</ListItem>
             )
         }
 
         case BlockType.orderedList: {
             return (
-                <ol {...attributes}>{props.children}</ol>
+                <List
+                    {...attributes}
+                    ordered={true}
+                >
+                    {props.children}
+                </List>
             )
         }
 
         case BlockType.unorderedList: {
             return (
-                <ul {...attributes}>{props.children}</ul>
+                <List
+                    {...attributes}
+                    ordered={false}
+                >
+                    {props.children}
+                </List>
             )
         }
 
@@ -95,13 +108,22 @@ export default function renderNode(props) {
 
         case BlockType.figure: {
             return (
-                <Figure {...props}/>
+                <Figure {...props} />
             )
         }
 
         case BlockType.caption: {
             return (
-                <Caption {...props}/>
+                <Caption {...props} />
+            )
+        }
+
+        case BlockType.division: {
+            return (
+                <DivisionBlock
+                    {...props}
+                    className={'ae-block-division'}
+                />
             )
         }
 

@@ -1,198 +1,28 @@
 .ae-editor {
-    figure {
-        margin: 0 0 var(--size-l);
-        // padding: 0;
-    }
+    .ae-editor-header {}
 
-    blockquote {
-        margin: 0;
-        // padding: 0;
-    }
-}
+    .ae-editor-content {
+        --offset: 40px;
 
-.ae-editor {
-    --color-1: #ffffff;
-    --color-2: #eff6f6;
-    --color-3: #d2e1e4;
-    --color-4: #a0b9c5;
-    --color-5: #577594;
-    --color-6: #10204f;
-    --color-7: #000000;
-
-    --background: white;
-    --font-size-caption: 16px;
-    --font-size-text: 20px;
-    --font-size-title: 36px;
-    --highlight-color: var(--color-5);
-    --highlight-background-color: var(--color-3);
-    --highlight-border-size: 5px;
-    --highlight-border-radius: 0;
-    --size-s: 5px;
-    --size-m: 10px;
-    --size-l: 20px;
-
-    --embed-video-ratio: 55.25%;
-    --blockquote-color: #666;
-    --blockquote-marker-offset: 20px;
-    --blockquote-marker-thickness: 3px;
-    --text-margin: 0;
-
-    // font-family: 'Roboto', sans-serif;
-    font-family: 'Lora', serif;
-    font-size: var(--font-size-text);
-    background-color: var(--background);
-}
-
-.ae-editor {
-    .focused {
         position: relative;
 
-        &:after{
-            --pos: ~"calc(-1 * var(--highlight-border-size))";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: var(--pos);
-            left: var(--pos);
+        &__main {
+            margin-top: 60px;
+            width: 70%;
+        }
 
-            border: var(--highlight-border-size) solid var(--highlight-color);
-            border-radius: var(--highlight-border-radius);
+        &__side {
+            position: fixed;
+            top: var(--offset);
+            right: 0;
 
-            content: '';
+            width: 30%;
+            height: ~"calc(100% - var(--offset))";
+
+            box-sizing: border-box;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 0 5px black;
         }
     }
-
-    .text {
-        margin: var(--text-margin);
-        // padding: var(--size-m) var(--size-l);
-        padding: var(--size-m) 0;
-    }
-}
-
-.ae-block-paragraph {
-    --text-margin: 0 0 var(--size-l);    
-}
-
-.ae-block-header {
-    --text-margin: 0 0 var(--size-l);    
-
-    font-size: var(--font-size-title);
-}
-
-.ae-block-image {
-    position: relative;
-    
-    img {
-        display: block;
-        width: 100%;
-    }
-}
-
-.ae-block-file {
-    --border: var(--background);
-
-    margin: 0;
-
-    .file-preview {
-        width: 50px;
-        border: var(--highlight-border-size) solid var(--border);
-    }
-
-    // &.focused {
-    //     --highlight-background-color: none;
-    //     --border: var(--highlight-color);
-    // }
-}
-
-.ae-block-blockquote {
-    position: relative;
-
-    font-style: italic;
-    color: var(--blockquote-color);
-
-    &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: ~"calc(-1 * var(--blockquote-marker-offset))";
-        width: 0;
-        height: 100%;
-
-        border-left: var(--blockquote-marker-thickness) solid var(--blockquote-color);
-        margin: 0;
-        padding: 0 var(--size-l);
-    }
-}
-
-.ae-block-table {
-    --border-color: var(--color-2);
-    --border-size: 2px;
-    --border: var(--border-size) solid var(--border-color);
-
-    width: 100%;
-    margin-bottom: var(--size-l);
-
-    border-spacing: 0;
-    border: var(--border);
-
-    tr {
-        padding: 0;
- 
-        &:first-child {
-            // font-style: bold;
-            background-color: var(--border-color);
-        }
-    }
-
-    td {
-        padding: 0;
-
-        min-width: 100px;
-
-        border-right: var(--border);
-        &:last-child {
-            border-right: none;
-        }
-    }
-}
-
-.ae-block-table {
-    .ae-block-paragraph {
-        margin-bottom: 0;
-        padding: var(--size-m) var(--size-m);
-    }
-}
-
-.ae-block-video {
-    margin-bottom: var(--size-l);
-
-    width: 100%;
-    height: 0;
-    position: relative;
-    padding-bottom: var(--embed-video-ratio);
-
-    iframe {
-        width: 100%;
-        height: 100%;
-        top:0;
-        left: 0;
-        position: absolute;
-    }
-}
-
-.ae-block-figure {
-    margin-bottom: var(--size-l);
-}
-
-.ae-block-caption {
-    padding-top: var(--size-s);
-    padding-left: var(--size-l);
-
-    .ae-block-paragraph {
-        padding: 0;
-    }
-
-    color: var(--color-5);
-    font-size: var(--font-size-caption);
-    font-style: italic;
 }

@@ -1,9 +1,11 @@
-import { Change } from 'slate'
+import { Change, Value } from 'slate'
+import Immutable from 'immutable'
 
 export interface IShortcutMarkOptions {
     key: string,
     type: string,
     isShiftKey?: boolean,
+    getData?: (value: Value) => Immutable.Map<string, any> | { [key: string]: any },
 }
 
 export default function shortcutMark(options: IShortcutMarkOptions) {
@@ -17,8 +19,15 @@ export default function shortcutMark(options: IShortcutMarkOptions) {
                 return null
             }
 
+            const data = !options.getData ? null : (
+                options.getData(change.value)
+            )
+
             event.preventDefault()
-            change.toggleMark(type)
+            change.toggleMark({
+                type,
+                data,
+            })
 
             return true
         },

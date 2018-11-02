@@ -8,6 +8,7 @@ import {
     FormatQuoteCloseIcon,
     FormatListBulletedIcon,
     TableIcon,
+    DivisionIcon,
 } from 'mdi-react'
 import IconButton from '../IconButton'
 import { BlockType } from '../Aeditor/const'
@@ -15,6 +16,7 @@ import insertImage from '../Aeditor/changes/insertImage'
 import listPlugin from '../Aeditor/plugins/list'
 import tablePlugin from '../Aeditor/plugins/table'
 import blockquotePlugin from '../Aeditor/plugins/blockquote'
+import insertDivision from '../Aeditor/changes/insertDivision'
 
 import './styles.less'
 
@@ -110,6 +112,54 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
             : this.props.onChange(tablePlugin.changes.insertTable(change, 3))
     }
 
+    onClickDivision = (event: Event) => {
+        console.log('toolbar: click divison')
+        event.preventDefault()
+
+        const value = this.props.value
+        const change = value.change()
+
+        return this.props.onChange(insertDivision(change, 2, null))
+    }
+
+    onChangeFile = (event) => {
+        const files: FileList = event.target.files
+
+        // This will upload the file after having read it
+        const upload = async (file) => {
+            const body = new FormData()
+            body.append('file', file)
+            body.append('user', 'hubot')
+
+            console.log('Uploading')
+            console.log(file)
+            console.log(body)
+
+            try {
+                const response = await fetch('/upload', { // Your PUT endpoint
+                    method: 'PUT',
+                    // headers: {
+                    //     'Content-Type': 'You will perhaps need to define a content-type here',
+                    // },
+                    body, // This is your file object
+                })
+
+                const data = await response.json() // if the response is a JSON object
+                console.log(data) // Handle the success response object
+
+                const change = this.props.value.change()
+
+                return this.props.onChange(
+                    insertImage(change, data.filepath, undefined)
+                )
+            } catch (error) {
+                console.log(error) // Handle the error response object
+            }
+        }
+
+        return upload(files[0])
+    }
+
     renderButton(onClick, children) {
         return (
             <IconButton
@@ -133,6 +183,10 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
         return (
             <div className={'ae-toolbar'}>
                 <div className={'left'}>
+                    <input
+                        type={'file'}
+                        onChange={this.onChangeFile}
+                    />
                     {this.renderButton(this.onClickImage, (
                         <ImageIcon />
                     ))}
@@ -150,6 +204,9 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
                     ))}
                     {this.renderButton(this.onClickTable, (
                         <TableIcon />
+                    ))}
+                    {this.renderButton(this.onClickDivision, (
+                        <DivisionIcon />
                     ))}
                 </div>
 

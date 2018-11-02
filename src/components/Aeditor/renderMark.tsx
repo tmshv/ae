@@ -1,6 +1,19 @@
 import React from 'react'
 import { MarkType } from './const'
 
+function Mark(props) {
+    const color = props.mark.data.get('color')
+    const style = !color ? null : {
+        backgroundColor: color,
+    }
+
+    return (
+        <mark style={style}>
+            {props.children}
+        </mark>
+    )
+}
+
 export default function renderMark(props) {
     const { children, mark } = props
 
@@ -37,7 +50,7 @@ export default function renderMark(props) {
 
         case MarkType.highlight: {
             return (
-                <mark>{children}</mark>
+                <Mark {...props}/>
             )
         }
 

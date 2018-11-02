@@ -13,6 +13,7 @@ export enum BlockType {
     video = 'video',
     figure = 'figure',
     caption = 'caption',
+    division = 'division',
 }
 
 export enum MarkType {

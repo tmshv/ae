@@ -40,14 +40,18 @@ export default function defaultPlugins() {
         shortcutMark({
             key: 'h',
             type: MarkType.highlight,
+            getData: value => {
+                const color = Math.floor(Math.random() * 0x1000000)
+                const hex = color.toString(16)
+
+                return {
+                    color: `#${hex}`,
+                }
+            }
         }),
         pasteEmbedLink({
             match: youtubeLinkRegExp,
-            change: (change: Change, link: string) => {
-                return insertVideo(change, link)
-                // console.log(link)
-                // return change.call(insertVideo, link)
-            },
+            change: (change: Change, link: string) => insertVideo(change, link),
         }),
         captionExit({
             exitBlockType: BlockType.paragraph,
