@@ -3,7 +3,7 @@ import className from 'classnames'
 import { Change } from 'slate'
 import { Dice1Icon, Dice4Icon, Dice5Icon } from 'mdi-react'
 import { BlockInfoProps } from '.'
-import IconButton from '../IconButton'
+import InfoIconButton from './InfoIconButton'
 
 enum DivisionLayout {
     default = 'default',
@@ -29,10 +29,6 @@ function nextLayout(currentValue: DivisionLayout): DivisionLayout {
 }
 
 export class DivisionInfo extends React.Component<BlockInfoProps, object> {
-    onMouseDown = (event: Event) => {
-        event.preventDefault()
-    }
-
     onClick = (event: Event) => {
         console.log('division_info: click')
 
@@ -91,14 +87,11 @@ export class DivisionInfo extends React.Component<BlockInfoProps, object> {
         const layout: DivisionLayout = block.data.get('layout') || DivisionLayout.default
 
         return (
-            <IconButton
-                hoverColor={'blue'}
-                size={20}
+            <InfoIconButton
                 onClick={this.onClick}
-                onMouseDown={this.onMouseDown}
             >
                 {this.renderIcon(layout)}
-            </IconButton>
+            </InfoIconButton>
         )
     }
 }
