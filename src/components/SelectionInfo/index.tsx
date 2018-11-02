@@ -2,6 +2,7 @@ import React from 'react'
 import { Value, Block, Change } from 'slate'
 import { BlockType } from '../Aeditor/const'
 import { DivisionInfo } from './DivisionInfo'
+import { ImageInfo } from './ImageInfo'
 
 interface Props {
     value: Value,
@@ -31,6 +32,22 @@ export default class SelectionInfo extends React.Component<Props, {}> {
         )
     }
 
+    renderImage(block: Block) {
+        return (
+            <div key={block.key}>
+                <p>
+                    {block.type}
+                </p>
+
+                <ImageInfo
+                    value={this.props.value}
+                    onChange={this.props.onChange}
+                    block={block}
+                />
+            </div>
+        )
+    }
+
     renderFigure(block: Block) {
         const hasCaption = block.getBlocksByType(BlockType.caption).size > 0
 
@@ -51,6 +68,10 @@ export default class SelectionInfo extends React.Component<Props, {}> {
         switch (block.type) {
             case BlockType.division: {
                 return this.renderDivision(block)
+            }
+
+            case BlockType.image: {
+                return this.renderImage(block)
             }
 
             case BlockType.figure: {
