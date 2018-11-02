@@ -47,12 +47,6 @@ export default class SelectionInfo extends React.Component<Props, {}> {
         )
     }
 
-    onClick = (event: Event) => {
-        event.preventDefault()
-
-        console.log('ae: click')
-    }
-
     renderBlock = (block: Block) => {
         switch (block.type) {
             case BlockType.division: {
@@ -66,10 +60,6 @@ export default class SelectionInfo extends React.Component<Props, {}> {
             default: {
                 return (
                     <div key={block.key}>
-                        <button onClick={this.onClick}>
-                            click
-                        </button>
-
                         {block.type}
                     </div>
                 )
