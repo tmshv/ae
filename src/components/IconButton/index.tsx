@@ -2,7 +2,7 @@ import React from 'react'
 import className from 'classnames'
 import './styles.less'
 
-interface IconButtonProps {
+export interface IconButtonProps {
     onClick(event: Event): void,
     onMouseDown?(event: Event): void,
     onMouseUp?(event: Event): void,
