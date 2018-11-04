@@ -20,6 +20,15 @@ function getSchema() {
             },
         },
         blocks: {
+            [BlockType.figure]: {
+                nodes: [
+                    { types: [BlockType.image], min: 1, max: 1 },
+                    { types: BlockType.caption, min: 0 },
+                ],
+            },
+            [BlockType.caption]: {
+                parent: { types: [BlockType.figure] },
+            },
             [BlockType.division]: division,
             [BlockType.image]: image,
             [BlockType.video]: {
