@@ -1,5 +1,5 @@
-import { LAST_CHILD_TYPE_INVALID } from 'slate-schema-violations'
-import { Block, Schema } from 'slate'
+import { LAST_CHILD_TYPE_INVALID, PARENT_TYPE_INVALID } from 'slate-schema-violations'
+import { Block, Schema, Change } from 'slate'
 import { BlockType } from '../const'
 import image from './image'
 import division from './division'
@@ -21,10 +21,22 @@ function getSchema() {
         },
         blocks: {
             [BlockType.figure]: {
+                parent: { types: [BlockType.division] },
                 nodes: [
                     { types: [BlockType.image], min: 1, max: 1 },
                     { types: BlockType.caption, min: 0 },
                 ],
+                normalize: (change: Change, violation: string, { node }: { node: Block }) => {
+                    switch (violation) {
+                        case PARENT_TYPE_INVALID: {
+                            return change.wrapBlockByKey(node.key, BlockType.division)
+                        }
+
+                        default: {
+                            break
+                        }
+                    }
+                },
             },
             [BlockType.caption]: {
                 parent: { types: [BlockType.figure] },
