@@ -3,20 +3,22 @@ import { BlockType } from '../const'
 import createCaption from './createCaption'
 import { List } from 'immutable'
 
-export interface IImage {
+interface IImage {
     src: string,
     caption?: string,
 }
 
 export default function createImage(options: IImage): Block {
-    const caption = createCaption(options.caption)
     const image = Block.create({
         type: BlockType.image,
         data: {
             src: options.src,
         },
     })
-    const nodes = List([image, caption]).toList()
+    const blocks = options.caption
+        ? [image, createCaption(options.caption)]
+        : [image]
+    const nodes = List(blocks).toList()
 
     return Block.create({
         type: BlockType.figure,

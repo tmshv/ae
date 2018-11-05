@@ -1,8 +1,16 @@
 import { NODE_DATA_INVALID } from 'slate-schema-violations'
 import { Block } from 'slate'
-import { DivisionLayout } from '../const';
+import { DivisionLayout, BlockType } from '../const'
 
 export default {
+    nodes: [
+        {
+            min: 1, types: [
+                BlockType.figure,
+                BlockType.paragraph,
+            ]
+        },
+    ],
     data: {
         layout: v => Boolean(v),
     },

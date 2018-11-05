@@ -19,7 +19,7 @@ function getCurrentFigure(value: Value): Block {
     const block = value.startBlock
     const ancestors = value.document.getAncestors(block.key)
 
-    return ancestors.findLast(p => p.type === BlockType.figure) as Block
+    return ancestors.findLast(p => (p as Block).type === BlockType.figure) as Block
 }
 
 function inCaption(value: Value): boolean {
@@ -56,7 +56,6 @@ export default function captionExit(options: ICaptionExitOptions) {
                 type: options.exitBlockType,
                 nodes: List([Text.create('')]).toList(),
             })
-
 
             return change
                 .insertNodeByKey(figureParent.key, insertionIndex, exitBlock)

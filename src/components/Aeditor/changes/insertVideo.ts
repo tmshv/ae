@@ -1,6 +1,7 @@
 import getVideoId from 'get-video-id'
 import { Change } from 'slate'
 import createVideo from '../utils/createVideo'
+import { insertOrReplaceBlock } from '../lib/change';
 
 export enum VideoService {
     youtube = 'youtube',
@@ -34,7 +35,7 @@ export default function insertVideo(change: Change, url: string): Change {
         }
     }
 
-    return change.insertBlock(createVideo({
+    return insertOrReplaceBlock(change, createVideo({
         src,
         url,
         caption: '',

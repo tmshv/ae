@@ -5,7 +5,7 @@ import createParagraph from './createParagraph'
 
 export default function createDivision(div: number): Block {
     const nodes = Range(0, div)
-        .map(x => createParagraph(`${x}`))
+        .map(() => createParagraph(''))
         .toList()
 
     return Block.create({
