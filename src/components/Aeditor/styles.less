@@ -3,12 +3,18 @@
 
     .ae-editor-content {
         --offset: 40px;
+        --side-width: 50px;
+        --main-width: ~"calc(100% - var(--side-width))";
 
         position: relative;
 
+        &.expanded {
+            --side-width: 30%;
+        }
+
         &__main {
             margin-top: 60px;
-            width: 70%;
+            width: var(--main-width);
         }
 
         &__side {
@@ -16,13 +22,27 @@
             top: var(--offset);
             right: 0;
 
-            width: 30%;
+            width: var(--side-width);
             height: ~"calc(100% - var(--offset))";
 
             box-sizing: border-box;
             padding: 10px;
             background-color: white;
-            box-shadow: 0 0 5px black;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+
+.ae-editor {
+    .ae-editor-content {
+        --transition: width 250ms;
+
+        &__main {
+            transition: var(--transition);
+        }
+
+        &__side {
+            transition: var(--transition);
         }
     }
 }

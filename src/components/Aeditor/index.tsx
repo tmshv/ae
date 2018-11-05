@@ -1,4 +1,5 @@
 import React from 'react'
+import className from 'classnames'
 import { Editor } from 'slate-react'
 import { Value, Change } from 'slate'
 import schema from './schema'
@@ -19,11 +20,22 @@ export interface IAeditorProps {
 
 interface IState {
     plugins: any[],
+    fullSelectionInfo: boolean,
 }
 
 export default class Aeditor extends React.Component<IAeditorProps, IState> {
     state = {
         plugins: defaultPlugins(),
+        fullSelectionInfo: true,
+    }
+
+    onFullSelectioInfoChange = (fullSelectionInfo: boolean) => {
+        // event.preventDefault()
+        // event.stopPropagation()
+
+        this.setState({
+            fullSelectionInfo,
+        })
     }
 
     renderEditor = (props: any) => (
@@ -35,11 +47,15 @@ export default class Aeditor extends React.Component<IAeditorProps, IState> {
                 />
             </div>
 
-            <div className={'ae-editor-content'}>
+            <div className={className('ae-editor-content', {
+                expanded: this.state.fullSelectionInfo,
+            })}>
                 <aside className={'ae-editor-content__side'}>
                     <SelectionInfo
                         value={this.props.value}
                         onChange={this.props.onChange}
+                        showFull={this.state.fullSelectionInfo}
+                        onShowFullChange={this.onFullSelectioInfoChange}
                     />
                 </aside>
 

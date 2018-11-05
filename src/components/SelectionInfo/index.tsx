@@ -1,13 +1,20 @@
 import React from 'react'
 import { Value, Block, Change } from 'slate'
+import className from 'classnames'
 import { BlockType } from '../Aeditor/const'
 import { DivisionInfo } from './DivisionInfo'
 import { ImageInfo } from './ImageInfo'
-import { FigureInfo } from './FigureInfo';
+import { FigureInfo } from './FigureInfo'
+import IconButton from '../IconButton'
+import { ArrowLeftThickIcon, ArrowRightThickIcon } from 'mdi-react'
+
+import './styles.less'
 
 interface Props {
     value: Value,
     onChange: (change: Change) => void,
+    showFull: boolean,
+    onShowFullChange: (value: boolean) => void,
 }
 
 export interface BlockInfoProps {
@@ -16,7 +23,11 @@ export interface BlockInfoProps {
     onChange: (change: Change) => void,
 }
 
-export default class SelectionInfo extends React.Component<Props, {}> {
+export default class SelectionInfo extends React.Component<Props, {}, any> {
+    onShowFullClick = (event: Event) => {
+        this.props.onShowFullChange(!this.props.showFull)
+    }
+
     renderDivision(block: Block) {
         return (
             <div key={block.key}>
@@ -95,15 +106,11 @@ export default class SelectionInfo extends React.Component<Props, {}> {
 
         const singleSelection = selection.isFocused && selection.isCollapsed
 
-        // {/* <p>
-        //     text: {fragment.text}
-        // </p> */}
-
         if (!singleSelection) {
             return null
         }
 
-        const key = (selection as any).focusKey
+        const key = (selection as any).startKey
         const ancestors = document.getAncestors(key)
             .filter(x => x.object !== 'document')
             .map(x => x as Block)
@@ -117,8 +124,27 @@ export default class SelectionInfo extends React.Component<Props, {}> {
 
     render() {
         return (
-            <div>
-                {this.renderInfoFragment()}
+            <div className={className('ae-selection-info', {
+                expanded: this.props.showFull,
+            })}>
+                <div className={'content'}>
+                    {!this.props.showFull ? null : (
+                        this.renderInfoFragment()
+                    )}
+                </div>
+                <div>
+                    <IconButton
+                        onClick={this.onShowFullClick}
+                    >
+                        {this.props.showFull
+                            ? (
+                                <ArrowRightThickIcon />
+                            ) : (
+                                <ArrowLeftThickIcon />
+                            )
+                        }
+                    </IconButton>
+                </div>
             </div>
         )
     }
