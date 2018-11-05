@@ -18,6 +18,7 @@
     --color-5: #577594;
     --color-6: #10204f;
     --color-7: #000000;
+    --color-8: gold;
 
     --block-border-radius: 3px;
 
@@ -30,9 +31,9 @@
     --font-size-caption: 16px;
     --font-size-text: 20px;
     --font-size-title: 36px;
-    --highlight-color: var(--color-5);
+    --highlight-color: var(--color-8);
     --highlight-background-color: var(--color-3);
-    --highlight-border-size: 5px;
+    --highlight-border-size: 3px;
     --highlight-border-radius: 0;
     --size-s: 5px;
     --size-m: 10px;
@@ -55,19 +56,17 @@
         position: relative;
 
         &:after{
+            content: '';
             pointer-events: none;
             z-index: 1;
             --pos: ~"calc(-1 * var(--highlight-border-size))";
             position: absolute;
             width: 100%;
             height: 100%;
-            top: var(--pos);
-            left: var(--pos);
+            top: 0;
+            left: 0;
 
-            border: var(--highlight-border-size) solid var(--highlight-color);
-            border-radius: var(--highlight-border-radius);
-
-            content: '';
+            box-shadow: 0 0 0 var(--highlight-border-size) var(--highlight-color) inset;
         }
     }
 
@@ -134,8 +133,6 @@
 }
 
 .ae-block-blockquote {
-    position: relative;
-
     font-style: italic;
 
     .ae-block-paragraph {
@@ -147,18 +144,24 @@
 
     padding-left: var(--block-side-padding);
     padding-right: var(--block-side-padding);
+}
 
-    &:after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: ~"calc(-1 * var(--blockquote-marker-offset))";
-        width: 0;
-        height: 100%;
+.ae-block-blockquote {
+    .ae-block-paragraph {
+        position: relative;
 
-        border-left: var(--blockquote-marker-thickness) solid var(--blockquote-color);
-        margin: 0;
-        padding: 0 var(--size-l);
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: ~"calc(-1 * var(--blockquote-marker-offset))";
+            width: 0;
+            height: 100%;
+    
+            border-left: var(--blockquote-marker-thickness) solid var(--blockquote-color);
+            margin: 0;
+            padding: 0 var(--size-l);
+        }
     }
 }
 

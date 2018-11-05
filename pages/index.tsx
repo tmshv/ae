@@ -47,7 +47,7 @@ export default class Index extends React.Component<object, IState> {
         }
     }
 
-    onChange = ({ value }) => {
+    onChange = ({ value }: { value: Value }) => {
         // console.log('Outline:')
         // outline(value)
 

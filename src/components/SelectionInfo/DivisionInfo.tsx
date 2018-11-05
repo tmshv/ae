@@ -1,92 +1,84 @@
 import React from 'react'
 import className from 'classnames'
-import { Change } from 'slate'
-import { Dice1Icon, Dice4Icon, Dice5Icon } from 'mdi-react'
+import { Change, Block } from 'slate'
 import { BlockInfoProps } from '.'
-import InfoIconButton from './InfoIconButton'
 import { DivisionLayout } from '../Aeditor/const'
+import ButtonGroup from '../../ui/Button/ButtonGroup'
+import Button from '../Button';
 
-function nextLayout(currentValue: DivisionLayout): DivisionLayout {
-    const values = [
-        DivisionLayout.default,
-        DivisionLayout.big,
-        DivisionLayout.full,
-    ]
-
-    let i = values.indexOf(currentValue)
-    if (i >= values.length - 1) {
-        i = 0
-    } else {
-        i++
-    }
-
-    return values[i]
-}
+const items = [
+    { name: 'Default', value: DivisionLayout.default },
+    { name: 'Big', value: DivisionLayout.big },
+    { name: 'Full', value: DivisionLayout.full },
+]
 
 export class DivisionInfo extends React.Component<BlockInfoProps, object> {
-    onClick = (event: Event) => {
-        console.log('division_info: click')
-
-        event.preventDefault()
-
+    setLayout = (layout: DivisionLayout) => {
         const { block, value } = this.props
         const change: Change = value.change()
 
-        const src = block.data.get('src')
-        const caption = block.data.get('caption')
-        const ratio = block.data.get('ratio')
-        const layout = nextLayout(block.data.get('layout'))
-
         const newProps: any = {
-            data: {
-                caption,
-                ratio,
-                src,
-                layout,
-            }
+            data: block.data.set('layout', layout)
         }
 
         return this.props.onChange(change.setNodeByKey(block.key, newProps))
     }
 
-    renderIcon(layout: DivisionLayout) {
-        switch (layout) {
-            case DivisionLayout.default: {
-                return (
-                    <Dice1Icon />
-                )
-            }
+    onClickLayout = (event: Event, value: string) => {
+        return this.setLayout(value as DivisionLayout)
+    }
 
-            case DivisionLayout.big: {
-                return (
-                    <Dice4Icon />
-                )
-            }
+    onAddBefore = (event: Event) => {
+        const { block, value } = this.props
+        const change: Change = value.change()
 
-            case DivisionLayout.full: {
-                return (
-                    <Dice5Icon />
-                )
-            }
+        return this.props.onChange(change.insertNodeByKey(block.key, 0, Block.create('paragraph')))
+    }
 
-            default: {
-                return (
-                    <Dice1Icon />
-                )
-            }
-        }
+    onAddAfter = (event: Event) => {
+        const { block, value } = this.props
+        const change: Change = value.change()
+
+        const i = block.nodes.size
+
+        return this.props.onChange(change.insertNodeByKey(block.key, i, Block.create('paragraph')))
+    }
+
+    renderLayout() {
+        const layout: DivisionLayout = this.props.block.data.get('layout')
+
+        return (
+            <ButtonGroup>
+                {items.map(x => (
+                    <Button
+                        highlight={x.value === layout}
+                        onClick={this.onClickLayout}
+                        value={x.value}
+                    >
+                        {x.name}
+                    </Button>
+                ))}
+            </ButtonGroup>
+        )
     }
 
     render() {
-        const { block } = this.props
-        const layout: DivisionLayout = block.data.get('layout')
-
         return (
-            <InfoIconButton
-                onClick={this.onClick}
-            >
-                {this.renderIcon(layout)}
-            </InfoIconButton>
+            <div>
+                {this.renderLayout()}
+
+                <Button
+                    onClick={this.onAddBefore}
+                >
+                    Add Before
+                </Button>
+
+                <Button
+                    onClick={this.onAddAfter}
+                >
+                    Add After
+                </Button>
+            </div>
         )
     }
 }

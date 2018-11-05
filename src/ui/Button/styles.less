@@ -1,0 +1,65 @@
+.ae-ui-button {
+    --color: #d9d9d9;
+    --color-hover: #b9b9b9;
+    --color-active: #a9a9a9;
+    
+    --color-highlight:gold;
+    --color-hover-highlight: #f7d20c;
+    --color-active-highlight: #e6c513;
+
+    text-align: center;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    height: 32px;
+    background-color: var(--color);
+
+    &:hover {
+        --color: var(--color-hover);
+    }
+
+    &:active {
+        --color: var(--color-active);
+    }
+
+    &.highlight {
+        --color: var(--color-highlight);
+
+        &:hover {
+            --color: var(--color-hover-highlight);
+        }
+    
+        &:active {
+            --color: var(--color-active-highlight);
+        }
+    }
+}
+
+.ae-ui-button {
+    --margin: 3px;
+    margin-right: var(--margin);
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.ae-ui-button-group {
+    display: flex;
+
+    .ae-ui-button {
+        --margin: 0;
+        border-radius: 0;
+    }
+
+    .ae-ui-button:first-child {
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+    }
+
+    .ae-ui-button:last-child{
+        border-bottom-right-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+}

@@ -5,5 +5,20 @@
 
     .content {
         flex: 1;
+        overflow: auto;
+    }
+}
+
+.ae-document-info--image-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .ae-block-image {
+        margin-right: 5px;
+        margin-bottom: 5px;
+
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }

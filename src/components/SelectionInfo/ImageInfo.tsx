@@ -1,9 +1,8 @@
 import React from 'react'
 import className from 'classnames'
-import { AspectRatioIcon, LandscapeIcon } from 'mdi-react'
-import { CropLandscapeIcon, CropPortraitIcon, CropSquareIcon } from 'mdi-react'
-import InfoIconButton from './InfoIconButton'
 import { BlockInfoProps } from '.'
+import ButtonGroup from '../../ui/Button/ButtonGroup'
+import Button from '../Button'
 
 enum ImageLayout {
     square = 'square',
@@ -11,42 +10,19 @@ enum ImageLayout {
     landscape = 'landscape',
 }
 
-function nextLayout(currentValue: ImageLayout): ImageLayout {
-    const values = [
-        ImageLayout.square,
-        ImageLayout.landscape,
-        ImageLayout.portrait,
-    ]
-
-    let i = values.indexOf(currentValue)
-    if (i >= values.length - 1) {
-        i = 0
-    } else {
-        i++
-    }
-
-    return values[i]
-}
+const items = [
+    { name: 'Square', value: ImageLayout.square },
+    { name: 'Landscape', value: ImageLayout.landscape },
+    { name: 'Portrait', value: ImageLayout.portrait },
+]
 
 export class ImageInfo extends React.PureComponent<BlockInfoProps, object> {
-    onAspectClick = (event: Event) => {
-        event.preventDefault()
-
+    setLayout(layout: ImageLayout) {
         const { block, value } = this.props
         const change = value.change()
 
-        const src = block.data.get('src')
-        const caption = block.data.get('caption')
-        const ratio = block.data.get('ratio')
-        const layout = nextLayout(block.data.get('layout'))
-
         const newProps: any = {
-            data: {
-                caption,
-                ratio,
-                src,
-                layout,
-            }
+            data: block.data.set('layout', layout)
         }
 
         return this.props.onChange(
@@ -54,32 +30,8 @@ export class ImageInfo extends React.PureComponent<BlockInfoProps, object> {
         )
     }
 
-    renderAspectIcon(layout: ImageLayout) {
-        switch (layout) {
-            case ImageLayout.landscape: {
-                return (
-                    <CropLandscapeIcon />
-                )
-            }
-
-            case ImageLayout.portrait: {
-                return (
-                    <CropPortraitIcon />
-                )
-            }
-
-            case ImageLayout.square: {
-                return (
-                    <CropSquareIcon />
-                )
-            }
-
-            default: {
-                return (
-                    <AspectRatioIcon />
-                )
-            }
-        }
+    onAspectClick = (event: Event, value: string) => {
+        return this.setLayout(value as ImageLayout)
     }
 
     render() {
@@ -88,11 +40,17 @@ export class ImageInfo extends React.PureComponent<BlockInfoProps, object> {
 
         return (
             <div>
-                <InfoIconButton
-                    onClick={this.onAspectClick}
-                >
-                    {this.renderAspectIcon(layout)}
-                </InfoIconButton>
+                <ButtonGroup>
+                    {items.map(x => (
+                        <Button
+                            value={x.value}
+                            onClick={this.onAspectClick}
+                            highlight={x.value === layout}
+                        >
+                            {x.name}
+                        </Button>
+                    ))}
+                </ButtonGroup>
             </div>
         )
     }

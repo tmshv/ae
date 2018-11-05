@@ -7,6 +7,7 @@ import { ImageInfo } from './ImageInfo'
 import { FigureInfo } from './FigureInfo'
 import IconButton from '../IconButton'
 import { ArrowLeftThickIcon, ArrowRightThickIcon } from 'mdi-react'
+import { DocumentInfo } from './DocumentInfo'
 
 import './styles.less'
 
@@ -118,6 +119,12 @@ export default class SelectionInfo extends React.Component<Props, {}, any> {
         return (
             <React.Fragment>
                 {ancestors.map(x => this.renderBlock(x))}
+
+                <DocumentInfo
+                    value={this.props.value}
+                    onChange={this.props.onChange}
+                />
+
             </React.Fragment>
         )
     }
