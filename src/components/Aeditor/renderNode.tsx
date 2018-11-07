@@ -4,6 +4,7 @@ import { Paragraph } from './blocks/Paragraph'
 import { Image } from './blocks/Image'
 import { File } from './blocks/File'
 import { Blockquote } from './blocks/Blockquote'
+import { Accent } from './blocks/Accent'
 import { Header } from './blocks/Header'
 import Video from './blocks/Video'
 import { Figure } from './blocks/Figure'
@@ -43,6 +44,12 @@ export default function renderNode(props) {
         case BlockType.blockquote: {
             return (
                 <Blockquote {...attributes}>{props.children}</Blockquote>
+            )
+        }
+
+        case BlockType.accent: {
+            return (
+                <Accent {...props}/>
             )
         }
 

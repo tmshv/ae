@@ -4,6 +4,7 @@ export enum BlockType {
     image = 'image',
     file = 'file',
     blockquote = 'blockquote',
+    accent = 'accent',
     orderedList = 'orderedList',
     unorderedList = 'unorderedList',
     listItem = 'listItem',

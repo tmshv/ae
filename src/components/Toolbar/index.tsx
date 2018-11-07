@@ -5,6 +5,7 @@ import {
     FormatHeader1Icon,
     BugIcon,
     FileIcon,
+    AlertBoxIcon,
     FormatQuoteCloseIcon,
     FormatListBulletedIcon,
     TableIcon,
@@ -17,8 +18,10 @@ import listPlugin from '../Aeditor/plugins/list'
 import tablePlugin from '../Aeditor/plugins/table'
 import blockquotePlugin from '../Aeditor/plugins/blockquote'
 import insertDivision from '../Aeditor/changes/insertDivision'
+import { isSelectionInAccent } from '../Aeditor/plugins/accent/lib'
 
 import './styles.less'
+import { wrapInAccent, unwrapAccent } from '../Aeditor/plugins/accent/changes';
 
 interface ToolbarProps {
     value: slate.Value,
@@ -81,6 +84,21 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
         return blockquotePlugin.utils.isSelectionInBlockquote(value)
             ? this.props.onChange(blockquotePlugin.changes.unwrapBlockquote(change))
             : this.props.onChange(blockquotePlugin.changes.wrapInBlockquote(change))
+    }
+
+    onClickAccent = (event: Event) => {
+        event.preventDefault()
+
+        const value = this.props.value
+        const change = value.change()
+
+        const type = this.hasBlock(BlockType.accent)
+            ? BlockType.paragraph
+            : BlockType.accent
+
+        return this.props.onChange(
+            change.setBlocks(type)
+        )
     }
 
     onClickUnorderedList = (event: Event) => {
@@ -198,6 +216,9 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
                     ))}
                     {this.renderButton(this.onClickQuote, (
                         <FormatQuoteCloseIcon />
+                    ))}
+                    {this.renderButton(this.onClickAccent, (
+                        <AlertBoxIcon />
                     ))}
                     {this.renderButton(this.onClickUnorderedList, (
                         <FormatListBulletedIcon />
