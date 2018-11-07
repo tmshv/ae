@@ -274,3 +274,37 @@
         --block-side-padding: var(--side-padding-full);
     }
 }
+
+.ae-block-url-card {
+    // cursor: pointer;
+
+    position: relative;
+    margin-bottom: var(--size-l);
+    border: 8px solid #0066ff;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(16, 84, 185, 0.5);
+
+    .ae-block-paragraph {
+        padding: 4px 10px;
+    }
+
+    .ae-block-image {
+        img {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        // border-radius: var(--block-border-radius);
+    }
+}

@@ -8,6 +8,7 @@ export default {
             min: 1, types: [
                 BlockType.figure,
                 BlockType.paragraph,
+                BlockType.urlCard,
             ]
         },
     ],

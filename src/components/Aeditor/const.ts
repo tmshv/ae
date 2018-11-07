@@ -15,6 +15,7 @@ export enum BlockType {
     figure = 'figure',
     caption = 'caption',
     division = 'division',
+    urlCard = 'urlCard',
 }
 
 export enum MarkType {
@@ -36,4 +37,11 @@ export enum DivisionLayout {
     default = 'default',
     big = 'big',
     full = 'full',
+}
+
+export interface IUrlCardData {
+    url: string,
+    imageSrc: string,
+    title: string,
+    description: string,
 }

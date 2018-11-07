@@ -12,6 +12,7 @@ import { Caption } from './blocks/Caption'
 import { List } from './blocks/List'
 import { ListItem } from './blocks/ListItem'
 import { DivisionBlock } from './blocks/Division'
+import { UrlCard } from './blocks/UrlCard'
 
 export default function renderNode(props) {
     const { node, attributes } = props
@@ -131,6 +132,12 @@ export default function renderNode(props) {
                     {...props}
                     className={'ae-block-division'}
                 />
+            )
+        }
+
+        case BlockType.urlCard: {
+            return (
+                <UrlCard {...props} />
             )
         }
 

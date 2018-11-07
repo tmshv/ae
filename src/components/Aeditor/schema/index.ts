@@ -38,6 +38,27 @@ function getSchema() {
                     }
                 },
             },
+            [BlockType.urlCard]: {
+                parent: { types: [BlockType.division] },
+                nodes: [
+                    { types: [BlockType.image], min: 1, max: 1 },
+                    { types: BlockType.paragraph, min: 0 },
+                ],
+                normalize: (change: Change, violation: string, { node }: { node: Block }) => {
+                    console.log('norm url card')
+                    console.log(violation)
+
+                    switch (violation) {
+                        case PARENT_TYPE_INVALID: {
+                            return change.wrapBlockByKey(node.key, BlockType.division)
+                        }
+
+                        default: {
+                            break
+                        }
+                    }
+                },
+            },
             [BlockType.caption]: {
                 parent: { types: [BlockType.figure] },
             },

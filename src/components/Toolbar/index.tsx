@@ -10,10 +10,12 @@ import {
     FormatListBulletedIcon,
     TableIcon,
     DivisionIcon,
+    LinkIcon,
 } from 'mdi-react'
 import IconButton from '../IconButton'
-import { BlockType } from '../Aeditor/const'
+import { BlockType, IUrlCardData } from '../Aeditor/const'
 import insertImage from '../Aeditor/changes/insertImage'
+import insertUrlCard from '../Aeditor/changes/insertUrlCard'
 import listPlugin from '../Aeditor/plugins/list'
 import tablePlugin from '../Aeditor/plugins/table'
 import blockquotePlugin from '../Aeditor/plugins/blockquote'
@@ -62,6 +64,20 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
         // return this.props.onChange(
         //     insertFile(change, file, undefined)
         // )
+    }
+
+    onClickUrlCard = () => {
+        const change = this.props.value.change()
+        const data: IUrlCardData = {
+            url: 'https://varlamov.ru/3160798.html',
+            title: '20 лучших архитектурных объектов 2018 года',
+            description: 'D',
+            imageSrc: 'https://l-files.livejournal.net/og_image/10761149/12346?v=1541254574',
+        }
+
+        return this.props.onChange(
+            insertUrlCard(change, data, undefined)
+        )
     }
 
     onClickHeader = (event) => {
@@ -228,6 +244,9 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
                     ))}
                     {this.renderButton(this.onClickDivision, (
                         <DivisionIcon />
+                    ))}
+                    {this.renderButton(this.onClickUrlCard, (
+                        <LinkIcon />
                     ))}
                 </div>
 
