@@ -12,6 +12,7 @@ import SelectionInfo from '../SelectionInfo'
 
 import './styles.less'
 import './ae.less'
+import './ae-focused.less'
 
 export interface IAeditorProps {
     value: Value,
