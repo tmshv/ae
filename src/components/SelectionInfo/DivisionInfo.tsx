@@ -51,6 +51,7 @@ export class DivisionInfo extends React.Component<BlockInfoProps, object> {
             <ButtonGroup>
                 {items.map(x => (
                     <Button
+                        key={x.value}
                         highlight={x.value === layout}
                         onClick={this.onClickLayout}
                         value={x.value}

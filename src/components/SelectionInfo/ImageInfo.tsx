@@ -43,6 +43,7 @@ export class ImageInfo extends React.PureComponent<BlockInfoProps, object> {
                 <ButtonGroup>
                     {items.map(x => (
                         <Button
+                            key={x.value}
                             value={x.value}
                             onClick={this.onAspectClick}
                             highlight={x.value === layout}
