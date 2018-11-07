@@ -1,51 +1,50 @@
 const express = require('express')
-const multer = require('multer')
 const next = require('next')
+const multer = require('multer')
 const crypto = require('crypto')
-// const { api } = require('./api')
+const axios = require('axios')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-
-function getFilename(cb) {
-  crypto.pseudoRandomBytes(16, function (err, raw) {
-    if (err) {
-      return cb(err, null)
-    }
-
-    return cb(null, raw.toString('hex'))
-  })
-}
-
-function getFileExtention(file) {
-  if (file.mimetype === 'image/jpeg') {
-    return '.jpg'
-  }
-
-  return ''
-}
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'static/uploads/')
-  },
-  filename: function (req, file, cb) {
-    getFilename((err, name) => {
+function apiUpload(server) {
+  function getFilename(cb) {
+    crypto.pseudoRandomBytes(16, function (err, raw) {
       if (err) {
         return cb(err, null)
       }
 
-      const filename = name + getFileExtention(file)
-      return cb(null, filename)
+      return cb(null, raw.toString('hex'))
     })
   }
-})
-const upload = multer({ storage: storage })
 
-function api(server) {
-  server.put('/upload', upload.single('file'), (req, res) => {
+  function getFileExtention(file) {
+    if (file.mimetype === 'image/jpeg') {
+      return '.jpg'
+    }
+
+    return ''
+  }
+
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'static/uploads/')
+    },
+    filename: function (req, file, cb) {
+      getFilename((err, name) => {
+        if (err) {
+          return cb(err, null)
+        }
+
+        const filename = name + getFileExtention(file)
+        return cb(null, filename)
+      })
+    }
+  })
+  const uploader = multer({ storage: storage })
+
+  server.put('/upload', uploader.single('file'), (req, res) => {
     // {
     //   fieldname: 'file',
     //   originalname: '17.jpg',
@@ -56,10 +55,6 @@ function api(server) {
     //   path: 'static/uploads/bf6075170b34eca67514e4b734819482',
     //   size: 351322,
     // }
-    console.log(req.file)
-
-    // req.file is the `avatar` file
-    // req.body will hold the text fields, if there were any
 
     const filepathBase = '/'
 
@@ -68,17 +63,50 @@ function api(server) {
       filepath: `${filepathBase}${req.file.path}`
     })
   })
+}
 
-  // server.get('/p/:id', (req, res) => {
-  //   const actualPage = '/post'
-  //   const queryParams = {
-  //     id: req.params.id,
-  //   }
+function apiUrlMeta(server) {
+  server.get('/api/url/meta', async (req, res) => {
+    const url = req.query.url
 
-  //   return app.render(req, res, actualPage, queryParams)
-  // })
+    try {
+      const response = await axios.get(url)
+      const metadata = await getMeta(response.data, url)
+
+      return res.json({
+        url,
+        metadata,
+      })
+    } catch (error) {
+      return res.status(500).json({
+        url,
+        error,
+      })
+    }
+  })
+}
+
+function api(server) {
+  apiUpload(server)
+  apiUrlMeta(server)
 
   return server
+}
+
+async function getMeta(html, url) {
+  const metascraper = require('metascraper')([
+    // require('metascraper-author')(),
+    // require('metascraper-date')(),
+    require('metascraper-description')(),
+    require('metascraper-image')(),
+    // require('metascraper-logo')(),
+    // require('metascraper-clearbit-logo')(),
+    // require('metascraper-publisher')(),
+    require('metascraper-title')(),
+    require('metascraper-url')()
+  ])
+
+  return metascraper({ html, url })
 }
 
 app.prepare()
