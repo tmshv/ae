@@ -1,8 +1,14 @@
 import React from 'react'
 import { Value, ValueJSON, Document, Block, Text, Inline } from 'slate'
+import Html from 'slate-html-serializer'
 import Aeditor from '../src/components/Aeditor'
 import { slateSample } from '../src/sample'
+import { rules } from '../src/components/Aeditor/rules'
 // import Plain from 'slate-plain-serializer'
+
+const html = new Html({
+    rules: rules(),
+})
 
 interface IState {
     value: Value,
@@ -50,6 +56,9 @@ export default class Index extends React.Component<object, IState> {
     onChange = ({ value }: { value: Value }) => {
         // console.log('Outline:')
         // outline(value)
+
+        console.log('html:')
+        console.log(html.serialize(value))
 
         this.setState({
             value

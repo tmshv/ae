@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "dependencies": {
     "@types/axios": "^0.14.0",
+    "@types/slate-html-serializer": "^0.6.2",
     "@zeit/next-less": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",
     "axios": "^0.18.0",
@@ -29,6 +30,7 @@
     "slate-edit-blockquote": "^0.6.1",
     "slate-edit-list": "^0.12.1",
     "slate-edit-table": "^0.18.0",
+    "slate-html-serializer": "^0.7.23",
     "slate-react": "0.14.0",
     "slate-schema-violations": "^0.1.39",
     "typescript": "^3.1.1"
