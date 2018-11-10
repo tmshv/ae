@@ -1,13 +1,11 @@
 import { Block } from 'slate'
 import { NODE_DATA_INVALID } from 'slate-schema-violations'
-import { ImageLayout, ImageCorner } from '../const'
+import { ContentAlign, BlockType } from '../const'
 
 export default {
-    isVoid: true,
+    parent: { types: [BlockType.figure] },
     data: {
-        layout: v => Boolean(v),
-        corner: v => Boolean(v),
-        // src: v => Boolean(v),
+        align: v => Boolean(v),
     },
     normalize: (change, reason, { node }) => {
         const block = node as Block
@@ -15,18 +13,10 @@ export default {
 
         switch (reason) {
             case NODE_DATA_INVALID: {
-                if (!data.has('src')) {
-                    break
-                }
-
                 let newData = data
 
-                if (!data.has('layout')) {
-                    newData = data.set('layout', ImageLayout.square)
-                }
-
-                if (!data.has('corner')) {
-                    newData = data.set('corner', ImageCorner.round)
+                if (!data.has('align')) {
+                    newData = data.set('align', ContentAlign.left)
                 }
 
                 const newProps: any = {

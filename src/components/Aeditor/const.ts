@@ -33,6 +33,18 @@ export enum ImageLayout {
     landscape = 'landscape',
 }
 
+export enum ImageCorner {
+    rect = 'rect',
+    round = 'round',
+    circle = 'circle',
+}
+
+export enum ContentAlign {
+    left = 'left',
+    right = 'right',
+    center = 'center',
+}
+
 export enum DivisionLayout {
     default = 'default',
     big = 'big',

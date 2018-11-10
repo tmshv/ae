@@ -1,14 +1,12 @@
 import className from 'classnames'
-import { BlockProps } from '.';
+import { BlockProps } from '.'
 
 export function Header(props: BlockProps) {
     // const { connectDropTarget, isOver, attributes, canDrop } = props;
 
     return (
         <h1 {...props.attributes}
-            className={className('ae-block-header', 'text', {
-                focused: false, // props.isSelected,
-            })}
+            className={className('ae-block-header', 'text')}
         >
             {props.children}
         </h1>

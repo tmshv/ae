@@ -87,6 +87,7 @@
 }
 
 .ae-block-image {
+    --radius: 0;
     position: relative;
 
     img {
@@ -95,7 +96,19 @@
         height: 100%;
         object-fit: cover;
 
-        border-radius: var(--block-border-radius);
+        border-radius: var(--radius);
+    }
+
+    &.corner-rect {
+        --radius: 0;
+    }
+
+    &.corner-round {
+        --radius: var(--block-border-radius);
+    }
+
+    &.corner-circle {
+        --radius: 1000px;
     }
 }
 
@@ -229,8 +242,24 @@
 }
 
 .ae-block-caption {
+    --align: left;
     padding-top: var(--size-s);
     padding-left: var(--size-l);
+    padding-right: var(--size-l);
+
+    text-align: var(--align);
+
+    &.align-left {
+        --align: left;
+    }
+
+    &.align-right {
+        --align: right;
+    }
+
+    &.align-center {
+        --align: center;
+    }
 
     .ae-block-paragraph {
         padding: 0;

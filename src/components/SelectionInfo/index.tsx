@@ -8,6 +8,7 @@ import { FigureInfo } from './FigureInfo'
 import IconButton from '../IconButton'
 import { ArrowLeftThickIcon, ArrowRightThickIcon } from 'mdi-react'
 import { DocumentInfo } from './DocumentInfo'
+import { CaptionInfo } from './CaptionInfo'
 
 import './styles.less'
 
@@ -37,6 +38,22 @@ export default class SelectionInfo extends React.Component<Props, {}, any> {
                 </p>
 
                 <DivisionInfo
+                    value={this.props.value}
+                    onChange={this.props.onChange}
+                    block={block}
+                />
+            </div>
+        )
+    }
+
+    renderCaption(block: Block) {
+        return (
+            <div key={block.key}>
+                <p>
+                    {block.type}
+                </p>
+
+                <CaptionInfo
                     value={this.props.value}
                     onChange={this.props.onChange}
                     block={block}
@@ -89,6 +106,10 @@ export default class SelectionInfo extends React.Component<Props, {}, any> {
 
             case BlockType.figure: {
                 return this.renderFigure(block)
+            }
+
+            case BlockType.caption: {
+                return this.renderCaption(block)
             }
 
             default: {

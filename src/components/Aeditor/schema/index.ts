@@ -3,6 +3,7 @@ import { Block, Schema, Change } from 'slate'
 import { BlockType } from '../const'
 import image from './image'
 import division from './division'
+import caption from './caption'
 
 function getSchema() {
     return {
@@ -59,13 +60,23 @@ function getSchema() {
                     }
                 },
             },
-            [BlockType.caption]: {
-                parent: { types: [BlockType.figure] },
-            },
+            [BlockType.caption]: caption,
             [BlockType.division]: division,
             [BlockType.image]: image,
             [BlockType.video]: {
                 isVoid: true,
+                // parent: { types: [BlockType.division] },
+                // normalize: (change: Change, violation: string, { node }: { node: Block }) => {
+                //     switch (violation) {
+                //         case PARENT_TYPE_INVALID: {
+                //             return change.wrapBlockByKey(node.key, BlockType.figure)
+                //         }
+
+                //         default: {
+                //             break
+                //         }
+                //     }
+                // },
             }
         },
     }
