@@ -1,5 +1,5 @@
 import { Change } from 'slate'
-import { MarkType, BlockType } from './const'
+import { MarkType, BlockType, IUrlCardData } from './const'
 import insertVideo from './changes/insertVideo'
 import blockquotePlugin from './plugins/blockquote'
 import listPlugin from './plugins/list'
@@ -8,6 +8,9 @@ import pasteEmbedLink from './plugins/pasteEmbedLink'
 import exitHeader from './plugins/exitHeader'
 import shortcutMark from './plugins/shortcutMark'
 import captionExit from './plugins/captionExit'
+import exitDivison from './plugins/division/exitDivision'
+import pasteLink from './plugins/pasteLink'
+import insertUrlCard from './changes/insertUrlCard'
 
 const youtubeLinkRegExp = /(youtube\.com)|(youtu\.be)/
 
@@ -17,6 +20,11 @@ export default function defaultPlugins() {
         listPlugin,
         tablePlugin,
         exitHeader(),
+        exitDivison({
+            exitBlockType: BlockType.paragraph,
+            exitKey: 'Enter',
+            metaKey: false,
+        }),
         shortcutMark({
             key: 'b',
             type: MarkType.bold,
@@ -48,6 +56,31 @@ export default function defaultPlugins() {
                     color: `#${hex}`,
                 }
             }
+        }),
+        pasteLink({
+            match: () => true,
+            change: async (change: Change, link: string) => {
+                console.log('paste link', link)
+
+                const getMeta = async (link: string) => {
+                    const meta = await fetch(`/api/url/meta?url=${link}`)
+                    const j = await meta.json()
+                    const data: IUrlCardData = {
+                        url: link,
+                        title: j.metadata.title as string,
+                        description: j.metadata.description as string,
+                        imageSrc: j.metadata.image as string,
+                    }
+
+                    console.log('paste meta', data)
+
+                    return insertUrlCard(change, data, undefined)
+                }
+
+                return getMeta(link)
+
+                // return change
+            },
         }),
         pasteEmbedLink({
             match: youtubeLinkRegExp,

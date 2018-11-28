@@ -5,6 +5,7 @@ import { List } from 'immutable'
 
 interface IImage {
     src: string,
+    layout?: string,
     caption?: string,
 }
 
@@ -13,6 +14,7 @@ export default function createImage(options: IImage): Block {
         type: BlockType.image,
         data: {
             src: options.src,
+            // layout: options.layout,
         },
     })
     const blocks = options.caption
