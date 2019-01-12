@@ -34,6 +34,7 @@ export class Image extends React.PureComponent<BlockProps, object> {
         const layout: string = node.data.get('layout')
         const corner: string = node.data.get('corner')
         const ratio: number = node.data.get('ratio')
+        const aspectRatio = getRatio(layout, ratio)
 
         const cornerClass = `corner-${corner}`
 
@@ -45,7 +46,7 @@ export class Image extends React.PureComponent<BlockProps, object> {
                 })}
             >
                 <Aspect
-                    ratio={getRatio(layout, ratio)}
+                    ratio={aspectRatio}
                 >
                     <img
                         src={src}
