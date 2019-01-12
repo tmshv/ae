@@ -12,6 +12,7 @@ const html = new Html({
 
 interface IState {
     value: Value,
+    htmlValue: string,
 }
 
 function outline(value: Value) {
@@ -52,7 +53,8 @@ export default class Index extends React.Component<object, IState> {
         super(props)
 
         this.state = {
-            value: undefined,
+            value: null,
+            htmlValue: null,
         }
     }
 
@@ -60,11 +62,12 @@ export default class Index extends React.Component<object, IState> {
         // console.log('Outline:')
         // outline(value)
 
-        console.log('html:')
-        console.log(html.serialize(value))
+        // console.log('html:')
+        const htmlValue = html.serialize(value)
 
         this.setState({
-            value
+            value,
+            htmlValue,
         })
     }
 
@@ -89,19 +92,23 @@ export default class Index extends React.Component<object, IState> {
                     justifyContent: 'center',
                 }}
             >
-                <Aeditor
+                <Ae
                     value={this.state.value}
                     onChange={this.onChange}
                 />
+
+                <div
+                    className={'ae-editor'}
+                    style={{
+                        marginTop: 100,
+                        width: '50%',
+                    }}
+                >
+                    <div
+                        dangerouslySetInnerHTML={{ __html: this.state.htmlValue }}
+                    />
+                </div>
             </div>
         )
     }
 }
-
-// Index.getInitialProps = async () => {
-//     const json = slateSample()
-
-//     return {
-//         json,
-//     }
-// }
