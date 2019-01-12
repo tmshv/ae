@@ -1,9 +1,9 @@
 import React from 'react'
 import { Value, ValueJSON, Document, Block, Text, Inline } from 'slate'
 import Html from 'slate-html-serializer'
-import Aeditor from '../src/components/Aeditor'
+import Ae from '../src/core/Ae'
 import { slateSample } from '../src/sample'
-import { rules } from '../src/components/Aeditor/rules'
+import { rules } from '../src/core/Ae/rules'
 // import Plain from 'slate-plain-serializer'
 
 const html = new Html({
