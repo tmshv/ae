@@ -23,9 +23,12 @@ function outline(value: Value) {
 }
 
 function pad(depth: number): string {
-    return depth !== 0
-        ? (' ').padStart(depth * 4)
-        : ''
+    if (depth === 0) {
+        return ''
+    }
+
+    const x: string = ' '
+    return x.padStart(depth * 4)
 }
 
 function outlineNode(node: Block | Text | Inline, depth: number) {
