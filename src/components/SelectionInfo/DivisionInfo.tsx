@@ -2,9 +2,9 @@ import React from 'react'
 import className from 'classnames'
 import { Change, Block } from 'slate'
 import { BlockInfoProps } from '.'
-import { DivisionLayout } from '../Aeditor/const'
+import { DivisionLayout } from '../../core/Ae/const'
 import ButtonGroup from '../../ui/Button/ButtonGroup'
-import Button from '../Button';
+import Button from '../Button'
 
 const items = [
     { name: 'Default', value: DivisionLayout.default },

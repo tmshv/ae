@@ -3,8 +3,8 @@ import { Block } from 'slate'
 import { FlashlightIcon, FlashlightOffIcon } from 'mdi-react'
 import InfoIconButton from './InfoIconButton'
 import { BlockInfoProps } from '.'
-import { BlockType } from '../Aeditor/const'
-import createCaption from '../Aeditor/utils/createCaption';
+import { BlockType } from '../../core/Ae/const'
+import createCaption from '../../core/Ae/utils/createCaption'
 
 function getCaptions(block: Block) {
     return block.getBlocksByType(BlockType.caption)

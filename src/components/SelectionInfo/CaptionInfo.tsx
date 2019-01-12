@@ -2,8 +2,8 @@ import React from 'react'
 import { BlockInfoProps } from '.'
 import ButtonGroup from '../../ui/Button/ButtonGroup'
 import Button from '../Button'
-import { ContentAlign } from '../Aeditor/const'
-import setDataField from '../Aeditor/changes/setDataField'
+import { ContentAlign } from '../../core/Ae/const'
+import setDataField from '../../core/Ae/changes/setDataField'
 
 const alignItems = [
     { name: 'Left', value: ContentAlign.left },

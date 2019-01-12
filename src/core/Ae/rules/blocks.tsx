@@ -1,6 +1,6 @@
 import className from 'classnames'
 import { Block } from 'slate'
-import Division from '../../Division'
+import Division from '../../../components/Division'
 
 export function serializeHeader(obj: Block, children) {
     return (

@@ -2,7 +2,7 @@ import React from 'react'
 import { List } from 'immutable'
 import { Change, Value, Block } from 'slate'
 import className from 'classnames'
-import { BlockType } from '../Aeditor/const'
+import { BlockType } from '../../core/Ae/const'
 import Aspect from '../Aspect'
 
 interface DocumentInfoProps {

@@ -3,7 +3,7 @@ import className from 'classnames'
 import { BlockInfoProps } from '.'
 import ButtonGroup from '../../ui/Button/ButtonGroup'
 import Button from '../Button'
-import { ImageCorner } from '../Aeditor/const'
+import { ImageCorner } from '../../core/Ae/const'
 
 enum ImageLayout {
     square = 'square',

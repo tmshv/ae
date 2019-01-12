@@ -1,7 +1,7 @@
 import React from 'react'
 import { Value, Block, Change } from 'slate'
 import className from 'classnames'
-import { BlockType } from '../Aeditor/const'
+import { BlockType } from '../../core/Ae/const'
 import { DivisionInfo } from './DivisionInfo'
 import { ImageInfo } from './ImageInfo'
 import { FigureInfo } from './FigureInfo'

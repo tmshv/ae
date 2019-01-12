@@ -13,17 +13,17 @@ import {
     LinkIcon,
 } from 'mdi-react'
 import IconButton from '../IconButton'
-import { BlockType, IUrlCardData } from '../Aeditor/const'
-import insertImage from '../Aeditor/changes/insertImage'
-import insertUrlCard from '../Aeditor/changes/insertUrlCard'
-import listPlugin from '../Aeditor/plugins/list'
-import tablePlugin from '../Aeditor/plugins/table'
-import blockquotePlugin from '../Aeditor/plugins/blockquote'
-import insertDivision from '../Aeditor/changes/insertDivision'
-import { isSelectionInAccent } from '../Aeditor/plugins/accent/lib'
+import { BlockType, IUrlCardData } from '../../core/Ae/const'
+import insertImage from '../../core/Ae/changes/insertImage'
+import insertUrlCard from '../../core/Ae/changes/insertUrlCard'
+import listPlugin from '../../core/Ae/plugins/list'
+import tablePlugin from '../../core/Ae/plugins/table'
+import blockquotePlugin from '../../core/Ae/plugins/blockquote'
+import insertDivision from '../../core/Ae/changes/insertDivision'
+// import { isSelectionInAccent } from '../../core/Ae/plugins/accent/lib'
 
 import './styles.less'
-import { wrapInAccent, unwrapAccent } from '../Aeditor/plugins/accent/changes';
+// import { wrapInAccent, unwrapAccent } from '../../core/Ae/plugins/accent/changes';
 
 interface ToolbarProps {
     value: slate.Value,

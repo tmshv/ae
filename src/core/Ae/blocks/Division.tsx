@@ -1,7 +1,7 @@
 import React from 'react'
 import className from 'classnames'
 import { BlockProps } from '.'
-import Division from '../../Division'
+import Division from '../../../components/Division'
 
 export class DivisionBlock extends React.PureComponent<BlockProps, object> {
     render() {
