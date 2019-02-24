@@ -1,4 +1,5 @@
-import React from 'react'
+import * as React from 'react'
+import { Button } from 'antd'
 import { Value, Block, Change } from 'slate'
 import className from 'classnames'
 import { BlockType } from '../../core/Ae/const'
@@ -26,7 +27,7 @@ export interface BlockInfoProps {
 }
 
 export default class SelectionInfo extends React.Component<Props, {}, any> {
-    onShowFullClick = (event: Event) => {
+    onShowFullClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         this.props.onShowFullChange(!this.props.showFull)
     }
 
@@ -151,6 +152,10 @@ export default class SelectionInfo extends React.Component<Props, {}, any> {
     }
 
     render() {
+        const icon = this.props.showFull
+            ? 'double-left'
+            : 'double-right'
+
         return (
             <div className={className('ae-selection-info', {
                 expanded: this.props.showFull,
@@ -166,18 +171,10 @@ export default class SelectionInfo extends React.Component<Props, {}, any> {
                         flexDirection: 'row-reverse',
                     }}
                 >
-                    <IconButton
+                    <Button
+                        icon={icon}
                         onClick={this.onShowFullClick}
-                        size={30}
-                    >
-                        {this.props.showFull
-                            ? (
-                                <ArrowLeftThickIcon />
-                            ) : (
-                                <ArrowRightThickIcon />
-                            )
-                        }
-                    </IconButton>
+                    />
                 </div>
             </div>
         )
