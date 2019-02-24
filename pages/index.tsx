@@ -7,6 +7,8 @@ import { rules } from '../src/core/Ae/rules'
 import App from '../src/components/App'
 // import Plain from 'slate-plain-serializer'
 
+import 'antd/dist/antd.css'
+
 const html = new Html({
     rules: rules(),
 })
