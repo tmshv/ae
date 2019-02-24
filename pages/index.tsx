@@ -94,39 +94,56 @@ export default class Index extends React.Component<{}, IState> {
             <App
                 value={value}
                 onChange={this.onChange}
+                renderContent={this.renderContent}
+            />
+        )
+    }
+
+    private renderContent = (options: any) => {
+        const value = this.state.value
+
+        const { showRendered = true } = options
+
+        const ae = (
+            <Ae
+                value={value}
+                onChange={this.onChange}
+            />
+        )
+
+        if (!showRendered) {
+            return ae
+        }
+
+        return (
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}
             >
                 <div
+                    className={'ae-editor'}
                     style={{
-                        display: 'flex',
-                        justifyContent: 'center',
+                        width: '50%',
+                        borderRight: '2px solid black',
+                    }}
+                >
+                    {ae}
+                </div>
+
+                <div
+                    className={'ae-editor'}
+                    style={{
+                        width: '50%',
+                        borderLeft: '2px solid black',
                     }}
                 >
                     <div
-                        className={'ae-editor'}
-                        style={{
-                            width: '50%',
-                            borderRight: '2px solid black',
-                        }}
-                    >
-                        <Ae
-                            value={value}
-                            onChange={this.onChange}
-                        />
-                    </div>
-
-                    <div
-                        className={'ae-editor'}
-                        style={{
-                            width: '50%',
-                            borderLeft: '2px solid black',
-                        }}
-                    >
-                        <div
-                            dangerouslySetInnerHTML={{ __html: this.state.htmlValue }}
-                        />
-                    </div>
+                        dangerouslySetInnerHTML={{ __html: this.state.htmlValue }}
+                    />
                 </div>
-            </App>
+            </div>
         )
     }
 }

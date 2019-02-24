@@ -1,23 +1,23 @@
 import * as React from 'react'
-import { Button } from 'antd'
+import { Button, Switch } from 'antd'
 import { Value, Block, Change } from 'slate'
 import className from 'classnames'
 import { BlockType } from '../../core/Ae/const'
 import { DivisionInfo } from './DivisionInfo'
 import { ImageInfo } from './ImageInfo'
 import { FigureInfo } from './FigureInfo'
-import IconButton from '../IconButton'
-import { ArrowLeftThickIcon, ArrowRightThickIcon } from 'mdi-react'
 import { DocumentInfo } from './DocumentInfo'
 import { CaptionInfo } from './CaptionInfo'
 
 import './styles.less'
 
 interface Props {
-    value: Value,
-    onChange: (change: Change) => void,
-    showFull: boolean,
-    onShowFullChange: (value: boolean) => void,
+    value: Value
+    onChange(change: Change): void
+    showFull: boolean
+    showRendered: boolean
+    onChangeShowFull(value: boolean): void
+    onChangeShowRendered(value: boolean, event: Event): void
 }
 
 export interface BlockInfoProps {
@@ -27,8 +27,8 @@ export interface BlockInfoProps {
 }
 
 export default class SelectionInfo extends React.Component<Props, {}, any> {
-    onShowFullClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        this.props.onShowFullChange(!this.props.showFull)
+    onClickShowFull = (event: React.MouseEvent<HTMLButtonElement>) => {
+        this.props.onChangeShowFull(!this.props.showFull)
     }
 
     renderDivision(block: Block) {
@@ -165,17 +165,20 @@ export default class SelectionInfo extends React.Component<Props, {}, any> {
                         this.renderInfoFragment()
                     )}
                 </div>
-                <div
+
+                <Switch
+                    size={'small'}
+                    checked={this.props.showRendered}
+                    onChange={this.props.onChangeShowRendered}
                     style={{
-                        display: 'flex',
-                        flexDirection: 'row-reverse',
+                        marginBottom: '10px',
                     }}
-                >
-                    <Button
-                        icon={icon}
-                        onClick={this.onShowFullClick}
-                    />
-                </div>
+                />
+
+                <Button
+                    icon={icon}
+                    onClick={this.onClickShowFull}
+                />
             </div>
         )
     }

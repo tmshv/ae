@@ -9,25 +9,27 @@ import './styles.less'
 interface IProps {
     value: Value
     onChange(change: Change): void
+    renderContent(options: IState): React.ReactNode
 }
 
 interface IState {
     fullSelectionInfo: boolean,
+    showRendered: boolean,
 }
 
 export default class App extends React.Component<IProps, IState> {
     state = {
         fullSelectionInfo: true,
+        showRendered: true,
     }
 
-    onFullSelectioInfoChange = (fullSelectionInfo: boolean) => {
-        // event.preventDefault()
-        // event.stopPropagation()
+    onChangeFullSelectioInfo = (fullSelectionInfo: boolean) => this.setState({
+        fullSelectionInfo,
+    })
 
-        this.setState({
-            fullSelectionInfo,
-        })
-    }
+    onChangeShowRendered = (showRendered: boolean) => this.setState({
+        showRendered,
+    })
 
     render() {
         return (
@@ -47,13 +49,15 @@ export default class App extends React.Component<IProps, IState> {
                             value={this.props.value}
                             onChange={this.props.onChange}
                             showFull={this.state.fullSelectionInfo}
-                            onShowFullChange={this.onFullSelectioInfoChange}
+                            showRendered={this.state.showRendered}
+                            onChangeShowFull={this.onChangeFullSelectioInfo}
+                            onChangeShowRendered={this.onChangeShowRendered}
                         />
                     </aside>
 
                     <div className={'wrapper'}>
                         <main className={'main'}>
-                            {this.props.children}
+                            {this.props.renderContent(this.state)}
                         </main>
                     </div>
                 </div>
