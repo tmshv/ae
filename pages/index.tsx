@@ -4,6 +4,7 @@ import Html from 'slate-html-serializer'
 import Ae from '../src/core/Ae'
 import { slateSample } from '../src/sample'
 import { rules } from '../src/core/Ae/rules'
+import App from '../src/components/App'
 // import Plain from 'slate-plain-serializer'
 
 const html = new Html({
@@ -48,7 +49,7 @@ function outlineNode(node: Block | Text | Inline, depth: number) {
     }
 }
 
-export default class Index extends React.Component<object, IState> {
+export default class Index extends React.Component<{}, IState> {
     constructor(props) {
         super(props)
 
@@ -81,34 +82,49 @@ export default class Index extends React.Component<object, IState> {
     }
 
     render() {
-        if (!this.state.value) {
+        const value = this.state.value
+
+        if (!value) {
             return null
         }
 
         return (
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                }}
+            <App
+                value={value}
+                onChange={this.onChange}
             >
-                <Ae
-                    value={this.state.value}
-                    onChange={this.onChange}
-                />
-
                 <div
-                    className={'ae-editor'}
                     style={{
-                        marginTop: 100,
-                        width: '50%',
+                        display: 'flex',
+                        justifyContent: 'center',
                     }}
                 >
                     <div
-                        dangerouslySetInnerHTML={{ __html: this.state.htmlValue }}
-                    />
+                        className={'ae-editor'}
+                        style={{
+                            width: '50%',
+                            borderRight: '2px solid black',
+                        }}
+                    >
+                        <Ae
+                            value={value}
+                            onChange={this.onChange}
+                        />
+                    </div>
+
+                    <div
+                        className={'ae-editor'}
+                        style={{
+                            width: '50%',
+                            borderLeft: '2px solid black',
+                        }}
+                    >
+                        <div
+                            dangerouslySetInnerHTML={{ __html: this.state.htmlValue }}
+                        />
+                    </div>
                 </div>
-            </div>
+            </App>
         )
     }
 }

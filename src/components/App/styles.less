@@ -1,0 +1,60 @@
+// main layout
+
+.app {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    .body {
+        height: ~"calc(100vh - 40px)";
+        
+        display: flex;
+
+        .wrapper {
+            flex: 1;
+            overflow: auto;
+        }
+    }
+}
+
+// sidebar layout
+
+.app {
+    .body {
+        --side-width: 50px;
+        
+        &.expanded {
+            --side-width: 30%;
+        }
+        
+        .side {
+            z-index: 100;
+            
+            width: var(--side-width);
+            // height: ~"calc(100% - var(--offset))";
+
+            box-sizing: border-box;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+        }
+    }
+}
+
+
+// animation
+
+.app {
+    .body {
+        --transition: width 250ms;
+
+        .main {
+            transition: var(--transition);
+        }
+
+        .side {
+            transition: var(--transition);
+        }
+    }
+}

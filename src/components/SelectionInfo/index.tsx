@@ -160,15 +160,21 @@ export default class SelectionInfo extends React.Component<Props, {}, any> {
                         this.renderInfoFragment()
                     )}
                 </div>
-                <div>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'row-reverse',
+                    }}
+                >
                     <IconButton
                         onClick={this.onShowFullClick}
+                        size={30}
                     >
                         {this.props.showFull
                             ? (
-                                <ArrowRightThickIcon />
-                            ) : (
                                 <ArrowLeftThickIcon />
+                            ) : (
+                                <ArrowRightThickIcon />
                             )
                         }
                     </IconButton>
