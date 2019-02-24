@@ -4,7 +4,7 @@ import { BlockProps } from '.'
 import Aspect from '../../../components/Aspect'
 import { ImageLayout } from '../const'
 
-function getRatio(layout: string, value: number = 1): number {
+export function getRatio(layout: string, value: number = 1): number {
     value = 3 / 4
 
     switch (layout) {

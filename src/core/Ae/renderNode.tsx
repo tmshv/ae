@@ -1,6 +1,6 @@
 import React from 'react'
 import { BlockType } from './const'
-import { Paragraph } from './blocks/Paragraph'
+import { ParagraphBlock as Paragraph } from './blocks/Paragraph'
 import { Image } from './blocks/Image'
 import { File } from './blocks/File'
 import { Blockquote } from './blocks/Blockquote'

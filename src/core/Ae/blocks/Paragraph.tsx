@@ -1,22 +1,10 @@
-import className from 'classnames'
-import { BlockProps } from '.';
+import * as React from 'react'
+import { BlockProps } from '.'
+import Paragraph from '../../../blocks/Paragraph'
 
-export function Paragraph(props: BlockProps) {
-    // const { connectDropTarget, isOver, attributes, canDrop } = props;
-
-    return (
-        <p {...props.attributes}
-            className={className('ae-block-paragraph', 'text', {
-                focused: false, // props.isSelected,
-            })}
-        >
-            {props.children}
-        </p>
-    )
-
-    // return connectDropTarget((
-    //     <p style={{ borderBottom: isOver && canDrop ? '3px solid #17a2b8' : 'none' }} {...attributes}>
-    //         {children}
-    //     </p>
-    // ));
+export function ParagraphBlock(props: BlockProps) {
+    return React.createElement(Paragraph, {
+        ...props.attributes,
+        children: props.children,
+    })
 }
