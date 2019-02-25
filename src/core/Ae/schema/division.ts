@@ -1,5 +1,5 @@
 import { NODE_DATA_INVALID } from 'slate-schema-violations'
-import { Block, SlateError } from 'slate'
+import { Block } from 'slate'
 import { DivisionLayout, BlockType } from '../const'
 
 export default {
@@ -15,11 +15,11 @@ export default {
     data: {
         layout: v => Boolean(v),
     },
-    normalize: (change, error: SlateError) => {
-        const block: Block = error.node
+    normalize: (change, reason, { node }) => {
+        const block = node as Block
         const data = block.data
 
-        switch (error.code) {
+        switch (reason) {
             case NODE_DATA_INVALID: {
                 let newData = data
 

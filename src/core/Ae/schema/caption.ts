@@ -1,17 +1,17 @@
-import { Block, SlateError } from 'slate'
+import { Block } from 'slate'
 import { NODE_DATA_INVALID } from 'slate-schema-violations'
 import { ContentAlign, BlockType } from '../const'
 
 export default {
-    parent: [{ type: [BlockType.figure] }],
+    parent: { types: [BlockType.figure] },
     data: {
         align: v => Boolean(v),
     },
-    normalize: (change, error: SlateError) => {
-        const block: Block = error.node
+    normalize: (change, reason, { node }) => {
+        const block = node as Block
         const data = block.data
 
-        switch (error.code) {
+        switch (reason) {
             case NODE_DATA_INVALID: {
                 let newData = data
 
