@@ -19,8 +19,8 @@ interface IState {
 
 export default class App extends React.Component<IProps, IState> {
     state = {
-        fullSelectionInfo: true,
-        showRendered: true,
+        fullSelectionInfo: false,
+        showRendered: false,
     }
 
     onChangeFullSelectioInfo = (fullSelectionInfo: boolean) => this.setState({
