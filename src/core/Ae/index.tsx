@@ -19,7 +19,7 @@ interface IState {
     plugins: any[],
 }
 
-export default class Aeditor extends React.Component<IAeditorProps, IState> {
+export default class Ae extends React.Component<IAeditorProps, IState> {
     state = {
         plugins: defaultPlugins(),
     }
@@ -39,7 +39,7 @@ export default class Aeditor extends React.Component<IAeditorProps, IState> {
                 renderNode={renderNode}
                 renderMark={renderMark}
                 renderEditor={this.renderEditor}
-                schema={schema}
+                // schema={schema}
                 plugins={this.state.plugins}
             />
         )
