@@ -50,7 +50,7 @@ export default function renderNode(props) {
 
         case BlockType.accent: {
             return (
-                <Accent {...props}/>
+                <Accent {...props} />
             )
         }
 
