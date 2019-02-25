@@ -1,4 +1,4 @@
-import { Block } from 'slate'
+import { Block, SlateError } from 'slate'
 import { NODE_DATA_INVALID } from 'slate-schema-violations'
 import { ImageLayout, ImageCorner } from '../const'
 
@@ -9,11 +9,13 @@ export default {
         corner: v => Boolean(v),
         // src: v => Boolean(v),
     },
-    normalize: (change, reason, { node }) => {
-        const block = node as Block
+    normalize: (change, error: SlateError) => {
+        console.log('normalizing image', error.code)
+
+        const block: Block = error.node
         const data = block.data
 
-        switch (reason) {
+        switch (error.code) {
             case NODE_DATA_INVALID: {
                 if (!data.has('src')) {
                     break

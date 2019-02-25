@@ -1,5 +1,5 @@
 import { LAST_CHILD_TYPE_INVALID, PARENT_TYPE_INVALID } from 'slate-schema-violations'
-import { Block, Schema, Change } from 'slate'
+import { Block, Schema, Change, SlateError } from 'slate'
 import { BlockType } from '../const'
 import image from './image'
 import division from './division'
@@ -9,8 +9,8 @@ function getSchema() {
     return {
         document: {
             last: { types: [BlockType.paragraph] },
-            normalize: (change, reason, { node }) => {
-                switch (reason) {
+            normalize: (change, error: SlateError, { node }) => {
+                switch (error.code) {
                     case LAST_CHILD_TYPE_INVALID: {
                         const paragraph = Block.create(BlockType.paragraph)
                         return change.insertNodeByKey(node.key, node.nodes.size, paragraph)
@@ -22,15 +22,17 @@ function getSchema() {
         },
         blocks: {
             [BlockType.figure]: {
-                parent: { types: [BlockType.division] },
+                parent: [{ type: BlockType.division }],
                 nodes: [
                     { types: [BlockType.image], min: 1, max: 1 },
                     { types: BlockType.caption, min: 0 },
                 ],
-                normalize: (change: Change, violation: string, { node }: { node: Block }) => {
-                    switch (violation) {
+                normalize: (change: Change, error: SlateError) => {
+                    const block: Block = error.node
+
+                    switch (error) {
                         case PARENT_TYPE_INVALID: {
-                            return change.wrapBlockByKey(node.key, BlockType.division)
+                            return change.wrapBlockByKey(block.key, BlockType.division)
                         }
 
                         default: {
@@ -40,18 +42,17 @@ function getSchema() {
                 },
             },
             [BlockType.urlCard]: {
-                parent: { types: [BlockType.division] },
+                parent: [{ type: [BlockType.division] }],
                 nodes: [
                     { types: [BlockType.image], min: 1, max: 1 },
                     { types: BlockType.paragraph, min: 0 },
                 ],
-                normalize: (change: Change, violation: string, { node }: { node: Block }) => {
-                    console.log('norm url card')
-                    console.log(violation)
+                normalize: (change: Change, error: SlateError) => {
+                    const block: Block = error.node
 
-                    switch (violation) {
+                    switch (error.code) {
                         case PARENT_TYPE_INVALID: {
-                            return change.wrapBlockByKey(node.key, BlockType.division)
+                            return change.wrapBlockByKey(block.key, BlockType.division)
                         }
 
                         default: {
