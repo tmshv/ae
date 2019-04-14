@@ -9,5 +9,37 @@ http://www.colorbox.io/#steps=7#hue_start=185#hue_end=240#hue_curve=easeInQuad#s
 ## Links
 
 - [slate-tuto](https://github.com/KohheePeace/slate-tuto/blob/master/src/slate-editor/renderer/blocks/Paragraph.jsx)
+- [Mobiledoc](https://github.com/bustle/mobiledoc-kit/blob/master/MOBILEDOC.md)
 
 How to calculate cursor location: [caret-position.js](https://github.com/oozou/slate-suggestions/blob/master/lib/caret-position.js)
+
+### Related Projects
+
+- [Editor.js](https://editorjs.io)
+- [Quilljs](https://quilljs.com)
+- [Medium Editor](http://yabwe.github.io/medium-editor/)
+
+
+### CMS
+
+- [strapi](https://strapi.io)
+- [Directus.io](https://directus.io)
+- [Cockpit](https://getcockpit.com)
+
+#### Not tested
+
+- [Grav](https://getgrav.org/downloads)
+- [Tiny Cloud](https://www.tiny.cloud)
+
+
+### Typograph
+
+- [typograph.js](https://github.com/typograf/typograf)
+- [Типограф Муравьёва](http://mdash.ru)
+
+::: TOOLS :::
+http://lamb.cc/typograph/
+
+Локальный типограф на python — typus β
+https://habrahabr.ru/post/320174/
+https://github.com/byashimov/website
