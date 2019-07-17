@@ -1,7 +1,6 @@
 const express = require('express')
 const next = require('next')
 const multer = require('multer')
-const crypto = require('crypto')
 const axios = require('axios')
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -9,6 +8,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 
 function apiUpload(server) {
+  const crypto = require('crypto')
   function getFilename(cb) {
     crypto.pseudoRandomBytes(16, function (err, raw) {
       if (err) {
