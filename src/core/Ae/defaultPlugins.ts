@@ -11,10 +11,11 @@ import captionExit from './plugins/captionExit'
 import exitDivison from './plugins/division/exitDivision'
 import pasteLink from './plugins/pasteLink'
 import insertUrlCard from './changes/insertUrlCard'
+import { Plugin } from 'slate-react'
 
 const youtubeLinkRegExp = /(youtube\.com)|(youtu\.be)/
 
-export default function defaultPlugins() {
+export default function defaultPlugins(): Plugin[] {
     return [
         blockquotePlugin,
         listPlugin,

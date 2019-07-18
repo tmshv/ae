@@ -1,5 +1,5 @@
 import React from 'react'
-import { Editor } from 'slate-react'
+import { Editor, Plugin } from 'slate-react'
 import { Value, Change } from 'slate'
 import schema from './schema'
 import handlePaste from './utils/handlePaste'
@@ -16,7 +16,7 @@ export interface IAeditorProps {
 }
 
 interface IState {
-    plugins: any[],
+    plugins: Plugin[],
 }
 
 export default class Ae extends React.Component<IAeditorProps, IState> {
