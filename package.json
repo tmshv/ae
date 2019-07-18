@@ -33,6 +33,7 @@
     },
     "devDependencies": {
         "@types/axios": "^0.14.0",
+        "@types/classnames": "^2.2.9",
         "@types/slate-html-serializer": "^0.6.2",
         "@zeit/next-less": "^1.0.1",
         "@types/express": "^4.16.0",
