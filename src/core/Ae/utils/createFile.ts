@@ -1,6 +1,7 @@
 import { Block } from 'slate'
 import { BlockType } from '../const'
 import { List } from 'immutable'
+import createParagraph from './createParagraph'
 
 export interface IFile {
     srcPreview: string,
@@ -11,15 +12,16 @@ export interface IFile {
 }
 
 export default function createFile(options: IFile): Block {
-    const file = Block.create({
-        type: BlockType.file,
-        data: options,
-    })
-    return file
-    // const nodes = List([file])
+    const nodes = List([createParagraph(options.name)])
 
-    // return Block.create({
-    //     type: BlockType.file,
-    //     nodes,
-    // })
+    return Block.create({
+        type: BlockType.file,
+        data: {
+            srcPreview: options.srcPreview,
+            srcFile: options.srcFile,
+            size: options.size,
+            mimeType: options.mimeType,
+        },
+        nodes,
+    })
 }

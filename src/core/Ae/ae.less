@@ -116,16 +116,21 @@
     --border: var(--background);
 
     margin: 0;
+    margin-bottom: var(--size-m);
+    padding: var(--size-s);
+
+    display: flex;
+    justify-content: space-between;
+
+    .ae-block-paragraph {
+        flex: 1;
+    }
 
     .file-preview {
         width: 50px;
+        margin-right: var(--size-m);
         border: var(--highlight-border-size) solid var(--border);
     }
-
-    // &.focused {
-    //     --highlight-background-color: none;
-    //     --border: var(--highlight-color);
-    // }
 }
 
 .ae-block-blockquote {

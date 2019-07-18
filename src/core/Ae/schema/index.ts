@@ -40,7 +40,6 @@ function getSchema() {
                 },
             },
             [BlockType.file]: {
-                isVoid: true,
                 parent: { types: [BlockType.division] },
                 // nodes: [
                 //     { types: BlockType.file, min: 0 },

@@ -14,15 +14,15 @@ const Img = ({ src, mix }) => (
 
 export class File extends React.PureComponent<BlockProps, object> {
     render() {
-        // const { node, editor, attributes, connectDragSource, isDragging, isSelected } = this.props;
         const { node, attributes, isSelected } = this.props
 
         const src = node.data.get('srcPreview')
+        const size: number = node.data.get('size')
         const name = node.data.get('name')
         const { readOnly } = this.props.editor.props
 
         return (
-            <figure
+            <div
                 {...attributes}
                 className={className('ae-block-file', {
                     focused: isSelected,
@@ -33,8 +33,8 @@ export class File extends React.PureComponent<BlockProps, object> {
                     src={src}
                 />
 
-                {/* {this.props.children} */}
-            </figure>
+                {this.props.children}
+            </div>
         )
     }
 }
