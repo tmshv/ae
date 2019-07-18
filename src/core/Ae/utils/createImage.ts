@@ -1,6 +1,7 @@
 import { Block } from 'slate'
 import { BlockType } from '../const'
 import createCaption from './createCaption'
+import createFigure from './createFigure'
 import { List } from 'immutable'
 
 interface IImage {
@@ -17,13 +18,10 @@ export default function createImage(options: IImage): Block {
             // layout: options.layout,
         },
     })
-    const blocks = options.caption
+    const nodes = List(options.caption
         ? [image, createCaption(options.caption)]
         : [image]
-    const nodes = List(blocks).toList()
+    )
 
-    return Block.create({
-        type: BlockType.figure,
-        nodes,
-    })
+    return createFigure(nodes)
 }
