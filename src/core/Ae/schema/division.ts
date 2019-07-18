@@ -9,6 +9,7 @@ export default {
                 BlockType.figure,
                 BlockType.paragraph,
                 BlockType.urlCard,
+                BlockType.file,
             ]
         },
     ],

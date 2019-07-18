@@ -39,6 +39,27 @@ function getSchema() {
                     }
                 },
             },
+            [BlockType.file]: {
+                isVoid: true,
+                parent: { types: [BlockType.division] },
+                // nodes: [
+                //     { types: BlockType.file, min: 0 },
+                // ],
+                normalize: (change: Change, violation: string, { node }: { node: Block }) => {
+                    console.log('NORMALIZE FILE', violation)
+
+                    switch (violation) {
+                        case PARENT_TYPE_INVALID: {
+                            console.log('NORMALIZE FILE WRAP  DIV', violation)
+                            return change.wrapBlockByKey(node.key, BlockType.division)
+                        }
+
+                        default: {
+                            break
+                        }
+                    }
+                },
+            },
             [BlockType.urlCard]: {
                 parent: { types: [BlockType.division] },
                 nodes: [

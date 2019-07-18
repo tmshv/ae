@@ -39,7 +39,7 @@ export default class Ae extends React.Component<IAeditorProps, IState> {
                 renderNode={renderNode}
                 renderMark={renderMark}
                 renderEditor={this.renderEditor}
-                // schema={schema}
+                schema={schema}
                 plugins={this.state.plugins}
             />
         )

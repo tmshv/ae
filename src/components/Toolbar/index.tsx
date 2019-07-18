@@ -15,6 +15,8 @@ import {
 import IconButton from '../IconButton'
 import { BlockType, IUrlCardData } from '../../core/Ae/const'
 import insertImage from '../../core/Ae/changes/insertImage'
+import insertFile from '../../core/Ae/changes/insertFile'
+import { IFile } from '../../core/Ae/utils/createFile'
 import insertUrlCard from '../../core/Ae/changes/insertUrlCard'
 import listPlugin from '../../core/Ae/plugins/list'
 import tablePlugin from '../../core/Ae/plugins/table'
@@ -52,18 +54,18 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
     }
 
     onClickFile = () => {
-        // const change = this.props.value.change()
-        // const file = {
-        //     srcPreview: 'https://art.shlisselburg.org/data/images/ae64123551407d5c325f75d83f58a338-medium.jpg',
-        //     srcFile: '',
-        //     name: 'Some PDF file',
-        //     size: 5000000,
-        //     mimeType: 'application/pdf',
-        // }
+        const change = this.props.value.change()
+        const file: IFile = {
+            srcPreview: 'https://art.shlisselburg.org/data/images/ae64123551407d5c325f75d83f58a338-medium.jpg',
+            srcFile: '',
+            name: 'Some PDF file',
+            size: 5000000,
+            mimeType: 'application/pdf',
+        }
 
-        // return this.props.onChange(
-        //     insertFile(change, file, undefined)
-        // )
+        return this.props.onChange(
+            insertFile(change, file, undefined)
+        )
     }
 
     onClickUrlCard = () => {
@@ -224,9 +226,9 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
                     {this.renderButton(this.onClickImage, (
                         <ImageIcon />
                     ))}
-                    {/* {this.renderButton(this.onClickFile, (
+                    {this.renderButton(this.onClickFile, (
                         <FileIcon />
-                    ))} */}
+                    ))}
                     {this.renderButton(this.onClickHeader, (
                         <FormatHeader1Icon />
                     ))}

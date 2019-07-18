@@ -14,36 +14,3 @@ export function getEventTransferText(event: Event): string {
 
     return text
 }
-
-export function insertFile(change: Change, file: any, target) {
-    if (target) {
-        change.select(target)
-    }
-
-    const x: any = {
-        type: BlockType.file,
-        data: file,
-        isVoid: true,
-        nodes: [
-            {
-                object: 'block',
-                type: 'paragraph',
-                nodes: [
-                    {
-                        'object': 'text',
-                        'leaves': [
-                            {
-                                'object': 'leaf',
-                                'text': file.name,
-                                'marks': []
-                            }
-                        ]
-                    }
-                ]
-            }
-        ],
-        // isVoid: true,
-    }
-
-    return change.insertBlock(x)
-}
