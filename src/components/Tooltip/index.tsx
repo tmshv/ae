@@ -1,7 +1,11 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 
-export default class Tooltip extends React.Component {
+export interface ITooltipProps {
+    editor: any
+}
+
+export default class Tooltip extends React.Component<ITooltipProps> {
     // getRoot() {
     //     // let root = document.getElementById('over')
     //     let root = document.querySelector('#over')

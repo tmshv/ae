@@ -10,17 +10,17 @@ import { BlockType } from './const'
 
 export function getEventTransferText(event: Event): string {
     const transfer = getEventTransfer(event)
-    const { text } = transfer
+    const { text } = transfer as any
 
     return text
 }
 
-export function insertFile(change: Change, file: object, target) {
+export function insertFile(change: Change, file: any, target) {
     if (target) {
-        change.select(target, undefined)
+        change.select(target)
     }
 
-    return change.insertBlock({
+    const x: any = {
         type: BlockType.file,
         data: file,
         isVoid: true,
@@ -30,12 +30,12 @@ export function insertFile(change: Change, file: object, target) {
                 type: 'paragraph',
                 nodes: [
                     {
-                        "object": "text",
-                        "leaves": [
+                        'object': 'text',
+                        'leaves': [
                             {
-                                "object": "leaf",
-                                "text": file.name,
-                                "marks": []
+                                'object': 'leaf',
+                                'text': file.name,
+                                'marks': []
                             }
                         ]
                     }
@@ -43,5 +43,7 @@ export function insertFile(change: Change, file: object, target) {
             }
         ],
         // isVoid: true,
-    })
+    }
+
+    return change.insertBlock(x)
 }

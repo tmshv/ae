@@ -4,4 +4,6 @@ export interface BlockProps {
     attributes: object,
     isSelected: boolean,
     children: any,
+
+    editor: any
 }

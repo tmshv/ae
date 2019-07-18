@@ -1,23 +1,16 @@
 import { Change, Text, Block, Value } from 'slate'
 import { BlockType } from '../const'
 import { List } from 'immutable'
+import { getCurrentCaption } from '../lib/value'
 
 export interface ICaptionExitOptions {
     exitBlockType: string,
     exitKey: string,
 }
 
-function getCurrentCaption(value: Value): Block {
-    const block = value.startBlock
-
-    return block && block.type === BlockType.caption
-        ? block
-        : null
-}
-
 function getCurrentFigure(value: Value): Block {
     const block = value.startBlock
-    const ancestors = value.document.getAncestors(block.key)
+    const ancestors = (value.document as any).getAncestors(block.key)
 
     return ancestors.findLast(p => (p as Block).type === BlockType.figure) as Block
 }
@@ -50,7 +43,7 @@ export default function captionExit(options: ICaptionExitOptions) {
             const figure = getCurrentFigure(value)
             const figureParent = value.document.getParent(figure.key)
 
-            const insertionIndex = figureParent.nodes.indexOf(figure) + 1
+            const insertionIndex = (figureParent as any).nodes.indexOf(figure) + 1
 
             const exitBlock = Block.create({
                 type: options.exitBlockType,

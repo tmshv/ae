@@ -1,6 +1,8 @@
-import { Change, Text, Block, Node, Value } from "slate";
-import { BlockType } from "../const";
-import { List } from "immutable";
+import { Change, Text, Block, Node, Value } from 'slate'
+import { BlockType } from '../const'
+import { List } from 'immutable'
+import { ICaptionExitOptions } from './captionExit'
+import { getCurrentCaption } from '../lib/value'
 
 export interface IPreventKeyOptions {
     key: string,

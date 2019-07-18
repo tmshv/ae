@@ -7,7 +7,7 @@ import { BlockType } from '../../core/Ae/const'
 import createCaption from '../../core/Ae/utils/createCaption'
 
 function getCaptions(block: Block) {
-    return block.getBlocksByType(BlockType.caption)
+    return (block as any).getBlocksByType(BlockType.caption)
 }
 
 export class FigureInfo extends React.PureComponent<BlockInfoProps, object> {

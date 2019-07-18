@@ -134,7 +134,7 @@ export default class SelectionInfo extends React.Component<Props, {}, any> {
         }
 
         const key = (selection as any).startKey
-        const ancestors = document.getAncestors(key)
+        const ancestors = (document as any).getAncestors(key)
             .filter(x => x.object !== 'document')
             .map(x => x as Block)
 

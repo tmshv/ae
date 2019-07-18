@@ -82,6 +82,7 @@ function getSchema() {
     }
 }
 
-const schema: Schema = getSchema()
+// const schema: Schema = getSchema()
+const schema: any = getSchema()
 
 export default schema

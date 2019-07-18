@@ -4,7 +4,7 @@ import { insertOrReplaceBlock } from '../lib/change'
 
 export default function insertImage(change: Change, src: string, target): Change {
     if (target) {
-        change.select(target, undefined)
+        change.select(target)
     }
 
     return insertOrReplaceBlock(change, createImage({

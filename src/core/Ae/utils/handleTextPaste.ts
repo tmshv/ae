@@ -6,7 +6,7 @@ export default function handleTextPaste(event: Event, change: Change) {
     const target = getEventRange(event, change.value)
 
     const transfer = getEventTransfer(event)
-    const { text } = transfer
+    const { text } = transfer as any
 
     if (!isUrl(text)) {
         return null
