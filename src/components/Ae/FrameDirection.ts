@@ -1,4 +1,6 @@
-export default enum FrameDirection {
-    Horizontal = "horizontal",
-    Vertical = "vertical",
+enum FrameDirection {
+    Horizontal = 'horizontal',
+    Vertical = 'vertical',
 }
+
+export default FrameDirection
