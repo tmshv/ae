@@ -29,7 +29,6 @@
         "slate-html-serializer": "^0.7.23",
         "slate-react": "0.14.0",
         "slate-schema-violations": "^0.1.39",
-        "typescript": "^3.1.1",
         "typograf": "^6.8.2"
     },
     "devDependencies": {
@@ -44,6 +43,7 @@
         "@types/react": "^16.4.14",
         "@types/slate": "^0.33.4",
         "@types/slate-react": "^0.18.0",
+        "typescript": "^3.5.3",
         "less": "^3.7.1",
         "tslint": "^5.11.0"
     },
