@@ -1,8 +1,9 @@
 import { Node } from 'slate'
 import { BlockType } from '../const'
 import * as s from './blocks'
+import { Rule } from 'slate-html-serializer'
 
-export function rules() {
+export function rules(): Rule[] {
     return [
         {
             serialize(obj: Node, children) {

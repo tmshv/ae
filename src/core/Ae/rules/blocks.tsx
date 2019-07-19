@@ -5,7 +5,7 @@ import Aspect from '../../../components/Aspect'
 import Paragraph from '../../../blocks/Paragraph'
 import { getRatio } from '../blocks/Image'
 
-export function serializeHeader(obj: Block, children) {
+export function serializeHeader(obj: Block, children: string) {
     return (
         <h1
             className={className('ae-block-header', 'text')}
@@ -15,7 +15,7 @@ export function serializeHeader(obj: Block, children) {
     )
 }
 
-export function serializeParagraph(obj: Block, children) {
+export function serializeParagraph(obj: Block, children: string) {
     return (
         <Paragraph
             block={obj}
@@ -25,7 +25,7 @@ export function serializeParagraph(obj: Block, children) {
     )
 }
 
-export function serializeFigure(obj: Block, children) {
+export function serializeFigure(obj: Block, children: string) {
     return (
         <figure
             className={'ae-block-figure'}
@@ -35,7 +35,7 @@ export function serializeFigure(obj: Block, children) {
     )
 }
 
-export function serializeCaption(obj: Block, children) {
+export function serializeCaption(obj: Block, children: string) {
     return (
         <figcaption
             className={'ae-block-caption'}
@@ -45,7 +45,7 @@ export function serializeCaption(obj: Block, children) {
     )
 }
 
-export function serializeBlockquote(obj: Block, children) {
+export function serializeBlockquote(obj: Block, children: string) {
     return (
         <blockquote
             className={'ae-block-blockquote'}
@@ -55,7 +55,7 @@ export function serializeBlockquote(obj: Block, children) {
     )
 }
 
-export function serializeVideo(obj: Block, children) {
+export function serializeVideo(obj: Block, children: string) {
     const src = obj.data.get('src')
 
     return (
@@ -76,7 +76,7 @@ export function serializeVideo(obj: Block, children) {
     )
 }
 
-export function serializeDivision(obj: Block, children) {
+export function serializeDivision(obj: Block, children: string) {
     const layout = obj.data.get('layout')
 
     return (
@@ -90,7 +90,7 @@ export function serializeDivision(obj: Block, children) {
     )
 }
 
-export function serializeImage(obj: Block, children) {
+export function serializeImage(obj: Block, children: string) {
     const corner: string = obj.data.get('corner')
     const src: string = obj.data.get('src')
     const caption: string = obj.data.get('caption')
@@ -117,7 +117,7 @@ export function serializeImage(obj: Block, children) {
     )
 }
 
-export function serializeAccent(obj: Block, children) {
+export function serializeAccent(obj: Block, children: string) {
     return (
         <p
             className={className('ae-block-accent', 'text')}
