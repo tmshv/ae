@@ -2,16 +2,6 @@ import React from 'react'
 import className from 'classnames'
 import { BlockProps } from '.'
 
-const Img = ({ src, mix }) => (
-    <img
-        className={className(mix)}
-        style={{
-            display: 'block',
-        }}
-        src={src}
-    />
-)
-
 export class File extends React.PureComponent<BlockProps, object> {
     render() {
         const { node, attributes, isSelected } = this.props
@@ -28,8 +18,8 @@ export class File extends React.PureComponent<BlockProps, object> {
                     focused: isSelected,
                 })}
             >
-                <Img
-                    mix={'file-preview'}
+                <img
+                    className={className('file-preview')}
                     src={src}
                 />
 
