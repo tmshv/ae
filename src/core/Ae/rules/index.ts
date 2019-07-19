@@ -44,6 +44,10 @@ export function rules(): Rule[] {
                         case BlockType.accent: {
                             return s.serializeAccent(obj, children)
                         }
+
+                        case BlockType.file: {
+                            return s.serializeFile(obj, children)
+                        }
                     }
                 }
             }

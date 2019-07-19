@@ -126,3 +126,26 @@ export function serializeAccent(obj: Block, children: string) {
         </p>
     )
 }
+
+export function serializeFile(obj: Block, children: string) {
+    const src = obj.data.get('srcPreview')
+    const size: number = obj.data.get('size')
+    const name = obj.data.get('name')
+
+    return (
+        <div
+            className={className('ae-block-file')}
+        >
+            <img
+                className={'file-preview'}
+                src={src}
+            />
+
+            {children}
+
+            <div>
+                {size}
+            </div>
+        </div>
+    )
+}
