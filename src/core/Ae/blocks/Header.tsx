@@ -1,3 +1,4 @@
+import * as React from 'react'
 import className from 'classnames'
 import { BlockProps } from '.'
 
