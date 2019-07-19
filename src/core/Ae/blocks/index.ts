@@ -5,7 +5,7 @@ export interface BlockProps {
     node: any,
     attributes: object,
     isSelected: boolean,
-    children: any,
+    children: React.ReactNode,
 
     editor: any
 }
