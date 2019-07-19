@@ -6,11 +6,16 @@ import { slateSample } from '../src/sample'
 import { rules } from '../src/core/Ae/rules'
 import App from '../src/components/App'
 // import Plain from 'slate-plain-serializer'
+import Typograf from 'typograf'
+
+const tp = new Typograf({ locale: ['ru', 'en-US'] })
+const typo = (value: string) => tp.execute(value)
+// const typo = (value: string) => value
 
 import 'antd/dist/antd.css'
 
 const html = new Html({
-    rules: rules(),
+    rules: rules(typo),
 })
 
 interface IState {

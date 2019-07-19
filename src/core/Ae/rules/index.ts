@@ -3,7 +3,7 @@ import { BlockType } from '../const'
 import * as s from './blocks'
 import { Rule } from 'slate-html-serializer'
 
-export function rules(): Rule[] {
+export function rules(typo: (value: string) => string): Rule[] {
     return [
         {
             serialize(obj: Node, children: string | object) {
@@ -50,6 +50,8 @@ export function rules(): Rule[] {
                         }
                     }
                 }
+
+                return typo(`${children}`)
             }
         }
     ]
