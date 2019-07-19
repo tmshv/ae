@@ -6,7 +6,7 @@ import { Rule } from 'slate-html-serializer'
 export function rules(): Rule[] {
     return [
         {
-            serialize(obj: Node, children) {
+            serialize(obj: Node, children: string | object) {
                 if (obj.object == 'block') {
                     switch (obj.type) {
                         case BlockType.header1: {
