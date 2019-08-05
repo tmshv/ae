@@ -1,8 +1,8 @@
 import React from 'react'
+import axios from 'axios'
 import { Value, ValueJSON, Document, Block, Text, Inline } from 'slate'
 import Html from 'slate-html-serializer'
 import Ae from '../src/core/Ae'
-import { slateSample } from '../src/sample'
 import { rules } from '../src/core/Ae/rules'
 import App from '../src/components/App'
 // import Plain from 'slate-plain-serializer'
@@ -56,7 +56,16 @@ function outlineNode(node: Block | Text | Inline, depth: number) {
     }
 }
 
-export default class Index extends React.Component<{}, IState> {
+export default class Index extends React.Component<{ data: ValueJSON}, IState> {
+    static async getInitialProps() {
+        const res = await axios.get('http://localhost:8000/samples/1')
+        const item = res.data
+
+        return {
+            data: item.data
+        }
+    }
+
     constructor(props) {
         super(props)
 
@@ -80,8 +89,7 @@ export default class Index extends React.Component<{}, IState> {
     }
 
     componentDidMount() {
-        const json = slateSample() as ValueJSON
-        const value = Value.fromJSON(json)
+        const value = Value.fromJSON(this.props.data)
 
         this.setState({
             value,
