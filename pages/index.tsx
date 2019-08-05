@@ -4,13 +4,14 @@ import { Value, ValueJSON, Document, Block, Text, Inline } from 'slate'
 import Html from 'slate-html-serializer'
 import Ae from '../src/core/Ae'
 import { rules } from '../src/core/Ae/rules'
-import App from '../src/components/App'
+import App, { IAppState } from '../src/components/App'
 // import Plain from 'slate-plain-serializer'
 import Typograf from 'typograf'
 
 const tp = new Typograf({ locale: ['ru', 'en-US'] })
-const typo = (value: string) => tp.execute(value)
-// const typo = (value: string) => value
+function typo(value: string): string {
+    return tp.execute(value)
+}
 
 import 'antd/dist/antd.css'
 
@@ -112,7 +113,7 @@ export default class Index extends React.Component<{ data: ValueJSON}, IState> {
         )
     }
 
-    private renderContent = (options: any) => {
+    private renderContent = (options: IAppState) => {
         const value = this.state.value
 
         const { showRendered = true } = options

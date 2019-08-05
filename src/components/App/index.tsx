@@ -6,18 +6,18 @@ import { Value, Change } from 'slate'
 
 import './styles.less'
 
-interface IProps {
+export interface IProps {
     value: Value
     onChange(change: Change): void
-    renderContent(options: IState): React.ReactNode
+    renderContent(options: IAppState): React.ReactNode
 }
 
-interface IState {
+export interface IAppState {
     fullSelectionInfo: boolean,
     showRendered: boolean,
 }
 
-export default class App extends React.Component<IProps, IState> {
+export default class App extends React.Component<IProps, IAppState> {
     state = {
         fullSelectionInfo: false,
         showRendered: false,
