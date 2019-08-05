@@ -1,7 +1,7 @@
 import getVideoId from 'get-video-id'
 import { Change } from 'slate'
 import createVideo from '../utils/createVideo'
-import { insertOrReplaceBlock } from '../lib/change';
+import { insertOrReplaceBlock } from '../lib/change'
 
 export enum VideoService {
     youtube = 'youtube',
