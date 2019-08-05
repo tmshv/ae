@@ -1,4 +1,4 @@
-import { LAST_CHILD_TYPE_INVALID, PARENT_TYPE_INVALID } from 'slate-schema-violations'
+import { LAST_CHILD_TYPE_INVALID, PARENT_TYPE_INVALID } from '../lib/violations'
 import { Block, Schema, Change } from 'slate'
 import { BlockType } from '../const'
 import image from './image'

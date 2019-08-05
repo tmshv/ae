@@ -1,5 +1,5 @@
 import { Block } from 'slate'
-import { NODE_DATA_INVALID } from 'slate-schema-violations'
+import { NODE_DATA_INVALID } from '../lib/violations'
 import { ImageLayout, ImageCorner } from '../const'
 
 export default {

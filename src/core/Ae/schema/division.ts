@@ -1,4 +1,4 @@
-import { NODE_DATA_INVALID } from 'slate-schema-violations'
+import { NODE_DATA_INVALID } from '../lib/violations'
 import { Block } from 'slate'
 import { DivisionLayout, BlockType } from '../const'
 
