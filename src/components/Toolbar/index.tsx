@@ -20,7 +20,6 @@ type ToolbarAction = SimpleToolbarAction | CustomToolbarAction
 
 export interface IToolbarProps {
     value: slate.Value,
-    onChange: any,
 
     left: ToolbarAction[]
     right: ToolbarAction[]

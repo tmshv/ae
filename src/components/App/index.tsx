@@ -53,7 +53,6 @@ export default class App extends React.Component<IProps, IAppState> {
                 <header className={'header'}>
                     <Toolbar
                         value={this.props.value}
-                        onChange={this.props.onChange}
                         left={[
                             {
                                 id: 'image',
