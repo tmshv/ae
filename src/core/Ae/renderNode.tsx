@@ -1,4 +1,5 @@
 import React from 'react'
+import { RenderNodeProps } from 'slate-react'
 import { BlockType } from './const'
 import { ParagraphBlock as Paragraph } from './blocks/Paragraph'
 import { Image } from './blocks/Image'
@@ -13,11 +14,14 @@ import { List } from './blocks/List'
 import { ListItem } from './blocks/ListItem'
 import { DivisionBlock } from './blocks/Division'
 import { UrlCard } from './blocks/UrlCard'
+import { Block } from 'slate'
 
-export default function renderNode(props) {
-    const { node, attributes } = props
+export default function renderNode(props: RenderNodeProps): any {
+    const { node } = props
+    const type = (node as Block).type
+    const attributes = props.attributes
 
-    switch (node.type) {
+    switch (type) {
         case BlockType.header1: {
             return (
                 <Header {...props} />
@@ -44,7 +48,7 @@ export default function renderNode(props) {
 
         case BlockType.blockquote: {
             return (
-                <Blockquote {...attributes}>{props.children}</Blockquote>
+                <Blockquote {...props} />
             )
         }
 
@@ -56,29 +60,25 @@ export default function renderNode(props) {
 
         case BlockType.listItem: {
             return (
-                <ListItem {...attributes}>{props.children}</ListItem>
+                <ListItem {...props} />
             )
         }
 
         case BlockType.orderedList: {
             return (
                 <List
-                    {...attributes}
+                    {...props}
                     ordered={true}
-                >
-                    {props.children}
-                </List>
+                />
             )
         }
 
         case BlockType.unorderedList: {
             return (
                 <List
-                    {...attributes}
+                    {...props}
                     ordered={false}
-                >
-                    {props.children}
-                </List>
+                />
             )
         }
 
