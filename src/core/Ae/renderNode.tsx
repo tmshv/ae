@@ -17,9 +17,44 @@ import { UrlCard } from './blocks/UrlCard'
 import { Block } from 'slate'
 
 export default function renderNode(props: RenderNodeProps): any {
+    const block = props.node as Block
+    const content = renderNodeFactory(props)
+    return content
+
+    // TODO: try to react portal or something else.
+    // in this case slate select blocks not correctly
+
+    const rootBlock = props.editor.value.document.getFurthestAncestor(block.key) as Block
+    const isRoot = block.key === rootBlock.key
+    if (props.isSelected && isRoot) {
+        return (
+            <div style={{
+                position: 'relative',
+            }}>
+                <div
+                    // {...props.attributes}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: 20,
+                        height: 20,
+                        backgroundColor: 'tomato',
+                    }}
+                >
+                </div>
+
+                {content}
+            </div>
+        )
+    }
+
+    return content
+}
+
+export function renderNodeFactory(props: RenderNodeProps): React.ReactNode | undefined {
     const { node } = props
     const type = (node as Block).type
-    const attributes = props.attributes
 
     switch (type) {
         case BlockType.header1: {
@@ -85,26 +120,20 @@ export default function renderNode(props: RenderNodeProps): any {
         case BlockType.table: {
             return (
                 <table className={'ae-block-table'}>
-                    <tbody {...attributes}>
-                        {props.children}
-                    </tbody>
+                    <tbody {...props} />
                 </table>
             )
         }
 
         case BlockType.tableRow: {
             return (
-                <tr {...attributes}>
-                    {props.children}
-                </tr>
+                <tr {...props} />
             )
         }
 
         case BlockType.tableCell: {
             return (
-                <td {...attributes}>
-                    {props.children}
-                </td>
+                <td {...props} />
             )
         }
 
