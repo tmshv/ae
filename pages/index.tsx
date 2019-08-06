@@ -57,9 +57,9 @@ function outlineNode(node: Block | Text | Inline, depth: number) {
     }
 }
 
-export default class Index extends React.Component<{ data: ValueJSON}, IState> {
+export default class Index extends React.Component<{ data: ValueJSON }, IState> {
     static async getInitialProps() {
-        const res = await axios.get('http://localhost:8000/samples/1')
+        const res = await axios.get('http://localhost:8000/samples/2')
         const item = res.data
 
         return {
