@@ -1,8 +1,8 @@
 import React from 'react'
-import slate from 'slate'
+import slate, { Value } from 'slate'
+import { Button, Row, Col } from 'antd'
 import {
     ImageIcon,
-    FormatHeader1Icon,
     BugIcon,
     FileIcon,
     AlertBoxIcon,
@@ -27,17 +27,73 @@ import insertDivision from '../../core/Ae/changes/insertDivision'
 import './styles.less'
 // import { wrapInAccent, unwrapAccent } from '../../core/Ae/plugins/accent/changes';
 
-interface ToolbarProps {
-    value: slate.Value,
-    onChange: any,
+interface SimpleToolbarAction {
+    id: string
+    icon?: string
+    name?: string
+    action: (value: Value, event: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-export default class Toolbar extends React.Component<ToolbarProps, any> {
+interface CustomToolbarAction {
+    id: string
+    component: React.ReactNode
+}
+
+type ToolbarAction = SimpleToolbarAction | CustomToolbarAction
+// type ToolbarAction = SimpleToolbarAction
+
+export interface IToolbarProps {
+    value: slate.Value,
+    onChange: any,
+
+    left: ToolbarAction[]
+    right: ToolbarAction[]
+}
+
+export default class Toolbar extends React.Component<IToolbarProps, any> {
+    private createContent(item: ToolbarAction) {
+        if ('component' in item) {
+            return item.component
+        }
+
+        if (item.icon) {
+            return (
+                <Button
+                    onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                        item.action(this.props.value, event)
+                    }}
+                    icon={item.icon}
+                    ghost
+                />
+            )
+        }
+
+        if (item.name) {
+            return (
+                <Button
+                    onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                        item.action(this.props.value, event)
+                    }}
+                    ghost
+                >{item.name}</Button>
+            )
+        }
+
+        return (
+            <Button
+                onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                    item.action(this.props.value, event)
+                }}
+                ghost
+            >action</Button>
+        )
+    }
+
     hasBlock(type) {
         return this.props.value.blocks.some(node => node.type === type)
     }
 
-    onClickBug = (event) => {
+    onClickSync = (event) => {
         event.preventDefault()
 
         const data = this.props.value.toJSON()
@@ -82,16 +138,6 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
         )
     }
 
-    onClickHeader = (event) => {
-        event.preventDefault()
-
-        const change = this.props.value.change()
-        const type = this.hasBlock(BlockType.header1)
-            ? BlockType.paragraph
-            : BlockType.header1
-
-        return this.props.onChange(change.setBlocks(type))
-    }
 
     onClickQuote = (event: Event) => {
         event.preventDefault()
@@ -196,68 +242,85 @@ export default class Toolbar extends React.Component<ToolbarProps, any> {
         return upload(files[0])
     }
 
-    renderButton(onClick, children) {
-        return (
-            <IconButton
-                mix={'ae-toolbar-button'}
-                onClick={onClick}
-                size={20}
-                color={'#666'}
-                hoverColor={'#333'}
-                focusColor={'#000'}
-                activeColor={'gold'}
-                disabledColor={'#ddd'}
-                disabled={false}
-                active={false}
-            >
-                {children}
-            </IconButton>
-        )
-    }
+    public render() {
+        const rightColSpan = 24 / this.props.right.length
+        const leftColSpan = 24 / this.props.left.length
 
-    render() {
         return (
             <div className={'ae-toolbar'}>
                 <div className={'left'}>
-                    <input
+                    <Button.Group style={{
+                        marginRight: 9,
+                    }}>
+                        <Button
+                            icon={'arrow-left'}
+                            ghost
+                        />
+                        <Button
+                            icon={'arrow-right'}
+                            ghost
+                        />
+                    </Button.Group>
+
+                    <Row
+                        gutter={0}
+                    >
+                        {this.props.left.map(x => (
+                            <Col
+                                key={x.id}
+                                span={leftColSpan}
+                            >
+                                {this.createContent(x)}
+                            </Col>
+                        ))}
+                    </Row>
+
+                    {/* <input
                         type={'file'}
                         onChange={this.onChangeFile}
-                    />
-                    {this.renderButton(this.onClickImage, (
+                    /> */}
+                    {/* {this.renderButton(this.onClickImage, (
                         <ImageIcon />
-                    ))}
-                    {this.renderButton(this.onClickFile, (
+                    ))} */}
+                    {/* {this.renderButton(this.onClickFile, (
                         <FileIcon />
-                    ))}
-                    {this.renderButton(this.onClickHeader, (
-                        <FormatHeader1Icon />
-                    ))}
-                    {this.renderButton(this.onClickQuote, (
+                    ))} */}
+
+                    {/* {this.renderButton(this.onClickQuote, (
                         <FormatQuoteCloseIcon />
-                    ))}
-                    {this.renderButton(this.onClickAccent, (
+                    ))} */}
+                    {/* {this.renderButton(this.onClickAccent, (
                         <AlertBoxIcon />
-                    ))}
-                    {this.renderButton(this.onClickUnorderedList, (
+                    ))} */}
+                    {/* {this.renderButton(this.onClickUnorderedList, (
                         <FormatListBulletedIcon />
-                    ))}
-                    {this.renderButton(this.onClickTable, (
+                    ))} */}
+                    {/* {this.renderButton(this.onClickTable, (
                         <TableIcon />
-                    ))}
-                    {this.renderButton(this.onClickDivision, (
+                    ))} */}
+                    {/* {this.renderButton(this.onClickDivision, (
                         <DivisionIcon />
-                    ))}
-                    {this.renderButton(this.onClickUrlCard, (
+                    ))} */}
+                    {/* {this.renderButton(this.onClickUrlCard, (
                         <LinkIcon />
-                    ))}
+                    ))} */}
                 </div>
 
                 <div className={'right'}>
-                    {this.renderButton(this.onClickBug, (
-                        <BugIcon />
-                    ))}
+                    <Row
+                        gutter={10}
+                    >
+                        {this.props.right.map(x => (
+                            <Col
+                                key={x.id}
+                                span={rightColSpan}
+                            >
+                                {this.createContent(x)}
+                            </Col>
+                        ))}
+                    </Row>
                 </div>
-            </div>
+            </div >
         )
     }
 }

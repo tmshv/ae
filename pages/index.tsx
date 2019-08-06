@@ -109,6 +109,16 @@ export default class Index extends React.Component<{ data: ValueJSON }, IState> 
                 value={value}
                 onChange={this.onChange}
                 renderContent={this.renderContent}
+
+                onSync={async value => {
+                    const data = {
+                        id: '2',
+                        meta: {},
+                        data: value.toJSON(),
+                    }
+                    const res = await axios.put('http://localhost:8000/samples/2', data)
+                    console.log(res.data)
+                }}
             />
         )
     }
