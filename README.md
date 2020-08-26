@@ -13,6 +13,10 @@ http://www.colorbox.io/#steps=7#hue_start=185#hue_end=240#hue_curve=easeInQuad#s
 
 How to calculate cursor location: [caret-position.js](https://github.com/oozou/slate-suggestions/blob/master/lib/caret-position.js)
 
+### Read it 
+
+[sports.ru](https://habr.com/ru/post/492228/)
+
 ### Related Projects
 
 - [Editor.js](https://editorjs.io)
@@ -25,12 +29,20 @@ How to calculate cursor location: [caret-position.js](https://github.com/oozou/s
 - [strapi](https://strapi.io)
 - [Directus.io](https://directus.io)
 - [Cockpit](https://getcockpit.com)
+- [documentnode.io](documentnode.io)
 
 #### Not tested
 
 - [Grav](https://getgrav.org/downloads)
 - [Tiny Cloud](https://www.tiny.cloud)
 
+### Editors
+
+- [Write.as](https://write.as)
+- [Telescope.ac](https://telescope.ac)
+- [Able.bio](https://able.bio)
+
+https://carrd.co
 
 ### Typograph
 
