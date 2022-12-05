@@ -1,8 +1,6 @@
 import React from 'react'
 import className from 'classnames'
 
-import './styles.less'
-
 export default class BlockControls extends React.Component<{}, {}, any> {
     render() {
         return (

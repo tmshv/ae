@@ -13,8 +13,6 @@ function typo(value: string): string {
     return tp.execute(value)
 }
 
-import 'antd/dist/antd.css'
-
 const html = new Html({
     rules: rules(typo),
 })

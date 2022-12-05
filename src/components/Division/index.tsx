@@ -2,8 +2,6 @@ import * as React from 'react'
 import classNames from 'classnames'
 import { getDivision, getStyle } from './lib'
 
-import './styles.less'
-
 export interface IDivisionProps {
     className?: string
     vertical?: boolean

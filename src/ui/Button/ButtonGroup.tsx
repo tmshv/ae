@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-// import './styles.less'
-
 export interface ButtonGroupProps {
     // onChange(value: any): void,
 }

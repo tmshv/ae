@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './styles.less'
-
 export default function Image(props) {
     const v = props.ratio * 100
     // const style = {

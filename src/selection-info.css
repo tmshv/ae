@@ -1,0 +1,25 @@
+.ae-selection-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 100%;
+}
+
+.ae-selection-info .content {
+    flex: 1;
+    overflow: auto;
+}
+
+.ae-document-info--image-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ae-document-info--image-list .ae-block-image {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.ae-document-info--image-list .ae-block-image:last-child {
+    margin-right: 0;
+}

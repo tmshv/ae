@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import './styles.less'
-
 const px = value => `${value}px`
 
 function getStyle(shiftX, shiftY) {

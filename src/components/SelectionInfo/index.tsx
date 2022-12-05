@@ -9,8 +9,6 @@ import { FigureInfo } from './FigureInfo'
 import { DocumentInfo } from './DocumentInfo'
 import { CaptionInfo } from './CaptionInfo'
 
-import './styles.less'
-
 interface Props {
     value: Value
     onChange(change: Change): void

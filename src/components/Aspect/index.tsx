@@ -1,7 +1,5 @@
 import React from 'react'
 
-import './styles.less'
-
 interface IAspectProps {
     mix?: string,
     ratio: number,

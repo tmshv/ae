@@ -1,6 +1,5 @@
 import React from 'react'
 import className from 'classnames'
-import './styles.less'
 
 export interface IconButtonProps {
     onClick(event: Event): void,
