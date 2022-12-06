@@ -23,7 +23,7 @@
       "dom",
       "es2018"
     ],
-    "strict": false,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
