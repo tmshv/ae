@@ -1,13 +1,10 @@
 import React, { useCallback, useState } from 'react'
-import axios from 'axios'
-import { Value, ValueJSON, Document, Block, Text, Inline } from 'slate'
+import { Value, Document, Block, Text, Inline } from 'slate'
 import Html from 'slate-html-serializer'
-import Ae from '../../core/Ae'
-import { rules } from '../../core/Ae/rules'
+import Ae from '@/core/Ae'
+import { rules } from '@/core/Ae/rules'
 import App, { IAppState } from '../App'
-// import Plain from 'slate-plain-serializer'
 import Typograf from 'typograf'
-import { GetServerSideProps, NextPage } from 'next'
 
 const tp = new Typograf({ locale: ['ru', 'en-US'] })
 function typo(value: string): string {
@@ -137,10 +134,9 @@ export const Main: React.FC<MainProps> = ({ initialValue }) => {
             value={state.value}
             onChange={onChange}
             renderContent={renderContent}
-
             onSync={async value => {
                 const data = {
-                    id: '2',
+                    id: Date.now(),
                     meta: {},
                     data: value.toJSON(),
                 }
