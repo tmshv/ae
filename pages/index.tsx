@@ -1,4 +1,3 @@
-import React from 'react'
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import db from 'public/samples.json'
@@ -14,6 +13,7 @@ type Props = {
 const Index: NextPage<Props> = () => {
     const sample = db.samples[0]
     const value = Value.fromJSON(sample.data)
+
     return (
         <Main initialValue={value} />
     )
