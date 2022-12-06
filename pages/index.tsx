@@ -1,9 +1,11 @@
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import db from 'public/samples.json'
+import { useCallback, useState } from 'react'
 import { Value } from 'slate'
 
-const Main = dynamic(import('../src/components/Main').then(m => m.Main), {
+import data from 'public/samples.json'
+
+const Ae = dynamic(import('@/core/Ae'), {
     ssr: false
 })
 
@@ -11,11 +13,18 @@ type Props = {
 }
 
 const Index: NextPage<Props> = () => {
-    const sample = db.samples[0]
-    const value = Value.fromJSON(sample.data)
+    const [value, setValue] = useState<Value>(
+        Value.fromJSON(data.samples[0].data)
+    )
+
+    const onChange = useCallback(({ value }: { value: Value }) => {
+        setValue(
+            value,
+        )
+    }, [])
 
     return (
-        <Main initialValue={value} />
+        <Ae value={value} onChange={onChange} />
     )
 }
 
