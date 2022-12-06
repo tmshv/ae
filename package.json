@@ -54,8 +54,7 @@
         "typescript": "^4.9.0"
     },
     "scripts": {
-        "dev": "node src/server.js",
-        "build:rollup": "rollup -c && tsc",
+        "dev": "next dev",
         "build": "next build",
         "start": "next start",
         "export": "next export",
