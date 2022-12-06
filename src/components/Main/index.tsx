@@ -120,7 +120,7 @@ export const Main: React.FC<MainProps> = ({ initialValue }) => {
                     }}
                 >
                     <div
-                        dangerouslySetInnerHTML={{ __html: this.state.htmlValue }}
+                        dangerouslySetInnerHTML={{ __html: state.htmlValue }}
                     />
                 </div>
             </div>
