@@ -14,21 +14,53 @@ type Props = {
 }
 
 const Index: NextPage<Props> = () => {
-    const [value, setValue] = useState<Value>(
-        Value.fromJSON(data.samples[0].data)
-    )
+    // const [value, setValue] = useState<Value>(
+    //     Value.fromJSON(data.samples[0].data)
+    // )
 
-    const onChange = useCallback(({ value }: { value: Value }) => {
-        setValue(
-            value,
-        )
-    }, [])
+    // const onChange = useCallback(({ value }: { value: Value }) => {
+    //     setValue(
+    //         value,
+    //     )
+    // }, [])
 
     return (
         <Ae
-            value={value}
-            onChange={onChange}
-            plugins={defaultPlugins()}
+            // value={data.samples[0].data}
+            value={[
+                {
+                    type: 'paragraph',
+                    children: [
+                        { text: 'A line of text in a paragraph.' }
+                    ],
+                },
+                {
+                    type: 'break',
+                    children: [
+                        { text: 'horizonal' }
+                    ],
+                },
+                {
+                    type: 'paragraph',
+                    children: [
+                        { text: 'A line of text in a paragraph.' }
+                    ],
+                },
+                {
+                    type: 'image',
+                    url: 'https://source.unsplash.com/zOwZKwZOZq8',
+                    children: [{ text: '' }],
+                },
+                {
+                    type: 'paragraph',
+                    children: [
+                        { text: 'A line of text in a paragraph.' }
+                    ],
+                },
+            ]}
+        // onChange={onChange}
+        // plugins={defaultPlugins()}
+        // plugins={[]}
         />
     )
 }
