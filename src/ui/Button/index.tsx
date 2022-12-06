@@ -1,8 +1,6 @@
 import * as React from 'react'
 import className from 'classnames'
 
-import './styles.less'
-
 export interface BaseButtonProps {
     highlight?: boolean,
     value?: any,

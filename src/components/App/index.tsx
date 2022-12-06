@@ -15,8 +15,6 @@ import tablePlugin from '../../core/Ae/plugins/table'
 import insertUrlCard from '../../core/Ae/changes/insertUrlCard'
 import { upload } from './upload'
 
-import './styles.less'
-
 function isHasBlock(value: Value, blockType: string) {
     return value.blocks.some(node => node.type === blockType)
 }

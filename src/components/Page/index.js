@@ -1,5 +1,3 @@
-import './styles.less'
-
 export default function Page(props) {
     return (
         <div className={'page'}>

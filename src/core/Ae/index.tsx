@@ -7,9 +7,6 @@ import renderNode from './renderNode'
 import renderMark from './renderMark'
 import defaultPlugins from './defaultPlugins'
 
-import './ae.less'
-import './ae-focused.less'
-
 export interface IAeditorProps {
     value: Value,
     onChange: (change: Change) => void,

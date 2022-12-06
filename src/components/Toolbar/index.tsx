@@ -2,8 +2,6 @@ import React from 'react'
 import slate, { Value } from 'slate'
 import { Button, Row, Col } from 'antd'
 
-import './styles.less'
-
 interface SimpleToolbarAction {
     id: string
     icon?: string

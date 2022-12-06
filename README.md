@@ -31,6 +31,18 @@ How to calculate cursor location: [caret-position.js](https://github.com/oozou/s
 - [Cockpit](https://getcockpit.com)
 - [documentnode.io](documentnode.io)
 
+
+### Git based
+
+- [prose.io](https://prose.io)
+- [forestry.io](https://forestry.io)
+
+- [https://octokit.github.io/rest.js/v18]
+
+look at [bulletproof-next](https://getstarted.sh/bulletproof-next) tutorial
+(it is based on [this](https://github.com/arunoda/bulletproof-next-app) actualy)
+for auth and github integration
+
 #### Not tested
 
 - [Grav](https://getgrav.org/downloads)
@@ -42,7 +54,15 @@ How to calculate cursor location: [caret-position.js](https://github.com/oozou/s
 - [Telescope.ac](https://telescope.ac)
 - [Able.bio](https://able.bio)
 
+https://teletype.in/@tmshv
+https://t.noting.io
+https://x.brick.do
+https://www.nototo.app
+https://collectednotes.com/xyu
+https://www.getoutline.com
+
 https://carrd.co
+https://studio.design
 
 ### Typograph
 
