@@ -4,8 +4,9 @@ import { useCallback, useState } from 'react'
 import { Value } from 'slate'
 
 import data from 'public/samples.json'
+import defaultPlugins from '@/core/Ae/defaultPlugins'
 
-const Ae = dynamic(import('@/core/Ae'), {
+const Ae = dynamic(import('@/core/Ae').then(m => m.Ae), {
     ssr: false
 })
 
@@ -24,7 +25,11 @@ const Index: NextPage<Props> = () => {
     }, [])
 
     return (
-        <Ae value={value} onChange={onChange} />
+        <Ae
+            value={value}
+            onChange={onChange}
+            plugins={defaultPlugins()}
+        />
     )
 }
 

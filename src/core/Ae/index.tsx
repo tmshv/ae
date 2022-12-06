@@ -1,44 +1,34 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Editor, Plugin } from 'slate-react'
 import { Value, Change } from 'slate'
 import schema from './schema'
 import handlePaste from './utils/handlePaste'
 import renderNode from './renderNode'
 import renderMark from './renderMark'
-import defaultPlugins from './defaultPlugins'
 
-export interface IAeditorProps {
+export type AeProps = {
     value: Value,
     onChange: (change: Change) => void,
-}
-
-interface IState {
     plugins: Plugin[],
 }
 
-export default class Ae extends React.Component<IAeditorProps, IState> {
-    state = {
-        plugins: defaultPlugins(),
-    }
-
-    renderEditor = (props: any) => (
+export const Ae: React.FC<AeProps> = ({ value, onChange, plugins }) => {
+    const renderEditor = useCallback((props: any) => (
         <div className={'ae-editor'}>
             {props.children}
         </div>
-    )
+    ), [])
 
-    render() {
-        return (
-            <Editor
-                value={this.props.value}
-                onPaste={handlePaste}
-                onChange={this.props.onChange}
-                renderNode={renderNode}
-                renderMark={renderMark}
-                renderEditor={this.renderEditor}
-                schema={schema}
-                plugins={this.state.plugins}
-            />
-        )
-    }
+    return (
+        <Editor
+            value={value}
+            onPaste={handlePaste}
+            onChange={onChange}
+            renderNode={renderNode}
+            renderMark={renderMark}
+            renderEditor={renderEditor}
+            schema={schema}
+            plugins={plugins}
+        />
+    )
 }
