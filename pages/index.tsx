@@ -1,9 +1,12 @@
 import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import db from 'public/samples.json'
+import { useCallback, useState } from 'react'
 import { Value } from 'slate'
 
-const Main = dynamic(import('../src/components/Main').then(m => m.Main), {
+import data from 'public/samples.json'
+import defaultPlugins from '@/core/Ae/defaultPlugins'
+
+const Ae = dynamic(import('@/core/Ae').then(m => m.Ae), {
     ssr: false
 })
 
@@ -11,11 +14,54 @@ type Props = {
 }
 
 const Index: NextPage<Props> = () => {
-    const sample = db.samples[0]
-    const value = Value.fromJSON(sample.data)
+    // const [value, setValue] = useState<Value>(
+    //     Value.fromJSON(data.samples[0].data)
+    // )
+
+    // const onChange = useCallback(({ value }: { value: Value }) => {
+    //     setValue(
+    //         value,
+    //     )
+    // }, [])
 
     return (
-        <Main initialValue={value} />
+        <Ae
+            // value={data.samples[0].data}
+            value={[
+                {
+                    type: 'paragraph',
+                    children: [
+                        { text: 'A line of text in a paragraph.' }
+                    ],
+                },
+                {
+                    type: 'break',
+                    children: [
+                        { text: 'horizonal' }
+                    ],
+                },
+                {
+                    type: 'paragraph',
+                    children: [
+                        { text: 'A line of text in a paragraph.' }
+                    ],
+                },
+                {
+                    type: 'image',
+                    url: 'https://source.unsplash.com/zOwZKwZOZq8',
+                    children: [{ text: '' }],
+                },
+                {
+                    type: 'paragraph',
+                    children: [
+                        { text: 'A line of text in a paragraph.' }
+                    ],
+                },
+            ]}
+        // onChange={onChange}
+        // plugins={defaultPlugins()}
+        // plugins={[]}
+        />
     )
 }
 
